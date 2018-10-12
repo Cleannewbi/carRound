@@ -20,8 +20,6 @@ public class MemManager implements iMemManager {
 		return meManager;
 	}
 	
-	
-	
 	@Override
 	public boolean addMem(MemberDto dto) {
 		
@@ -106,15 +104,50 @@ public class MemManager implements iMemManager {
 			return findId;
 	}
 
-	
+	@Override
+	public MemberDto getCom(String comname) {			// 회사 정보
+		
+		String sql = " SELECT SEQ, ID, PASSWORD, PHOTO, NAME, PHONE, ADDRESS, EMAIL, CARD, AUTH "
+				+ " FROM RC_MEMBER "
+				+ " WHERE NAME = ? ";
+		
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		MemberDto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getCom Success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, comname);
+			System.out.println("2/6 getCom Success");
+		
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getCom Success");
+		
+			while(rs.next()) {
+				int i = 1;
+			
+			dto = new MemberDto(rs.getInt(i++), rs.getString(i++), rs.getString(i++),
+					rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+					rs.getString(i++),rs.getString(i++),rs.getInt(i++) );
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			}
+			System.out.println("4/6 getCom Success");
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBClose.close(psmt, conn, rs);			
+			System.out.println("6/6 S getCom");
+		}
+		
+		return dto;
+	}
+
 }

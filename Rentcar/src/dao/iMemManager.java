@@ -8,5 +8,7 @@ public interface iMemManager {
 	
 	public boolean idcheck(String id);
 	
+	public MemberDto getCom(String comname);
+	
 
 }

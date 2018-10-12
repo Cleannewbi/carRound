@@ -1,3 +1,5 @@
+<%@page import="dao.MemManager"%>
+<%@page import="dao.iMemManager"%>
 <%@page import="dao.iBbsDao"%>
 <%@page import="dao.BbsDao"%>
 <%@page import="dao.InfoDao"%>
@@ -8,23 +10,24 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-  //  List<ReviewDto> bbslist = (List<ReviewDto>)request.getAttribute("bbslist");			// 리뷰리스트 받아오기
-  //  System.out.println(bbslist.get(3));
+<%
+String InfoSeq = request.getParameter("seq");
+int seq = Integer.parseInt(InfoSeq);
+String comname = request.getParameter("comp");
+	//  List<ReviewDto> bbslist = (List<ReviewDto>)request.getAttribute("bbslist");			// 리뷰리스트 받아오기
+	//  System.out.println(bbslist.get(3));
     
-   /*  InfoDto infodto = (InfoDto)request.getAttribute("infolist");		// 차량정보 */
-   iBbsDao ibdao = BbsDao.getInstance();
-   // InfoDto iidto = ibdao.getInfoList(seq);
-   // System.out.println(iidto.toString());		
+	/*  InfoDto infodto = (InfoDto)request.getAttribute("infolist");		// 차량정보 */
+	iInfoDao iidao = InfoDao.getInstance();
+	InfoDto iidto = iidao.getInfoList(seq);
+	System.out.println(iidto.toString());		
     
-     
-    MemberDto comdto = (MemberDto)request.getAttribute("comdto");		// 회사정보
-    System.out.println(comdto.toString());
-     
-    %>
-    
-    
-    
+	iMemManager imdao = MemManager.getInstance();
+	MemberDto comdto = imdao.getCom(comname);
+	/* MemberDto comdto = (MemberDto)request.getAttribute("comdto");		// 회사정보 */
+    // System.out.println(comdto.toString()); 
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,33 +52,33 @@
  <table>
  	<tr>
  		<th>차량 사진</th>
- 		<td><%=infodto.getCar_pic() %></td>
+ 		<td><%=iidto.getCar_pic() %></td>
  	</tr>
  	
  	<tr>
  		<th>차 이름</th>
- 		<td><%=infodto.getCar_name() %></td>
+ 		<td><%=iidto.getCar_name() %></td>
  	</tr>
  	
  	<tr>
  		<th>타입</th>
- 		<td><%=infodto.getCar_type() %></td>
+ 		<td><%=iidto.getCar_type() %></td>
  	</tr>
  	
  	<tr>
  		<th>연료</th>
- 		<td><%=infodto.getCar_fuel() %></td>
+ 		<td><%=iidto.getCar_fuel() %></td>
  	</tr>
  
  	 <tr>
  		<th>사이즈</th>
- 		<td><%=infodto.getCar_fee() %></td>
+ 		<td><%=iidto.getCar_fee() %></td>
  	</tr>
  
  
   	<tr>
  		<th>비용</th>
- 		<td><%=infodto.getCar_fuel() %></td>
+ 		<td><%=iidto.getCar_fuel() %></td>
  	</tr>
  </table>
  

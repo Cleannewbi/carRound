@@ -159,5 +159,49 @@ public class InfoDao implements iInfoDao {
 		return list;
 	}
 	
+	@Override
+	public InfoDto getInfoList(int seq) {			// 차량 정보
+		
+		String sql = " SELECT SEQ, COM_NAME, CAR_PIC, CAR_NAME, CAR_TYPE, CAR_FUEL, CAR_SIZE, CAR_FEE "
+				+ " FROM RC_INFO"
+				+ " WHERE SEQ = ?  ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		InfoDto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getInfoList Success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("2/6 getInfoList Success");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getInfoList Success");
+		
+			while(rs.next()) {
+				int i = 1;
+				dto = new InfoDto(rs.getInt(i++), rs.getString(i++), 
+						rs.getString(i++), rs.getString(i++), rs.getString(i++), 
+						rs.getString(i++), rs.getString(i++), rs.getString(i++));
+				
+			}
+			System.out.println("4/6 getInfoList Success");
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBClose.close(psmt, conn, rs);			
+			System.out.println("6/6 S getBbs");
+		}
+		
+		return dto;
+	}
+	
 
 }
