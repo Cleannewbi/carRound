@@ -84,7 +84,7 @@ private static BbsDao bbsdao = new BbsDao();
 	}
 */
 	
-	//ddddddd
+	
 	@Override
 	public InfoDto getInfoList(int seq) {			// 차량 정보
 		
