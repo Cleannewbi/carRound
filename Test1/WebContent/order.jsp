@@ -124,6 +124,8 @@
 	MemberDto companyDto= memberService.getMember(carInfoDto.getCom_name(),2);
 	System.out.println("company dto : "+companyDto);
 	
+	
+	//주소 핀꼽기, 정보를 다오에 적용시키기
 %>
 
 <div style="margin-left: 60px">
