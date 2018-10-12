@@ -31,7 +31,7 @@ if(checkedBoxs != null) {
 	height: 600px;
 	background-color: #cceeee;
 }
-.info {
+.info {ㅇㅇ
 	width: 40%;
 	height: 200px;
 	min-width: 450px;
@@ -115,7 +115,7 @@ li {
 			<li>
 				<div class="info">
 					<div><strong class="infoText"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="#"><img class="infoImg" src="./images/k5.jpg"></a>
+					<a href="RentCarDetail.jsp?seq="<%=idto.getInfo_seq() %>><img class="infoImg" src="./images/k5.jpg"></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 
@@ -156,8 +156,8 @@ li {
 						<div class="infoDetail" name="comp">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
 							<input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')">
+							<%-- <input type="hidden" id="comp" name="comp" value="<%=idto.getCom_name() %>"> --%>
 						</div> 
-		<% %>
 				</div>
 			</li>
 
@@ -169,6 +169,14 @@ li {
 	</ul>
 </div>
 </form>
+
+
+<script type="text/javascript">
+
+function RentCarDetail(seq) {
+	location.href = "RentCarDetail.jsp?seq=" + seq;
+}
+</script>
 
 </body>
 </html>

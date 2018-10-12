@@ -14,13 +14,14 @@
 String InfoSeq = request.getParameter("seq");
 int seq = Integer.parseInt(InfoSeq);
 String comname = request.getParameter("comp");
+System.out.println("comname" + comname);
 	//  List<ReviewDto> bbslist = (List<ReviewDto>)request.getAttribute("bbslist");			// 리뷰리스트 받아오기
 	//  System.out.println(bbslist.get(3));
     
 	/*  InfoDto infodto = (InfoDto)request.getAttribute("infolist");		// 차량정보 */
 	iInfoDao iidao = InfoDao.getInstance();
 	InfoDto iidto = iidao.getInfoList(seq);
-	System.out.println(iidto.toString());		
+	System.out.println(iidto.toString());
     
 	iMemManager imdao = MemManager.getInstance();
 	MemberDto comdto = imdao.getCom(comname);
@@ -93,7 +94,7 @@ String comname = request.getParameter("comp");
  <table>
  	<tr>
  		<th>회사 배너 사진</th>
- 		<td><%=comdto.getMember_Photo() %></td>
+ 		<%-- <td><%=comdto.getMember_Photo() %></td> --%>
  	</tr>
  	
  	<tr>

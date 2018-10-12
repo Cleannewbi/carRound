@@ -158,11 +158,15 @@ li {
 <a href="MyPage.jsp">MyPage.jsp</a>
 
 <script type="text/javascript">
+
+/* 
 function RentCarDetail(seq) {
 	location.href = "RentCarDetail.jsp?seq=" + seq;
 }
-/* 
-var loc[];
+ */
+
+/*
+var loc = [];
 var ln = $(".cb1").length;
 var array;
 //alert(ln)
