@@ -52,28 +52,14 @@
   color:#fff;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 </style>
-
-
 </head>
 <body>
 
 <br>
 
-
 <br><br>
-<form action="control" onsubmit="return check()" name="fr">
+<form action="regi.jsp" onsubmit="return check()" name="fr" method="post">
 <div align="center">
 
 <h2>일반 회원 가입</h2>
@@ -160,7 +146,7 @@
    	 <a href="javascript:document.fr.submit();"> 회원가입 </a>
 	</div> -->
 	
-				<input type="hidden" name="command" value="addmem">
+<!-- 				<input type="hidden" name="command" value="addmem"> -->
 				<input type="hidden" name="auth" value="mem">
 			</td>
 		</tr>
@@ -180,10 +166,6 @@
     <a href="#" onclick="submit()"> 회원가입 </a>
 </div>
  -->
-
-
-
-
 
 <script type="text/javascript">
 

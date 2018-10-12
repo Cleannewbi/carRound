@@ -60,7 +60,7 @@ request.setCharacterEncoding("utf-8");
 
 
 <br>
-<form onsubmit="return check()" name="fr" action="control" >		
+<form onsubmit="return check()" name="fr" action="regi.jsp" >		
 <div align="center">
 	<table>
 		<tr>
@@ -122,7 +122,7 @@ request.setCharacterEncoding("utf-8");
 		<tr>
 			<td colspan="2"><br>
 				<input type="submit" value="회원가입">
-				<input type="hidden" name="command" value="addmem">
+				<!-- <input type="hidden" name="command" value="addmem"> -->
 				<input type="hidden" name="auth" value="com">
 				<input type="hidden" name="imgname" value="<%=imgname %>">
 			</td>
