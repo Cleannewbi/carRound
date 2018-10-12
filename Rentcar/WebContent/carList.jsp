@@ -147,7 +147,7 @@ li {
 			<li>
 				<div class="info">
 					<div><strong class="infoText"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="#"><img class="infoImg" src="./images/k5.jpg"></a>
+					<a href="RentCarDetail.jsp?seq="<%=idto.getInfo_seq() %>><img class="infoImg" src="./images/k5.jpg"></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail" name="size">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 

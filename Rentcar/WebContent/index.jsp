@@ -154,8 +154,8 @@ li {
 </jsp:include>
 </div>
 
-<a href="detail.jsp">detail.jsp</a>
-<a href="image.jsp">image.jsp</a>
+<a href="RentCarDetail.jsp">detail.jsp</a>
+<a href="MyPage.jsp">MyPage.jsp</a>
 
 <script type="text/javascript">
 function RentCarDetail(seq) {
