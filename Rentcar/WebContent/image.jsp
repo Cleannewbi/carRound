@@ -29,7 +29,7 @@ request.setCharacterEncoding("utf-8");
 	   		 filename = item.getName();
 
 	   	//	String dir = "e:\\image";
-	   		String uploadUri = "/image";			// webcontent 안에 image폴더 만듦
+	   		String uploadUri = "/images";			// webcontent 안에 image폴더 만듦
 	   		String dir = request.getSession().getServletContext().getRealPath(uploadUri);		
 	   		System.out.println(dir);	// 물리적경로 확인
 	   		item.write(new File(dir, filename));

@@ -9,7 +9,7 @@ import dto.ReviewDto;
 public interface iBbsDao {
 
 //	public List<BbsDto> getBbsList();
-	
+// 통합적인 게시판 dao 
 	
 /////////////
 	public InfoDto getInfoList(int seq);		// 차량 정보

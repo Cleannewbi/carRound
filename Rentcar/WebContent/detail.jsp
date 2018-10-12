@@ -1,3 +1,7 @@
+<%@page import="dao.iBbsDao"%>
+<%@page import="dao.BbsDao"%>
+<%@page import="dao.InfoDao"%>
+<%@page import="dao.iInfoDao"%>
 <%@page import="dto.InfoDto"%>
 <%@page import="dto.MemberDto"%>
 <%@page import="dto.ReviewDto"%>
@@ -5,11 +9,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    List<ReviewDto> bbslist = (List<ReviewDto>)request.getAttribute("bbslist");			// 리뷰리스트 받아오기
+  //  List<ReviewDto> bbslist = (List<ReviewDto>)request.getAttribute("bbslist");			// 리뷰리스트 받아오기
   //  System.out.println(bbslist.get(3));
     
-    InfoDto infodto = (InfoDto)request.getAttribute("infolist");		// 차량정보
-    System.out.println(infodto.toString());		
+   /*  InfoDto infodto = (InfoDto)request.getAttribute("infolist");		// 차량정보 */
+   iBbsDao ibdao = BbsDao.getInstance();
+   // InfoDto iidto = ibdao.getInfoList(seq);
+   // System.out.println(iidto.toString());		
     
      
     MemberDto comdto = (MemberDto)request.getAttribute("comdto");		// 회사정보
@@ -126,7 +132,8 @@
  
  
  <!-- 리뷰 게시판  -->
- 
+
+<%--  
 <br><br>
 <div align="center" style="border: solid black 1px">
 <table style="text-align: center">
@@ -159,7 +166,7 @@
 
 </table>
 </div>
-
+ --%>
 
 
 
