@@ -194,7 +194,7 @@ var map = new naver.maps.Map('map', mapOptions);
 <hr style="color: grey">
 <div style="margin-left: 60px">
 <h2  class="title">옵션선택</h2>
-<p  class="content">딜리버리 서비스 <input type="checkbox" id="deliCheck" onclick="deliFunc(this)"></p>
+<p  class="content">딜리버리 서비스 <input type="checkbox" id="deliveryCheck" onclick="deliFunc(this)"></p>
 </div>
 <hr>
 <div style="margin-left: 60px">
@@ -233,27 +233,11 @@ var map = new naver.maps.Map('map', mapOptions);
   			var testdeli = "<%=deli %>";
  	 		alert("testdeli = " + testdeli);
  	 		var testdeliCar = "<%=formatter.format(carFee+deli) %>";
+ 	 		testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
  	 		alert("testdeliCar = " + testdeliCar); 
- 	 		var deliv = $('#delivery').val();
- 	 		alert("딜리버리  : "+deliv);
- 	 		var deliCh = $("#deliCheck").val();
- 	 		alert("체크박스 : "+deliCh);
 
-  	 <%-- 	 	$.ajax({
- 	 			url : "./controller.jsp",
- 	 			type : "post",
- 	 			data : deliCheck,
- 	 			success:function(data){
- 	 				alert("통신성공!");
- 	 				alert("testdeliCar = " + testdeliCar);
- 	 				data=<%=deli%>;
- 	 				$("#finalFee").val(<%=formatter.format(carFee+deli) %>);
- 	 			},
- 	 			error:function(){
- 	 				alert("통신실패!");
- 	 			}
- 	 		}); 
- 	 		  --%>
+ 	 		document.getElementById("finalFee").innerHTML=testdeliCar;
+ 	 		
  		}else {
  			alert("선택해제");
  			document.getElementById("deliPrice").innerHTML="0원";
@@ -261,23 +245,11 @@ var map = new naver.maps.Map('map', mapOptions);
  			var testdeli = "<%=deli %>";
  	 		alert("testdeli = " + testdeli);
  	 		var testdeliCar = "<%=formatter.format(carFee+deli)%>";
+ 	 		testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
  	 		alert("testdeliCar = " + testdeliCar);
- 	 		alert($("#delivery").val());
-  	 		
- <%-- 	 		$.ajax({
- 	 			url : "controller.jsp",
- 	 			type : "post",
- 	 			data :  ,
- 	 			success:function(data){
- 	 				alert("통신성공!");
- 	 				alert("testdeliCar = " + testdeliCar);
- 	 				data=<%=deli%>;
- 	 				$("#finalFee").val(<%=formatter.format(carFee+deli) %>);
- 	 			},
- 	 			error:function(){
- 	 				alert("통신실패!");
- 	 			}
- 	 		});  --%>
+ 	 		
+ 	 		document.getElementById("finalFee").innerHTML=testdeliCar;
+ 
  		}
 	} 
 	
