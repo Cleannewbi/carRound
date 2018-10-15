@@ -48,7 +48,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=TyohXIeFvfwc1UdkRR_2&submodules=geocoder"></script>
 <style type="text/css">
 .title{
 	color:#76bcba 
@@ -182,17 +181,49 @@
 <h2 class="title">전화번호</h2>
 <p  class="content"><%=companyDto.getMember_phone().substring(0, 3)%>-<%=companyDto.getMember_phone().substring(3, 7)%>-<%=companyDto.getMember_phone().substring(7, 11)%></p>
 
-<div id="map" style="width:40%;height:400px;"></div>
+<div id="map" style="width:500px;height:400px;"></div>
 </div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e53f47e84dfa687f87346382fb232397&libraries=services"></script>
 <script>
-var mapOptions = {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-};
-
-var map = new naver.maps.Map('map', mapOptions);
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+	
+	// 지도를 생성합니다    
+	var map = new daum.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new daum.maps.services.Geocoder();
+	var company_address = "<%=companyDto.getMember_address()%>";
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(company_address, function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
+	
+	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var company_name = "<%=companyDto.getMember_name() %>";	
+	        var infowindow = new daum.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+company_name+'</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+});    
 </script>
-
 <hr style="color: grey">
 <div style="margin-left: 60px">
 <h2  class="title">옵션선택</h2>
