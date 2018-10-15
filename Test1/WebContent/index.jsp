@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <% request.setCharacterEncoding("KSC5601");%>
+<% request.setCharacterEncoding("KSC5601");%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,12 +18,12 @@
 <p>ID : <input type="text" name="id"></p>
 <p>PW : <input type="text" name="pw"></p>
 <p>차 이름 : <input type="text" name="carName" value="2019 아반떼"></p>
+<p>회사 이름 : <input type="text" name="comName" value="TEST COMPANY"></p>
 <p>임대시작 : <input type="text" name="startDate" ></p>
 <p>임대 끝 : <input type="text" name="endDate"></p>
 <input type="submit" value="들어가기">
 </form>
 
-<!-- 차 이름 한글이면 깨짐 -->
 
 </body>
 </html>

@@ -14,6 +14,7 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String carName =  request.getParameter("carName");
+	String comName = request.getParameter("comName");
 
 	String startDate = request.getParameter("startDate");
 	String endDate = request.getParameter("endDate");
@@ -61,6 +62,7 @@
 	font-size: 17px;
 	color:#595959;
 	border-bottom: 1px solid #595959;
+	height: 200px;
 }
 #topData{
 	vertical-align: top;
@@ -75,7 +77,7 @@
 	memberDaoServiceImpl memberService = new memberDaoService();
 	
 	//2.car Info
-	InfoDto carInfoDto = infoService.getCarInfo(carName);
+	InfoDto carInfoDto = infoService.getCarInfo(carName, comName);
 	System.out.println("carInfo : "+carInfoDto);
 	
 	//3.member Info
@@ -125,7 +127,10 @@
 	System.out.println("company dto : "+companyDto);
 	
 %>
-<div style="margin-left: 60px">
+
+<form action="orderAf.jsp" method="post">
+<input type="hidden" name="infoSeq" value="<%=carInfoDto.getInfo_seq()%>">
+<div style="margin-left: 500px">
 <table>
 <col width="600"><col width="100">
 <tr>
@@ -140,9 +145,9 @@
 </div>
 
 <hr style="color: grey">
-<div style="margin-left: 60px">
+<div style="margin-left: 500px">
 <h2 class="title">운전자정보</h2>
-<table id="userTable">
+<table id="userTable" >
 <col width="150"><col width="300">
 <tr>
 	<td class="userTable"> <font color="grey">이름</font> </td>
@@ -180,7 +185,7 @@
 <br>
 <hr color="grey">
 <br>
-<div style="margin-left: 60px">
+<div style="margin-left: 500px">
 <h2 class="title">업체명</h2>
 <p class="content"><%=companyDto.getMember_name() %></p>
 <h2  class="title">주소</h2>
@@ -232,12 +237,12 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 });    
 </script>
 <hr style="color: grey">
-<div style="margin-left: 60px">
+<div style="margin-left: 500px">
 <h2  class="title">옵션선택</h2>
 <p  class="content">딜리버리 서비스 <input type="checkbox" id="deliveryCheck" onclick="deliFunc(this)"></p>
 </div>
 <hr>
-<div style="margin-left: 60px">
+<div style="margin-left: 500px">
 <h2  class="title">결제정보</h2>
 <table>
 <col width="250"><col width="250">
@@ -292,8 +297,9 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
  
  		}
 	} 
-	
+
 
 </script>
+</form>
 </body>
 </html>

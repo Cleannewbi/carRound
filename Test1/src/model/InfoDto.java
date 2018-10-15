@@ -44,7 +44,19 @@ public class InfoDto implements Serializable {
 	private String Car_size;	// 소형, 중형, 대형
 	private String Car_fee;
 	
-	
+		
+	public InfoDto(int info_seq, String com_name, String car_pic, String car_name, String car_type, String car_fuel,
+			String car_size, String car_fee) {
+		super();
+		Info_seq = info_seq;
+		Com_name = com_name;
+		Car_pic = car_pic;
+		Car_name = car_name;
+		Car_type = car_type;
+		Car_fuel = car_fuel;
+		Car_size = car_size;
+		Car_fee = car_fee;
+	}
 	
 	public int getInfo_seq() {
 		return Info_seq;
@@ -94,19 +106,7 @@ public class InfoDto implements Serializable {
 	public void setCar_fee(String car_fee) {
 		Car_fee = car_fee;
 	}
-	
-	public InfoDto(int info_seq, String com_name, String car_pic, String car_name, String car_type, String car_fuel,
-			String car_size, String car_fee) {
-		super();
-		Info_seq = info_seq;
-		Com_name = com_name;
-		Car_pic = car_pic;
-		Car_name = car_name;
-		Car_type = car_type;
-		Car_fuel = car_fuel;
-		Car_size = car_size;
-		Car_fee = car_fee;
-	}
+
 	
 	@Override
 	public String toString() {

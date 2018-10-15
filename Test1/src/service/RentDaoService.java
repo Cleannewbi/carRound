@@ -7,8 +7,8 @@ public class RentDaoService implements RentDaoServiceImpl {
 	RentDao dao = new RentDao();
 	
 	@Override
-	public boolean setReservation(RentDto rDto) {
-		return dao.setReservation(rDto);
+	public boolean setReservation(RentDto rDto, int infoSeq) {
+		return dao.setReservation(rDto, infoSeq);
 	}
 	
 }
