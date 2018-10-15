@@ -13,8 +13,6 @@
 <%
 String InfoSeq = request.getParameter("seq");
 int seq = Integer.parseInt(InfoSeq);
-String comname = request.getParameter("comp");
-System.out.println("comname" + comname);
 	//  List<ReviewDto> bbslist = (List<ReviewDto>)request.getAttribute("bbslist");			// 리뷰리스트 받아오기
 	//  System.out.println(bbslist.get(3));
     
@@ -24,7 +22,7 @@ System.out.println("comname" + comname);
 	System.out.println(iidto.toString());
     
 	iMemManager imdao = MemManager.getInstance();
-	MemberDto comdto = imdao.getCom(comname);
+	MemberDto comdto = imdao.getCom(iidto.getCom_name());
 	/* MemberDto comdto = (MemberDto)request.getAttribute("comdto");		// 회사정보 */
     // System.out.println(comdto.toString()); 
 %>
@@ -171,18 +169,6 @@ System.out.println("comname" + comname);
 </table>
 </div>
  --%>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

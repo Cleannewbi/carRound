@@ -64,7 +64,7 @@ public class MyPageDao implements iMyPageDao {
 	@Override
 	public List<RentDto> getRentPageList(String id) {
 		
-		String sql = "SELECT SEQ,CARNAME,RC_START,RC_END,CUS_ID,COM_NUM"
+		String sql = "SELECT SEQ,CARNAME,RC_START,RC_END,CUS_ID,COM_NUM,PRICE"
 				+ " FROM RC_RENT"
 				+ " WHERE CUS_ID =? ";
 		
@@ -85,7 +85,7 @@ public class MyPageDao implements iMyPageDao {
 			int i = 1;
 			while (rs.next()) {
 				RentDto dto = new RentDto(rs.getInt(i++),
-							rs.getString(i++),rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++));
+							rs.getString(i++),rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
 				
 				rentlist.add(dto);
 			}

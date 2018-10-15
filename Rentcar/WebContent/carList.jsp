@@ -140,7 +140,7 @@ li {
 			<strong style="text-align: center; height: 100px;">등록된 차량이 없습니다.</strong>
 			</li>
 			<% 		
-		} else {
+		} else { 
 			for(int i=0 ; i < chkResult.size() ; i++) {
 				InfoDto idto = chkResult.get(i);
 			%>
@@ -156,7 +156,6 @@ li {
 						<div class="infoDetail" name="comp">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
 							<input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')">
-							<%-- <input type="hidden" id="comp" name="comp" value="<%=idto.getCom_name() %>"> --%>
 						</div> 
 				</div>
 			</li>

@@ -37,7 +37,14 @@ public class RentDto implements Serializable {
 	private String Rent_end;
 	private String cus_id;				// MemberDto.Member_id
 	private int com_num;				// InfoDto.seq
+	private int price;
 	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public int getRent_seq() {
 		return Rent_seq;
 	}
@@ -75,7 +82,7 @@ public class RentDto implements Serializable {
 		this.com_num = com_num;
 	}
 	
-	public RentDto(int rent_seq, String rent_carname, String rent_start, String rent_end, String cus_id, int com_num) {
+	public RentDto(int rent_seq, String rent_carname, String rent_start, String rent_end, String cus_id, int com_num, int price) {
 		super();
 		Rent_seq = rent_seq;
 		Rent_carname = rent_carname;
@@ -83,6 +90,7 @@ public class RentDto implements Serializable {
 		Rent_end = rent_end;
 		this.cus_id = cus_id;
 		this.com_num = com_num;
+		this.price = price;
 	}
 	
 	@Override
