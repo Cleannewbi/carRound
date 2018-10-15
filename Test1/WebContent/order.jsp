@@ -22,6 +22,7 @@
 	/*
 	//login 값 받기
 	Object ologin = session.getAttribute("login");
+	//start day , end day, 차 이름 = rentInfo 라는 이름의 session으로 받아오기
 	Object rent = session.getAttribute("rentInfo");
 	MemberDto mem = null;
 	RentDto rentdto = null;
@@ -123,10 +124,7 @@
 	MemberDto companyDto= memberService.getMember(carInfoDto.getCom_name(),2);
 	System.out.println("company dto : "+companyDto);
 	
-	
-	//주소 핀꼽기, 정보를 다오에 적용시키기
 %>
-
 <div style="margin-left: 60px">
 <table>
 <col width="600"><col width="100">
@@ -145,26 +143,35 @@
 <div style="margin-left: 60px">
 <h2 class="title">운전자정보</h2>
 <table id="userTable">
-<col width="150"><col width="200">
+<col width="150"><col width="300">
 <tr>
 	<td class="userTable"> <font color="grey">이름</font> </td>
-	<td class="userTable"><%=userDto.getMember_name()%></td>
+	<td class="userTable"><input class="content" type="text" value="<%=userDto.getMember_name()%>" style="background-color:transparent; border: none;"></td>
 </tr>
 <tr>
 	<td class="userTable">연락처</td>
-	<td class="userTable"><%=userDto.getMember_phone().substring(0, 3)%>-<%=userDto.getMember_phone().substring(3, 7)%>-<%=userDto.getMember_phone().substring(7, 11)%></td>
+	<td class="userTable">
+		<input class="content" type="text" value="<%=userDto.getMember_phone().substring(0, 3)%>" size="2" style="background-color:transparent; border: none;">-&nbsp;&nbsp;
+		<input class="content" type="text" value="<%=userDto.getMember_phone().substring(3, 7)%>" size="2"  style="background-color:transparent; border: none;">-&nbsp;&nbsp;
+		<input class="content" type="text" value="<%=userDto.getMember_phone().substring(7, 11)%>"size="2"  style="background-color:transparent; border: none;">
+	</td>
 </tr>
 <tr>
 	<td class="userTable">주소</td>
-	<td class="userTable"><%=userDto.getMember_address()%></td>
+	<td class="userTable"><input class="content" type="text" value="<%=userDto.getMember_address()%>" style="background-color:transparent; border: none;"></td>
 </tr>
 <tr>
 	<td class="userTable">결제정보</td>
-	<td  class="userTable"><%=card[0]%>-<%=card[1]%>-<%=card[2]%>-<%=card[3]%>	</td>
+	<td  class="userTable">
+		<input class="content" size="2"  type="text" value="<%=card[0]%>" style="background-color:transparent; border: none;">-&nbsp;
+		<input class="content" size="2"  type="text" value="<%=card[1]%>" style="background-color:transparent; border: none;">-&nbsp;
+		<input class="content" size="2"  type="text" value="<%=card[2]%>" style="background-color:transparent; border: none;">-&nbsp;
+		<input class="content" size="2"  type="text" value="<%=card[3]%>" style="background-color:transparent; border: none;">
+	</td>
 </tr>
 <tr>
 	<td class="userTable">운전면허 번호</td>
-	<td  class="userTable"><%=userDto.getMember_Photo()%>	</td>
+	<td  class="userTable"><input class="content" type="text" value="<%=userDto.getMember_Photo()%>" style="background-color:transparent; border: none;"></td>
 </tr>
 </table>
 <br>
