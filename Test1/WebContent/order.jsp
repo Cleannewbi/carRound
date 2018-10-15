@@ -186,7 +186,7 @@
 </tr>
 </table>
 <br>
-<font size="3" color="puple">※고객님의 정보가 맞는지 확인하여 주십시오.</font>
+<font size="3" color="blue">※고객님의 정보가 맞는지 확인하여 주십시오.</font>
 </div>
 <br>
 <hr color="grey">
@@ -246,12 +246,29 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 <div style="margin-left: 500px">
 <h2  class="title">옵션선택</h2>
 <p  class="content">딜리버리 서비스 <input type="checkbox" id="deliveryCheck" onclick="deliFunc(this)"></p>
+<p><font size="3" color="blue">딜리버리 서비스란? <br>위에 기재된 운전자 정보에서 픽업가능한 시스템입니다.</font>
 </div>
 <hr>
 <div style="margin-left: 500px">
 <h2  class="title">결제정보</h2>
 <table>
 <col width="250"><col width="250">
+<tr height="30">
+	<td class="content">시작일</td>
+	<td align="right">
+		<input class="content" name="startYear" size="2" type="text" value="<%=startDateYear%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
+		<input class="content" name="startMonth" size="1" align="right" type="text" value="<%=startDateMonth%>월" style="background-color:transparent; border: none; text-align: right;"readonly="readonly">
+		<input class="content" name="startDay" size="1"  type="text" align="right" value="<%=startDateDay%>일" style="background-color:transparent; border: none; text-align: right;" readonly="readonly">
+	</td>
+</tr>
+<tr height="30">
+	<td class="content">반납일</td>
+	<td align="right">
+		<input class="content" name="endYear" size="2"  type="text" value="<%=endDateYear%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
+		<input class="content" name="endMonth" size="1"  type="text" value="<%=endDateMonth%>월" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
+		<input class="content" name="endDay" size="1"  type="text" value="<%=endDateDay%>일" style="background-color:transparent; border: none;text-align: right;" readonly="readonly"  >
+	</td>
+</tr>
 <tr height="30">
 	<td class="content">대여료</td>
 	<td align="right"  class="content"><%=carInfoDto.getCar_fee() %> 원</td>
@@ -266,7 +283,9 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 </tr>
 <tr height="30">
 	<td><font size="4" color="red"><b>최종 결제금액</b></font></td>
-	<td align="right" id="finalFee"><font size="4" color="red"><b><%=formatter.format(carFee+deli)%>원</b></font></td>
+	<td align="right">
+		<input class="content" id="finalFee" name="price" type="text" value="<%=formatter.format(carFee+deli)%>원" style="color:red; background-color:transparent; border: none; text-align: right; font-weight: bold;" readonly="readonly"  >
+	</td>
 </tr>
 </table>
 </div>
@@ -278,16 +297,16 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 <script type="text/javascript">
  	function deliFunc( e ) {
  		if ($('input:checkbox[id="deliveryCheck"]').is(":checked")){
- 			//alert("선택");
+ 			alert("선택");
  			document.getElementById("deliPrice").innerHTML="10,000원";
  			<% deli = 10000;%>
   			var testdeli = "<%=deli %>";
- 	 		//alert("testdeli = " + testdeli);
+ 	 		alert("testdeli = " + testdeli);
  	 		var testdeliCar = "<%=formatter.format(carFee+deli) %>";
- 	 		testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
- 	 		//alert("testdeliCar = " + testdeliCar); 
+ 	 		//testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
+ 	 		alert("testdeliCar = " + testdeliCar); 
 
- 	 		document.getElementById("finalFee").innerHTML=testdeliCar;
+ 	 		document.getElementById("finalFee").value=testdeliCar+"원";
  	 		
  		}else {
  			alert("선택해제");
@@ -296,10 +315,10 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
  			var testdeli = "<%=deli %>";
  	 		alert("testdeli = " + testdeli);
  	 		var testdeliCar = "<%=formatter.format(carFee+deli)%>";
- 	 		testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
+ 	 		//testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
  	 		alert("testdeliCar = " + testdeliCar);
  	 		
- 	 		document.getElementById("finalFee").innerHTML=testdeliCar;
+ 	 		document.getElementById("finalFee").value=testdeliCar+"원";
  
  		}
 	} 

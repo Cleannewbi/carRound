@@ -1,3 +1,4 @@
+<%@page import="javax.annotation.security.DenyAll"%>
 <%@page import="model.RentDto"%>
 <%@page import="dao.RentDao"%>
 <%@page import="dao.RentDaoImpl"%>
@@ -11,30 +12,21 @@
 	//session에서 가져오면 hidden loginId order.jsp에서 삭제해야됨
 	
 	String carName = request.getParameter("carName").trim();
-	String startDate = request.getParameter("startDate").trim();
-	String endDate = request.getParameter("endDate").trim();
-	int price = Integer.parseInt(request.getParameter("price"));
-
-	String rName =  request.getParameter("rc_name").trim();
+	String startDate = request.getParameter("startYear").trim()+request.getParameter("startMonth").trim()+request.getParameter("startDay").trim();	
+	String endDate = request.getParameter("endYear").trim()+request.getParameter("endMonth").trim()+request.getParameter("endDay").trim();
+	String pri = request.getParameter("price");
+	pri=pri.replace(",", "");
+	pri=pri.replace("원", "");
+	int price = (Integer.parseInt(pri));
 	
-	String pho1 =  request.getParameter("rcPhone1");
-	String pho2 =  request.getParameter("rcPhone2");
-	String pho3 =  request.getParameter("rcPhone3");
-	String rPhone = pho1.trim()+pho2.trim()+ pho3.trim();
-	
+	String rName =  request.getParameter("rcName").trim();
+	String rPhone = request.getParameter("rcPhone1").trim()+request.getParameter("rcPhone2").trim()+request.getParameter("rcPhone3").trim();
 	String rAddress =  request.getParameter("rcAddress").trim();
-	
-	String card1 =  request.getParameter("rcCard1");
-	String card2 =  request.getParameter("rcCard2");
-	String card3 =  request.getParameter("rcCard3");
-	String card4 =  request.getParameter("rcCard4");
-	String rCard = card1.trim()+card2.trim()+card3.trim()+card4.trim();
-	
+	String rCard = request.getParameter("rcCard1").trim()+ request.getParameter("rcCard2").trim()+ request.getParameter("rcCard3").trim()+ request.getParameter("rcCard4").trim();
 	String rPhoto = request.getParameter("rcPhoto").trim();
-
-	
-	int infoSeq =Integer.parseInt(request.getParameter("infoSeq"));
-
+	int comNum =Integer.parseInt(request.getParameter("infoSeq"));
+	System.out.println("login id : "+loginId+" carName : "+carName+" startDate : "+startDate+" enddate : "+endDate+ " price: "+price+" rName: "+rName+" rAddress: "+rAddress
+			+"rCard : "+rCard+"rphoto : "+rPhoto+" comNum : "+comNum);
 %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -45,13 +37,11 @@
 </head>
 <body>
 
-
 <%
-
 	RentDaoImpl rentdao = RentDao.getInstance();
-	RentDto dto = new RentDto(carName, startDate, endDate, loginId, infoSeq, price,rName, rPhone, rAddress, rCard, rPhoto);
+	RentDto dto = new RentDto(carName, startDate, endDate, loginId, comNum, price,rName, rPhone, rAddress, rCard, rPhoto);
 
-	boolean isS = rentdao.setReservation(dto, infoSeq);
+	boolean isS = rentdao.setReservation(dto);
 	if(isS){
 %>
 		<script type="text/javascript">

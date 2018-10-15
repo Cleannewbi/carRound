@@ -17,11 +17,11 @@ public class RentDao implements RentDaoImpl{
 	}
 	
 	@Override
-	public boolean setReservation(RentDto rDto, int infoSeq) {
+	public boolean setReservation(RentDto rDto) {
 		
 		String sql = " INSERT INTO RC_RENT "
 				+ " VALUES( SEQ_RC_RENT.NEXTVAL, ?, ?, ?, ?, ?, ?, "
-				+ " ?, ?, ?, ?, ?";
+				+ " ?, ?, ?, ?, ?)";
 		
 		System.out.println("sql : "+sql);
 		
