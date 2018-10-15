@@ -7,13 +7,31 @@
 <%
 
 	// loginId 는 session에서 가져와야함 Object ologin = session.getAttribute("login");
-
-
-	String loginId = request.getParameter("loginId");
-	String carName = request.getParameter("carName");
-	String startDate = request.getParameter("startDate");
-	String endDate = request.getParameter("endDate");
+	String loginId = request.getParameter("loginId").trim();
+	//session에서 가져오면 hidden loginId order.jsp에서 삭제해야됨
+	
+	String carName = request.getParameter("carName").trim();
+	String startDate = request.getParameter("startDate").trim();
+	String endDate = request.getParameter("endDate").trim();
 	int price = Integer.parseInt(request.getParameter("price"));
+
+	String rName =  request.getParameter("rc_name").trim();
+	
+	String pho1 =  request.getParameter("rcPhone1");
+	String pho2 =  request.getParameter("rcPhone2");
+	String pho3 =  request.getParameter("rcPhone3");
+	String rPhone = pho1.trim()+pho2.trim()+ pho3.trim();
+	
+	String rAddress =  request.getParameter("rcAddress").trim();
+	
+	String card1 =  request.getParameter("rcCard1");
+	String card2 =  request.getParameter("rcCard2");
+	String card3 =  request.getParameter("rcCard3");
+	String card4 =  request.getParameter("rcCard4");
+	String rCard = card1.trim()+card2.trim()+card3.trim()+card4.trim();
+	
+	String rPhoto = request.getParameter("rcPhoto").trim();
+
 	
 	int infoSeq =Integer.parseInt(request.getParameter("infoSeq"));
 
@@ -31,7 +49,7 @@
 <%
 
 	RentDaoImpl rentdao = RentDao.getInstance();
-	RentDto dto = new RentDto(carName,startDate,endDate,loginId,price);
+	RentDto dto = new RentDto(carName, startDate, endDate, loginId, infoSeq, price,rName, rPhone, rAddress, rCard, rPhoto);
 
 	boolean isS = rentdao.setReservation(dto, infoSeq);
 	if(isS){

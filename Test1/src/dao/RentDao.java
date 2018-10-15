@@ -20,7 +20,8 @@ public class RentDao implements RentDaoImpl{
 	public boolean setReservation(RentDto rDto, int infoSeq) {
 		
 		String sql = " INSERT INTO RC_RENT "
-				+ " VALUES( SEQ_RC_RENT.NEXTVAL, ?, ?, ?, ?, ?, ?";
+				+ " VALUES( SEQ_RC_RENT.NEXTVAL, ?, ?, ?, ?, ?, ?, "
+				+ " ?, ?, ?, ?, ?";
 		
 		System.out.println("sql : "+sql);
 		
@@ -36,8 +37,13 @@ public class RentDao implements RentDaoImpl{
 			psmt.setString(2, rDto.getRent_start());
 			psmt.setString(3, rDto.getRent_end());
 			psmt.setString(4, rDto.getCus_id());
-			psmt.setInt(5, infoSeq);
+			psmt.setInt(5, rDto.getCom_num());
 			psmt.setInt(6, rDto.getPrice());
+			psmt.setString(7, rDto.getRc_name());
+			psmt.setString(8, rDto.getRc_phone());
+			psmt.setString(9, rDto.getRc_address());
+			psmt.setString(10, rDto.getRc_card());
+			psmt.setString(11, rDto.getRc_photo());
 				System.out.println("2/6 setReservation Success");
 			count=psmt.executeUpdate();
 				System.out.println("3/6 setReservation Success");

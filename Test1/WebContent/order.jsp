@@ -61,11 +61,15 @@
 #userTable{
 	font-size: 17px;
 	color:#595959;
-	border-bottom: 1px solid #595959;
 	height: 200px;
+    border-collapse: collapse;
 }
 #topData{
 	vertical-align: top;
+}
+.userTd{
+ 	border-bottom: 1px solid #444444;
+    padding: 10px;
 }
 </style>
 </head>
@@ -130,11 +134,13 @@
 
 <form action="orderAf.jsp" method="post">
 <input type="hidden" name="infoSeq" value="<%=carInfoDto.getInfo_seq()%>">
+<input type="hidden" name="loginId" value="<%=id%>">
 <div style="margin-left: 500px">
 <table>
 <col width="600"><col width="100">
 <tr>
-	<td colspan="2" height="70" > <font size="7px"><%=carInfoDto.getCar_name() %></font> </td>
+	<td colspan="2" height="70" > <input class="content" name="carName" type="text" value="<%=carInfoDto.getCar_name() %>" style="background-color:transparent; border: none; font-size:28px;"readonly="readonly">
+	</td>
 </tr>
 <tr>
 	<td height="400" > <%=carInfoDto.getCar_pic() %></td>
@@ -150,33 +156,33 @@
 <table id="userTable" >
 <col width="150"><col width="300">
 <tr>
-	<td class="userTable"> <font color="grey">이름</font> </td>
-	<td class="userTable"><input class="content" type="text" value="<%=userDto.getMember_name()%>" style="background-color:transparent; border: none;"></td>
+	<td class="userTd"><b>이름</b> </td>
+	<td class="userTd"><input class="content" name="rcName" type="text" value="<%=userDto.getMember_name()%>" style="background-color:transparent; border: none;"></td>
 </tr>
 <tr>
-	<td class="userTable">연락처</td>
-	<td class="userTable">
-		<input class="content" type="text" value="<%=userDto.getMember_phone().substring(0, 3)%>" size="2" style="background-color:transparent; border: none;">-&nbsp;&nbsp;
-		<input class="content" type="text" value="<%=userDto.getMember_phone().substring(3, 7)%>" size="2"  style="background-color:transparent; border: none;">-&nbsp;&nbsp;
-		<input class="content" type="text" value="<%=userDto.getMember_phone().substring(7, 11)%>"size="2"  style="background-color:transparent; border: none;">
+	<td class="userTd"><b>연락처</b></td>
+	<td class="userTd">
+		<input class="content" name="rcPhone1" type="text" value="<%=userDto.getMember_phone().substring(0, 3)%>" size="2" style="background-color:transparent; border: none;">-&nbsp;&nbsp;
+		<input class="content" name="rcPhone2" type="text" value="<%=userDto.getMember_phone().substring(3, 7)%>" size="2"  style="background-color:transparent; border: none;">-&nbsp;&nbsp;
+		<input class="content" name="rcPhone3" type="text" value="<%=userDto.getMember_phone().substring(7, 11)%>"size="2"  style="background-color:transparent; border: none;">
 	</td>
 </tr>
 <tr>
-	<td class="userTable">주소</td>
-	<td class="userTable"><input class="content" type="text" value="<%=userDto.getMember_address()%>" style="background-color:transparent; border: none;"></td>
+	<td class="userTd"><b>주소</b></td>
+	<td class="userTd"><input name="rcAddress" class="content" type="text" value="<%=userDto.getMember_address()%>" style="background-color:transparent; border: none;"></td>
 </tr>
 <tr>
-	<td class="userTable">결제정보</td>
-	<td  class="userTable">
-		<input class="content" size="2"  type="text" value="<%=card[0]%>" style="background-color:transparent; border: none;">-&nbsp;
-		<input class="content" size="2"  type="text" value="<%=card[1]%>" style="background-color:transparent; border: none;">-&nbsp;
-		<input class="content" size="2"  type="text" value="<%=card[2]%>" style="background-color:transparent; border: none;">-&nbsp;
-		<input class="content" size="2"  type="text" value="<%=card[3]%>" style="background-color:transparent; border: none;">
+	<td class="userTd"><b>결제정보</b></td>
+	<td  class="userTd">
+		<input class="content" name="rcCard1" size="2"  type="text" value="<%=card[0]%>" style="background-color:transparent; border: none;">-&nbsp;
+		<input class="content" name="rcCard2" size="2"  type="text" value="<%=card[1]%>" style="background-color:transparent; border: none;">-&nbsp;
+		<input class="content" name="rcCard3" size="2"  type="text" value="<%=card[2]%>" style="background-color:transparent; border: none;">-&nbsp;
+		<input class="content"name="rcCard4" size="2"  type="text" value="<%=card[3]%>" style="background-color:transparent; border: none;">
 	</td>
 </tr>
 <tr>
-	<td class="userTable">운전면허 번호</td>
-	<td  class="userTable"><input class="content" type="text" value="<%=userDto.getMember_Photo()%>" style="background-color:transparent; border: none;"></td>
+	<td class="userTd"><b>운전면허 번호</b></td>
+	<td  class="userTd"><input class="content" name="rcPhoto" type="text" value="<%=userDto.getMember_Photo()%>" style="background-color:transparent; border: none;"></td>
 </tr>
 </table>
 <br>
@@ -251,11 +257,11 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	<td align="right"  class="content"><%=carInfoDto.getCar_fee() %> 원</td>
 </tr>
 <tr height="30">
-	<td> <font size="3" color="#595959">대여일수</font> </td>
+	<td class="content">대여일수</td>
 	<td align="right"  class="content"><%=RentDays %>일</td>
 </tr>
 <tr height="30">
-	<td> <font size="3" color="#595959 ">딜리버리</font> </td>
+	<td class="content">딜리버리</td>
 	<td align="right" class="content" id="deliPrice">0원</td>
 </tr>
 <tr height="30">
@@ -272,14 +278,14 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 <script type="text/javascript">
  	function deliFunc( e ) {
  		if ($('input:checkbox[id="deliveryCheck"]').is(":checked")){
- 			alert("선택");
+ 			//alert("선택");
  			document.getElementById("deliPrice").innerHTML="10,000원";
  			<% deli = 10000;%>
   			var testdeli = "<%=deli %>";
- 	 		alert("testdeli = " + testdeli);
+ 	 		//alert("testdeli = " + testdeli);
  	 		var testdeliCar = "<%=formatter.format(carFee+deli) %>";
  	 		testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
- 	 		alert("testdeliCar = " + testdeliCar); 
+ 	 		//alert("testdeliCar = " + testdeliCar); 
 
  	 		document.getElementById("finalFee").innerHTML=testdeliCar;
  	 		
