@@ -4,6 +4,15 @@
 <%@page import="dao.InfoDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- <%@ include file="/infoSaving.jsp" %> 차후에 사용하자 --%>
+<%
+String rentPlace = request.getParameter("rentPlace");
+String startDate = request.getParameter("startDate");
+String startTime = request.getParameter("startTime");
+String endDate = request.getParameter("endDate");
+String endTime = request.getParameter("endTime");
+System.out.println(rentPlace + startDate + startTime + endDate + endTime);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -74,10 +83,7 @@ li {
 </style>
 </head>
 <body>
-		<%
-		InfoDao idao = InfoDao.getInstance();
-		List<InfoDto> list = idao.getInfoList();
-		%>
+
 <!-- 위쪽 체크박스 -->
 <div id="div_left">
 <form name="frm" method="post" action="carList.jsp">
@@ -147,15 +153,25 @@ li {
 	</ul>
 </div>
  --%>
- 
+
 <div id="main_area">
+<%
+if(rentPlace.equals("") && startDate.equals("") && startTime.equals("") && endDate.equals("") && endTime.equals("")) {
+%>
 <jsp:include page="carList.jsp" flush="false">
 	<jsp:param value="index.jsp" name="actionPath"/>
 </jsp:include>
 </div>
-
-<a href="RentCarDetail.jsp">detail.jsp</a>
-<a href="MyPage.jsp">MyPage.jsp</a>
+<%
+} else {
+%>
+<jsp:include page="carList.jsp" flush="false">
+	<jsp:param value="index.jsp" name="actionPath"/>
+</jsp:include>
+</div>
+<%
+}
+%>
 
 <script type="text/javascript">
 

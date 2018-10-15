@@ -85,7 +85,7 @@ public class MyPageDao implements iMyPageDao {
 			int i = 1;
 			while (rs.next()) {
 				RentDto dto = new RentDto(rs.getInt(i++),
-							rs.getString(i++),rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++));
+							rs.getString(i++),rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++));
 				
 				rentlist.add(dto);
 			}
