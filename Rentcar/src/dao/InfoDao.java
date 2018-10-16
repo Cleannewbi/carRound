@@ -115,6 +115,9 @@ public class InfoDao implements iInfoDao {
 				else if(keyword[i].equals("fuelElec")) {
 					sql += " CAR_FUEL =  '전기' ";
 				}
+				else if(keyword[i].equals("fuelDizel")) {
+					sql += " CAR_FUEL =  '디젤' ";
+				}
 				
 				if(keyword.length == (i+1)) {
 					break;
@@ -202,6 +205,62 @@ public class InfoDao implements iInfoDao {
 		
 		return dto;
 	}
+
+	@Override
+	public List<InfoDto> getInfoSearchableList(String carname, String comname) {
+		
+		String sql = " SELECT SEQ, COM_NAME, CAR_PIC, CAR_NAME, CAR_TYPE, CAR_FUEL, CAR_SIZE, CAR_FEE " + 
+				" FROM RC_INFO " + 
+				" WHERE COM_NAME NOT IN (SELECT COM_NAME FROM RC_RENT WHERE CAR_NAME= ? AND COM_NAME = ?) ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<InfoDto> list = new ArrayList<>();
+
+		try {
+			conn = DBConnection.getConnection();
+
+			System.out.println("1/6 getInfoSearchableList() Success!");
+			
+			// dummy data
+			if(carname.equals("") && comname.equals("")) {
+				carname = "K5";
+				comname = "TEST COMPANY";
+			}
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, carname);
+			psmt.setString(2, comname);
+			System.out.println("2/6 getInfoSearchableList() Success!");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getInfoSearchableList() Success!");
+			
+			while(rs.next()) {
+				InfoDto dto = new InfoDto(rs.getInt(1),
+										  rs.getString(2),
+										  rs.getString(3),
+										  rs.getString(4),
+										  rs.getString(5),
+										  rs.getString(6),
+										  rs.getString(7),
+										  rs.getString(8));
+				list.add(dto);
+			}
+			System.out.println("4/6 getInfoSearchableList() Success!");
+		} catch (Exception e) {
+			System.out.println("getInfoSearchableList() Fail");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return list;
+		
+	}
+	
+	
 	
 
 }

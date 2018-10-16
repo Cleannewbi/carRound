@@ -11,5 +11,7 @@ public interface iInfoDao {
 	public List<InfoDto> getChecked(String datas[]);
 	
 	public InfoDto getInfoList(int seq);
+	
+	public List<InfoDto> getInfoSearchableList(String carname, String comname);
 
 }

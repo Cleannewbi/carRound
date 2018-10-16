@@ -6,6 +6,14 @@
     pageEncoding="UTF-8"%>
 <%
 String actionPath = request.getParameter("actionPath");
+
+String rentPlace = request.getParameter("rentPlace");
+String startDate = request.getParameter("startDate");
+String startTime = request.getParameter("startTime");
+String endDate = request.getParameter("endDate");
+String endTime = request.getParameter("endTime");
+System.out.println("carList : " + rentPlace + startDate + startTime + endDate + endTime);
+
 String[] checkedBoxs = request.getParameterValues("arr");
 if(checkedBoxs != null) {
 	for(int i=0 ; i<checkedBoxs.length ; i++) {
@@ -31,10 +39,10 @@ if(checkedBoxs != null) {
 	height: 600px;
 	background-color: #cceeee;
 }
-.info {ㅇㅇ
+.info {
 	width: 40%;
 	height: 200px;
-	min-width: 450px;
+	min-width: 550px;
 	min-height: 200px;
 	background-color: #ffffff;
 	border: 1px solid black;
@@ -43,8 +51,8 @@ if(checkedBoxs != null) {
 }
 .relativeBtn {
 	position: relative;
-	 left: 400px; 
-	 bottom: 90px;
+	 left: 500px; 
+	 bottom: 130px;
 }
 .infoImg {
 	 width: auto; height: auto; max-width: 200px; max-height: 200px;
@@ -59,7 +67,7 @@ if(checkedBoxs != null) {
 }
 .infoDetail {
 	position: relative;
-	left: 210px;
+	left: 200px;
 	bottom: 130px;
 }
 ul {
@@ -99,15 +107,19 @@ li {
 	<ul>
 	<%
 	InfoDao idao = InfoDao.getInstance();
+	
+	// 체크박스를 통해 들어온 경우
 	if(checkedBoxs != null) {
 		List<InfoDto> chkResult = idao.getChecked(checkedBoxs);
 	
+		// 리스트 안에 값이 없을경우
 		if(chkResult == null || chkResult.size() == 0) {
 			%>
 			<li>
 			<strong style="text-align: center; height: 100px;">등록된 차량이 없습니다.</strong>
 			</li>
 			<% 		
+		// 리스트 안에 값이 있을경우
 		} else {
 			for(int i=0 ; i < chkResult.size() ; i++) {
 				InfoDto idto = chkResult.get(i);
@@ -121,6 +133,7 @@ li {
 						<div class="infoDetail">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 
 						<div class="infoDetail">연료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCar_fuel() %></strong></div> &nbsp; 
 						<div class="infoDetail">차량종류&nbsp;&nbsp;<strong><%=idto.getCar_type() %></strong></div>
+						<div class="infoDetail">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
 							<input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')">
 						</div> 
@@ -131,15 +144,20 @@ li {
 		<%
 			}
 		}
+	// 검색을 통해 들어온 경우
 	} else {
-		List<InfoDto> chkResult = idao.getInfoList();
+		String comname = "";
+		String carname = "";
+		List<InfoDto> chkResult = idao.getInfoSearchableList(carname, comname);
 		
+		// 리스트 안에 값이 없을경우
 		if(chkResult == null || chkResult.size() == 0) {
 			%>
 			<li>
 			<strong style="text-align: center; height: 100px;">등록된 차량이 없습니다.</strong>
 			</li>
 			<% 		
+		// 리스트 안에 값이 있을경우
 		} else { 
 			for(int i=0 ; i < chkResult.size() ; i++) {
 				InfoDto idto = chkResult.get(i);

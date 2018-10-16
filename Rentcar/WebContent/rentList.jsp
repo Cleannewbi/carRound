@@ -50,11 +50,6 @@ System.out.println(rentPlace + startDate + startTime + endDate + endTime);
 	margin: 50px 0px 0px 100px;
 	padding: 10px 10px 10px 10px;
 }
-.relativeBtn {
-	position: relative;
-	 left: 500px; 
-	 bottom: 90px;
-}
 .infoImg {
 	 width: auto; height: auto; max-width: 200px; max-height: 200px;
 }
@@ -65,11 +60,6 @@ System.out.println(rentPlace + startDate + startTime + endDate + endTime);
 	margin-top: 0px;
 	font-size: 20px;
 	background-color: #ffffff;
-}
-.infoDetail {
-	position: relative;
-	left: 210px;
-	bottom: 130px;
 }
 ul {
 	list-style: none;
@@ -93,9 +83,9 @@ li {
 			<td>차량등급</td>
 		</tr>
 		<tr></tr><tr></tr><tr></tr><tr></tr>
-		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A</td></tr>
-		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B</td></tr>
-		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C</td></tr>
+		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소형</td></tr>
+		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;중형</td></tr>
+		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대형</td></tr>
 		<tr></tr><tr></tr><tr></tr><tr></tr><hr>
 		<tr align="center">
 		<td>차량종류</td>
@@ -108,8 +98,9 @@ li {
 		<td>연료</td>
 		</tr>
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelLpg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LPG</td></tr>
-		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelOil">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;휘발유</td></tr>
+		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelOil">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가솔린</td></tr>
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelElec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전기</td></tr>
+		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelDizel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;디젤</td></tr>
 	</table>
 	</form>
 	<br>
@@ -164,6 +155,11 @@ if(rentPlace.equals("") && startDate.equals("") && startTime.equals("") && endDa
 </div>
 <%
 } else {
+	request.setAttribute("rentPlace", rentPlace);
+	request.setAttribute("startDate", startDate);
+	request.setAttribute("startTime", startTime);
+	request.setAttribute("endDate", endDate);
+	request.setAttribute("endTime", endTime);
 %>
 <jsp:include page="carList.jsp" flush="false">
 	<jsp:param value="index.jsp" name="actionPath"/>
