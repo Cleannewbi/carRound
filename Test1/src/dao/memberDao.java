@@ -29,6 +29,7 @@ public class memberDao implements memberDaoImpl{
 					" WHERE NAME=?";
 		}
 		System.out.println("sql : "+sql);
+		System.out.println("ID or name: "+id);
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

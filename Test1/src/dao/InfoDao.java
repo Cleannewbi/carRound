@@ -18,7 +18,7 @@ public class InfoDao implements InfoDaoImpl {
 	
 	public static InfoDao getInstance() {
 		return infoDao;
-	}//ddddddddddd
+	}
 	
 	@Override
 	public InfoDto getCarInfo(String Car_name, String comName) {
@@ -27,6 +27,7 @@ public class InfoDao implements InfoDaoImpl {
 				+ " FROM RC_INFO "
 				+ " WHERE CAR_NAME=? AND COM_NAME=?";
 		System.out.println("sql : "+sql);
+		System.out.println("carname : "+Car_name+" comName : "+comName);
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

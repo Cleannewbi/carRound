@@ -71,6 +71,20 @@
  	border-bottom: 1px solid #444444;
     padding: 10px;
 }
+.btn{
+	display:inline-block;
+	border-radius:0.35em;
+	text-decoration:none;
+	font-weight:400;
+	width:150px;
+	height:43px;
+	font-size:15px;
+	color:#FFF;
+	background-color:#8ebdbc;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -94,6 +108,21 @@
 		card[1]=cards.substring(4,8);
 		card[2]=cards.substring(8,12);
 		card[3]=cards.substring(12,16);
+		
+		//member 전화번호 
+		String userPhone[] = new String[3];
+		String userPh = userDto.getMember_phone().replace("-", "");
+		userPh=userPh.trim();
+		if (userPh.length()>10){	//11이면
+			userPhone[0]=userPh.substring(0, 3);
+			userPhone[1]=userPh.substring(3, 7);
+			userPhone[2]=userPh.substring(7, 11);
+			
+		}else if  (userDto.getMember_phone().length()<10){//9이면
+			userPhone[0]=userDto.getMember_phone().substring(0, 2);
+			userPhone[1]=userDto.getMember_phone().substring(2, 5);
+			userPhone[2]=userDto.getMember_phone().substring(5, 9);
+		}
 		
 		//member 대여일 
 		int startDateYear =Integer.parseInt(startDate.substring(0,4));
@@ -130,6 +159,21 @@
 	MemberDto companyDto= memberService.getMember(carInfoDto.getCom_name(),2);
 	System.out.println("company dto : "+companyDto);
 	
+		//회사 폰
+		String comPhone[] = new String[3];
+		String comPh = companyDto.getMember_phone().replace("-", "");
+		comPh=comPh.trim();
+		if (comPh.length()>10){	//11이면
+			comPhone[0]=comPh.substring(0, 3);
+			comPhone[1]=comPh.substring(3, 7);
+			comPhone[2]=comPh.substring(7, 11);
+					
+		}else if (comPh.length()<10){	//9면
+			comPhone[0]=comPh.substring(0, 2);
+			comPhone[1]=comPh.substring(2, 5);
+			comPhone[2]=comPh.substring(5, 9);
+		}
+	
 %>
 
 <form action="orderAf.jsp" method="post">
@@ -143,7 +187,7 @@
 	</td>
 </tr>
 <tr>
-	<td height="400" > <%=carInfoDto.getCar_pic() %></td>
+	<td height="400" ><img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>"> </td>
 	<td id="topData"><%=carInfoDto.getCar_type() %><br><%=carInfoDto.getCar_size() %><br><%=carInfoDto.getCar_fuel()%> </td>
 </tr>
 
@@ -162,9 +206,9 @@
 <tr>
 	<td class="userTd"><b>연락처</b></td>
 	<td class="userTd">
-		<input class="content" name="rcPhone1" type="text" value="<%=userDto.getMember_phone().substring(0, 3)%>" size="2" style="background-color:transparent; border: none;">-&nbsp;&nbsp;
-		<input class="content" name="rcPhone2" type="text" value="<%=userDto.getMember_phone().substring(3, 7)%>" size="2"  style="background-color:transparent; border: none;">-&nbsp;&nbsp;
-		<input class="content" name="rcPhone3" type="text" value="<%=userDto.getMember_phone().substring(7, 11)%>"size="2"  style="background-color:transparent; border: none;">
+		<input class="content" name="rcPhone1" type="text" value="<%=userPhone[0]%>" size="2" style="background-color:transparent; border: none;">-&nbsp;&nbsp;
+		<input class="content" name="rcPhone2" type="text" value="<%=userPhone[1]%>" size="2"  style="background-color:transparent; border: none;">-&nbsp;&nbsp;
+		<input class="content" name="rcPhone3" type="text" value="<%=userPhone[2]%>"size="2"  style="background-color:transparent; border: none;">
 	</td>
 </tr>
 <tr>
@@ -197,7 +241,7 @@
 <h2  class="title">주소</h2>
 <p  class="content"><%=companyDto.getMember_address() %></p>
 <h2 class="title">전화번호</h2>
-<p  class="content"><%=companyDto.getMember_phone().substring(0, 3)%>-<%=companyDto.getMember_phone().substring(3, 7)%>-<%=companyDto.getMember_phone().substring(7, 11)%></p>
+<p  class="content"><%=comPhone[0]%>-<%=comPhone[1]%>-<%=comPhone[2]%></p>
 
 <div id="map" style="width:500px;height:400px;"></div>
 </div>
@@ -291,7 +335,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 </div>
 
 <br><br>
-<input type="submit"  value="결제하기">
+<input class="btn" type="submit"  value="결제하기" align="bottom">
 
 
 <script type="text/javascript">
