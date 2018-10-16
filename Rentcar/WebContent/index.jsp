@@ -69,7 +69,7 @@ input {
 <link rel="shortcut icon" href="#">
 </head>
 <body>
-
+<a href="loginPage.jsp">LOGIN</a>
 <div id="searchDiv">
 <section id="contactarea" class="parallax section" style="background-image: url(http://themepush.com/demo/runcharity/assets/img/map.png);">
 <div class="wrapsection">

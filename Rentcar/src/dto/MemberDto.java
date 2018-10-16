@@ -124,6 +124,28 @@ public class MemberDto implements Serializable {
 		Member_card = member_card;
 	}
 	
+	// session
+	public MemberDto(int member_seq, String member_id, String member_Photo, String member_name, String member_phone,
+			String member_address, String member_email, String member_card, int member_auth) {
+		super();
+		Member_seq = member_seq;
+		Member_id = member_id;
+		Member_Photo = member_Photo;
+		Member_name = member_name;
+		Member_phone = member_phone;
+		Member_address = member_address;
+		Member_email = member_email;
+		Member_card = member_card;
+		Member_auth = member_auth;
+	}
+	
+	// login
+	public MemberDto(String member_id, String member_pw) {
+		super();
+		Member_id = member_id;
+		Member_pw = member_pw;
+	}
+	
 	public MemberDto() {
 		// TODO Auto-generated constructor stub
 	}

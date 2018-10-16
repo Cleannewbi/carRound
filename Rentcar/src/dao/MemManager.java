@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import db.DBClose;
 import db.DBConnection;
@@ -148,6 +149,57 @@ public class MemManager implements iMemManager {
 		}
 		
 		return dto;
+	}
+	
+	@Override
+	public MemberDto login(String id, String pw) {
+		String sql = " SELECT SEQ, ID, PHOTO, NAME, PHONE, ADDRESS, EMAIL, CARD, AUTH "
+				+ " FROM RC_MEMBER "
+				+ " WHERE ID = ? AND PASSWORD = ? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		MemberDto mem = null;
+		
+		try {
+			
+			conn = DBConnection.getConnection();
+			System.out.println("login 1/6 Success");
+			psmt = conn.prepareStatement(sql);
+			System.out.println("login 2/6 Success");
+			
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+			
+			rs = psmt.executeQuery();
+			System.out.println("login 3/6 Success");
+			
+			if(rs.next()) {
+				int seq = rs.getInt(1);
+				String _id = rs.getString(2);
+				String photo = rs.getString(3);
+				String name = rs.getString(4);
+				String phone = rs.getString(5);
+				String address = rs.getString(6);
+				String email = rs.getString(7);
+				String card = rs.getString(8);
+				int auth = rs.getInt(9);
+				
+				mem = new MemberDto(seq, _id, photo, name, phone, address, email, card, auth);
+				
+			}			
+			System.out.println("login 4/6 Success");
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			DBClose.close(psmt, conn, rs);	
+			System.out.println("login 5/6 Success");
+		}
+		
+		return mem;
 	}
 
 }

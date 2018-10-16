@@ -10,5 +10,7 @@ public interface iMemManager {
 	
 	public MemberDto getCom(String comname);
 	
+	public MemberDto login(String id, String pw);
+	
 
 }
