@@ -8,50 +8,15 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style type="text/css">
-*{margin:0;padding:0;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
-#container{
-  width:715px;
-  height:230px;
-  margin:50px auto;
-}
-.button-3{
-  width:140px;
-  height:50px;
-  border:2px solid #76bcba;
-  float:left;
-  text-align:center;
-  cursor:pointer;
-  position:relative;
-  box-sizing:border-box;
-  overflow:hidden;
-  margin:0 0 40px 50px;
-}
-.button-3 a{
-  font-family:arial;
-  font-size:16px;
-  color:#76bcba;
-  text-decoration:none;
-  line-height:50px;
-  transition:all .5s ease;
-  z-index:2;
-  position:relative;
-}
-.eff-3{
-  width:140px;
-  height:50px;
-  bottom:-50px;
-  background:#76bcba;
-  position:absolute;
-  transition:all .5s ease;
-  z-index:1;
-}
-.button-3:hover .eff-3{
-  bottom:0;
-}
-.button-3:hover a{
-  color:#fff;
-}
-
+input:focus {
+  outline: none;
+} input.img_button {
+        background: url(./images/k5.jpg) no-repeat;
+        border: none;
+        width: 82px;
+        height: 30px;
+        cursor: pointer;
+       }
 </style>
 </head>
 <body>
@@ -65,73 +30,79 @@
 <h2>일반 회원 가입</h2>
 <br>
 	<table>
+	<col width="100"><col width="80">
+	
 		<tr>
-			<td>아이디</td>
 			<td>
-				<input type="text" name="id" id="id" size="20">
+				<input type="text" name="id" id="id" size="20" placeholder="아이디" style="background-color:transparent;border:0 solid black;">
+				<hr>
 				<!-- id확인 -->
-				<p id="idcheck" style="font-size: 8px"></p>		
-				<input type="button" id="btn" value="id확인">
+				<p id="idcheck" style="font-size: 8px"></p>	
+			</td>
+			
+			<td style="text-align: left">	
+				<input type="button" id="btn" class="img_button">
 			</td>
 		</tr>
 
 		<tr>
-			<td><br>패스워드</td>
 			<td><br>
-				<input type="password" name="password">
+				<input type="password" name="password" placeholder="비밀번호" style="background-color:transparent;border:0 solid black;"><hr>
 			</td>
 		</tr>
 	
 	
 		<tr>
-			<td><br>이름</td>
 			<td><br>
-				<input type="text" name="name">
-			</td>
-		</tr>
-	
-	
-		<tr>
-			<td><br>전화번호</td>
-			<td><br>
-				<input type="text" name="phone1" size="3"> - <input type="text" name="phone2" size="3"> - <input type="text" name="phone3" size="3">
+				<input type="text" name="name" placeholder="이름"style="background-color:transparent;border:0 solid black;"><hr>
 			</td>
 		</tr>
 	
 		<tr>
-			<td colspan="2"><br>주소 찾기</td>
+			<td><br>
+				<input type="text" name="phone" size="5"placeholder="전화번호" style="background-color:transparent;border:0 solid black;">
+				<hr>
+			</td>
 		</tr>
 
-		<tr>
-			<td>
-				<input type="text" id="sample4_postcode" placeholder="우편번호" name="add1">
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+<tr>
+			<td><br>
+				<input type="text" id="sample4_postcode" placeholder="우편번호" name="add1" size= "3" style="background-color:transparent;border:0 solid black;" ><hr>
 			</td>
-			<td>	
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="add2">
-				<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="add3">
-				<span id="guide" style="color:#999"></span>
+			<td><br><input type="button" onclick="sample4_execDaumPostcode()" value="주소 검색" ></td>
+		</tr>
+			
+			
+		<tr>	
+			<td><br>
+				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="add2" size="30" style="background-color:transparent;border:0 solid black;"><hr>
+			</td>	
+		</tr>
+		
+	<!-- 	<tr>
+			<td><br><input type="button" onclick="sample4_execDaumPostcode()" value="주소 검색" ></td>
+		</tr> -->
+		
+		<tr>
+		<td colspan="2"><span id="guide" style="color:#999"></span></td>
+		</tr>
+		
+		<tr>
+			<td><br>
+				<input type="email" name="email" placeholder="이메일" style="background-color:transparent;border:0 solid black;"><hr>
+			</td>
+		</tr>
+	
+	
+		<tr>
+			<td><br>
+				<input type="text" name="imgname" placeholder="운전면허 번호" style="background-color:transparent;border:0 solid black;"><hr>
 			</td>
 		</tr>
 		
 		<tr>
-			<td><br>이메일</td>
 			<td><br>
-				<input type="email" name="email" placeholder="aaa@aaa.com">
-			</td>
-		</tr>
-	
-		<tr>
-			<td><br>운전면허 번호</td>
-			<td><br>
-				<input type="text" name="imgname" >
-			</td>
-		</tr>
-		
-		<tr>
-			<td><br>결제용 카드번호</td>
-			<td><br>
-				<input type="text" name="cardnum1" size="3"> - <input type="text" name="cardnum2" size="3"> - <input type="text" name="cardnum3" size="3"> - <input type="text" name="cardnum4" size="3"> 
+				<input type="text" name="cardnum" placeholder="결제용 카드 번호"style="background-color:transparent;border:0 solid black;"><hr>
 			</td>
 		</tr>
 	
@@ -139,14 +110,8 @@
 	
 	
 		<tr>
-			<td colspan="2"><br>
+			<td colspan="4" style="text-align: center"><br>
 					<input type="submit" value="회원가입"> 
-	<!-- <div class="button-3">
-   	 <div class="eff-3"></div>
-   	 <a href="javascript:document.fr.submit();"> 회원가입 </a>
-	</div> -->
-	
-<!-- 				<input type="hidden" name="command" value="addmem"> -->
 				<input type="hidden" name="auth" value="mem">
 			</td>
 		</tr>

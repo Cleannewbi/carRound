@@ -8,6 +8,7 @@ request.setCharacterEncoding("utf-8");
      --%>
     <%
     String imgname = request.getParameter("imgname");		// 이미지 출력 위해 받아옴
+    String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
     %>
 
@@ -19,8 +20,44 @@ request.setCharacterEncoding("utf-8");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style type="text/css">
+input:focus {
+  outline: none;
+}
+.file_input_hidden {
+    font-size:29px;
+    position:absolute;
+    right:0px;
+    top:0px;
+    opacity:0;
+    filter: alpha(opacity=0);
+    -ms-filter: alpha(opacity=0);
+    cursor:pointer;
+}
+.file_input_img_btn {
+    padding:0 0 0 5px;
+      width: 82px;
+        height: 30px;
+}
+.file_input_div {
+    position:relative;
+    width:80px;
+    height:36px;
+    overflow:hidden;
+}
+
+input.img_button {
+        background: url(./images/k5.jpg) no-repeat;
+        border: none;
+        width: 82px;
+        height: 30px;
+        cursor: pointer;
+ }
+
+
+
+</style>
 </head>
 <body>
 <br><br><br><br>
@@ -31,27 +68,25 @@ request.setCharacterEncoding("utf-8");
 <div align="center">
 <h2>기업 가입</h2>
 <br><br>
-<table>
+<table align="center" class="imageclass">
 		<%if(imgname != null){ %>
 		<tr>
-			<td>
-				<img alt="" src="image/<%=imgname %>" height="100" width="100">
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img alt="" src="images/<%=imgname %>" height="100" width="100">
 			</td>
-		</tr>
+		
 		
 		<%}else{ %>
 		<tr>
-			<td>
+			<td><%=nbsp %><%=nbsp %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				사진을 등록해주세요
 			</td>
-		</tr>
+	
 		<%} %>
-<tr>
+
 	<td>
-		<input type="file" name="image" style="width: 200px">
-	</td>
-	<td>
-		<input type="submit" value="올리기">
+			<%=nbsp %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <input id="myfilefield" type="file" name="file">
 	</td>
 </tr>
 </table>
@@ -63,64 +98,72 @@ request.setCharacterEncoding("utf-8");
 <form onsubmit="return check()" name="fr" action="regi.jsp" >		
 <div align="center">
 	<table>
+	<col width="100"><col width="100">
 		<tr>
-			<td>아이디</td>
 			<td>
-				<input type="text" name="id" id="id" size="20">
+				<input type="text" name="id" id="id" size="20" placeholder="아이디" style="background-color:transparent;border:0 solid black;"><hr>
 				<!-- id확인 -->
-				<p id="idcheck" style="font-size: 8px"></p>		
+				<p id="idcheck" style="font-size: 8px"></p>
+			</td>	
+			<td>	
 				<input type="button" id="btn" value="id확인">
 			</td>
 		</tr>
 
 		<tr>
-			<td><br>패스워드</td>
 			<td><br>
-				<input type="password" name="password">
+				<input type="password" name="password" placeholder="비밀번호" style="background-color:transparent;border:0 solid black;"><hr>
 			</td>
 		</tr>
 	
 	
+		
 		<tr>
-			<td><br>이름</td>
 			<td><br>
-				<input type="text" name="name">
+				<input type="text" name="name" placeholder="이름"style="background-color:transparent;border:0 solid black;"><hr>
 			</td>
 		</tr>
 	
 	
+		
 		<tr>
-			<td><br>전화번호</td>
 			<td><br>
-				<input type="text" name="phone1" size="3"> - <input type="text" name="phone2" size="3"> - <input type="text" name="phone3" size="3">
+				<input type="text" name="phone" size="5"placeholder="전화번호" style="background-color:transparent;border:0 solid black;">
+				<hr>
 			</td>
-		</tr>
-	
-		<tr>
-			<td colspan="2"><br>주소 찾기</td>
 		</tr>
 
+
 		<tr>
-			<td>
-				<input type="text" id="sample4_postcode" placeholder="우편번호" name="add1">
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+			<td><br>
+				<input type="text" id="sample4_postcode" placeholder="우편번호" name="add1" size= "3" style="background-color:transparent;border:0 solid black;" ><hr>
 			</td>
-			<td>	
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="add2">
-				<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="add3">
-				<span id="guide" style="color:#999"></span>
-			</td>
+			
+			<td><br><input type="button" onclick="sample4_execDaumPostcode()" value="주소 검색" ></td>
+		</tr>	
+			
+		<tr>	
+			<td><br>
+				<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="add2" size="30" style="background-color:transparent;border:0 solid black;"><hr>
+			</td>	
+		</tr>
+		
+<!-- 		<tr>
+			<td><br><input type="button" onclick="sample4_execDaumPostcode()" value="주소 검색" ></td>
+		</tr>
+		 -->
+		<tr>
+		<td colspan="2"><span id="guide" style="color:#999"></span></td>
 		</tr>
 		
 		<tr>
-			<td><br>이메일</td>
 			<td><br>
-				<input type="email" name="email" placeholder="aaa@aaa.com">
+				<input type="email" name="email" placeholder="이메일" style="background-color:transparent;border:0 solid black;"><hr>
 			</td>
 		</tr>
 	
 		<tr>
-			<td colspan="2"><br>
+			<td colspan="4" style="text-align: center"><br>
 				<input type="submit" value="회원가입">
 				<!-- <input type="hidden" name="command" value="addmem"> -->
 				<input type="hidden" name="auth" value="com">
@@ -266,10 +309,12 @@ function sample4_execDaumPostcode() {
 }
 </script>
 
+<script type="text/javascript">
+document.getElementById('myfilefield').onchange = function() {
+	  this.form.submit();
+	};
 
-
-
-
+</script>
 
 </body>
 </html>
