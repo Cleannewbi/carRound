@@ -152,10 +152,11 @@
 		
  		//최종결제금액
  		int carFee = Integer.parseInt(carInfoDto.getCar_fee().replace(",", ""))*(int)(long)RentDays;
- 		int deli = 0;	//딜리버리 추가금액
- 		
+ 		//최종결제금액 컴마생성
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
-
+		
+ 		//딜리버리 추가금액
+ 		int deli = 0;	
 	//4.company Info
 	MemberDto companyDto= memberService.getMember(carInfoDto.getCom_name(),2);
 	System.out.println("company dto : "+companyDto);

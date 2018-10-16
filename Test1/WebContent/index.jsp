@@ -24,6 +24,7 @@
 <input type="submit" value="들어가기">
 </form>
 
+<a href="managerMain.jsp"> 매니저창ㄱㄱ</a>
 
 </body>
 </html>

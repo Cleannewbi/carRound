@@ -36,62 +36,24 @@ public class MemberDto implements Serializable {
 	private String Member_address;
 	private String Member_email;
 	private String Member_card;			// xxxx-xxxx-xxxx-xxxx	->	xxxxxxxxxxxxxxxx
+	private int Member_auth;
+	public MemberDto() {	}
 	
-	public int getMember_seq() {
-		return Member_seq;
-	}
-	public void setMember_seq(int member_seq) {
+	public MemberDto(int member_seq, String member_id, String member_pw, String member_Photo, String member_name,
+			String member_phone, String member_address, String member_email, String member_card, int member_auth) {
+		super();
 		Member_seq = member_seq;
-	}
-	public String getMember_id() {
-		return Member_id;
-	}
-	public void setMember_id(String member_id) {
 		Member_id = member_id;
-	}
-	public String getMember_pw() {
-		return Member_pw;
-	}
-	public void setMember_pw(String member_pw) {
 		Member_pw = member_pw;
-	}
-	public String getMember_Photo() {
-		return Member_Photo;
-	}
-	public void setMember_Photo(String member_Photo) {
 		Member_Photo = member_Photo;
-	}
-	public String getMember_name() {
-		return Member_name;
-	}
-	public void setMember_name(String member_name) {
 		Member_name = member_name;
-	}
-	public String getMember_phone() {
-		return Member_phone;
-	}
-	public void setMember_phone(String member_phone) {
 		Member_phone = member_phone;
-	}
-	public String getMember_address() {
-		return Member_address;
-	}
-	public void setMember_address(String member_address) {
 		Member_address = member_address;
-	}
-	public String getMember_email() {
-		return Member_email;
-	}
-	public void setMember_email(String member_email) {
 		Member_email = member_email;
-	}
-	public String getMember_card() {
-		return Member_card;
-	}
-	public void setMember_card(String member_card) {
 		Member_card = member_card;
+		Member_auth = member_auth;
 	}
-	
+
 	// Insert
 	public MemberDto(int member_seq, String member_id, String member_pw, String member_Photo, String member_name,
 			String member_phone, String member_address, String member_email, String member_card) {
@@ -116,15 +78,92 @@ public class MemberDto implements Serializable {
 		Member_card = member_card;
 	}
 	
+	public int getMember_seq() {
+		return Member_seq;
+	}
+
+	public void setMember_seq(int member_seq) {
+		Member_seq = member_seq;
+	}
+
+	public String getMember_id() {
+		return Member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		Member_id = member_id;
+	}
+
+	public String getMember_pw() {
+		return Member_pw;
+	}
+
+	public void setMember_pw(String member_pw) {
+		Member_pw = member_pw;
+	}
+
+	public String getMember_Photo() {
+		return Member_Photo;
+	}
+
+	public void setMember_Photo(String member_Photo) {
+		Member_Photo = member_Photo;
+	}
+
+	public String getMember_name() {
+		return Member_name;
+	}
+
+	public void setMember_name(String member_name) {
+		Member_name = member_name;
+	}
+
+	public String getMember_phone() {
+		return Member_phone;
+	}
+
+	public void setMember_phone(String member_phone) {
+		Member_phone = member_phone;
+	}
+
+	public String getMember_address() {
+		return Member_address;
+	}
+
+	public void setMember_address(String member_address) {
+		Member_address = member_address;
+	}
+
+	public String getMember_email() {
+		return Member_email;
+	}
+
+	public void setMember_email(String member_email) {
+		Member_email = member_email;
+	}
+
+	public String getMember_card() {
+		return Member_card;
+	}
+
+	public void setMember_card(String member_card) {
+		Member_card = member_card;
+	}
+
+	public int getMember_auth() {
+		return Member_auth;
+	}
+
+	public void setMember_auth(int member_auth) {
+		Member_auth = member_auth;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDto [Member_seq=" + Member_seq + ", Member_id=" + Member_id + ", Member_pw=" + Member_pw
 				+ ", Member_Photo=" + Member_Photo + ", Member_name=" + Member_name + ", Member_phone=" + Member_phone
 				+ ", Member_address=" + Member_address + ", Member_email=" + Member_email + ", Member_card="
-				+ Member_card + "]";
+				+ Member_card + ", Member_auth=" + Member_auth + "]";
 	}
-	
-	
-	
 
 }
