@@ -52,7 +52,7 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style type="text/css">
 .title{
-	color:#76bcba 
+	color:#76bcba;
 }
 .content{
 	font-size: 17px;
@@ -72,6 +72,7 @@
     padding: 10px;
 }
 .btn{
+	text-align:center;
 	display:inline-block;
 	border-radius:0.35em;
 	text-decoration:none;
@@ -179,7 +180,7 @@
 <form action="orderAf.jsp" method="post">
 <input type="hidden" name="infoSeq" value="<%=carInfoDto.getInfo_seq()%>">
 <input type="hidden" name="loginId" value="<%=id%>">
-<div style="margin-left: 500px">
+<div align="center">
 <table>
 <col width="600"><col width="100">
 <tr>
@@ -187,7 +188,7 @@
 	</td>
 </tr>
 <tr>
-	<td height="400" ><img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>"> </td>
+	<td height="400" ><img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>" height="400"> </td>
 	<td id="topData"><%=carInfoDto.getCar_type() %><br><%=carInfoDto.getCar_size() %><br><%=carInfoDto.getCar_fuel()%> </td>
 </tr>
 
@@ -332,42 +333,29 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	</td>
 </tr>
 </table>
-</div>
 
 <br><br>
-<input class="btn" type="submit"  value="결제하기" align="bottom">
-
-
+</div>
+<div align="center">
+<input class="btn" type="submit"  value="결제하기" align="middle">
+</div>
 <script type="text/javascript">
  	function deliFunc( e ) {
  		if ($('input:checkbox[id="deliveryCheck"]').is(":checked")){
- 			alert("선택");
  			document.getElementById("deliPrice").innerHTML="10,000원";
  			<% deli = 10000;%>
   			var testdeli = "<%=deli %>";
- 	 		alert("testdeli = " + testdeli);
  	 		var testdeliCar = "<%=formatter.format(carFee+deli) %>";
- 	 		//testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
- 	 		alert("testdeliCar = " + testdeliCar); 
-
  	 		document.getElementById("finalFee").value=testdeliCar+"원";
  	 		
  		}else {
- 			alert("선택해제");
  			document.getElementById("deliPrice").innerHTML="0원";
  			<% deli = 0;%>
  			var testdeli = "<%=deli %>";
- 	 		alert("testdeli = " + testdeli);
- 	 		var testdeliCar = "<%=formatter.format(carFee+deli)%>";
- 	 		//testdeliCar = "<font size='4' color='red'><b>"+testdeliCar+"원</b></font>";
- 	 		alert("testdeliCar = " + testdeliCar);
- 	 		
+ 	 		var testdeliCar = "<%=formatter.format(carFee+deli)%>"; 	 		
  	 		document.getElementById("finalFee").value=testdeliCar+"원";
- 
  		}
 	} 
-
-
 </script>
 </form>
 </body>
