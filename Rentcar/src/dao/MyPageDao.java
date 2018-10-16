@@ -22,18 +22,17 @@ public class MyPageDao implements iMyPageDao {
 		return myPageDao;
 	}
 	@Override
-	public List<MemberDto> getMyPageList(String id) {
+	public MemberDto getMyPageList(String id) {
 		String sql = "SELECT SEQ,ID,PASSWORD,PHOTO,NAME,PHONE,ADDRESS,EMAIL,CARD,AUTH"
 				+ " FROM RC_MEMBER "
-				+ " WHERE ID = ?";
-		
+				+ " WHERE ID=? AND AUTH =1";
+		System.out.println(sql);
+		System.out.println(id);
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
 		MemberDto dto = null;
-		
-		List<MemberDto> mylist = new ArrayList<>();
 		
 		try {
 			conn = DBConnection.getConnection();
@@ -44,14 +43,13 @@ public class MyPageDao implements iMyPageDao {
 			System.out.println("2/6 getMyPageList Success");
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getMyPageList Success");
-			int i = 1;
-			while (rs.next()) {
-				 dto = new MemberDto(rs.getInt(i++),
-						 rs.getString(i++),rs.getString(i++),rs.getString(i++), rs.getString(i++),rs.getString(i++),
-						rs.getString(i++),	rs.getString(i++), rs.getString(i++),rs.getInt(i++));
-				
-				mylist.add(dto);
-			}
+			
+			if (rs.next()) {
+				 dto = new MemberDto(rs.getInt(1),
+						 rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5),rs.getString(6),
+						rs.getString(7),	rs.getString(8), rs.getString(9),rs.getInt(10));
+
+			}System.out.println("DB id:"+id);
 			System.out.println("getMyPageList Loading Success");
 		} catch (Exception e) {
 			System.err.println(e);
@@ -59,12 +57,13 @@ public class MyPageDao implements iMyPageDao {
 			DBClose.close(psmt, conn, rs);
 		}
 		
-		return mylist;
+		return dto;
 	}
 	@Override
 	public List<RentDto> getRentPageList(String id) {
 		
-		String sql = "SELECT SEQ,CARNAME,RC_START,RC_END,CUS_ID,COM_NUM,PRICE"
+		String sql = "SELECT SEQ,CARNAME,RC_START,RC_END,CUS_ID,COM_NUM,"
+				+ " PRICE, RC_NAME, RC_PHONE, RC_ADDRESS, RC_CARD, RC_PHOTO "
 				+ " FROM RC_RENT"
 				+ " WHERE CUS_ID =? ";
 		
@@ -82,27 +81,29 @@ public class MyPageDao implements iMyPageDao {
 			System.out.println("2/6 getRentPageList Success");
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getRentPageList Success");
-			int i = 1;
+			
 			while (rs.next()) {
-				RentDto dto = new RentDto(rs.getInt(i++),
-							rs.getString(i++),rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getInt(i++), rs.getInt(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++));
-				
+				RentDto dto = new RentDto(rs.getInt(1),
+							rs.getString(2),rs.getString(3), rs.getString(4), 
+							rs.getString(5), rs.getInt(6),rs.getInt(7), rs.getString(8),
+							rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12));
+		
 				rentlist.add(dto);
 			}
 			System.out.println("getRentPageList Loading Success");
+			
 		} catch (Exception e) {
 			System.err.println(e);
 		} finally {
 			DBClose.close(psmt, conn, rs);
-		}
-		
-		return rentlist;
-		
+			
+			
+		}return rentlist;
 	}
 	@Override
-	public boolean updateMyPage(MemberDto dto) {
+	public boolean updateMyPage(String photo, String phone, String address, String email, String card, int seq) {
 		String sql = " UPDATE RC_MEMBER SET "
-				+ "  PHOTO=?, NAME=?, PHONE=?, ADDRESS=?, EMAIL=?, CARD=? "
+				+ "  PHOTO=?, PHONE=?, ADDRESS=?, EMAIL=?, CARD=? "
 				+ " WHERE SEQ=? ";
 		
 		Connection conn = null;
@@ -115,13 +116,12 @@ public class MyPageDao implements iMyPageDao {
 			
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setString(i++, dto.getMember_Photo());
-			psmt.setString(i++, dto.getMember_name());
-			psmt.setString(i++, dto.getMember_phone());
-			psmt.setString(i++, dto.getMember_address());
-			psmt.setString(i++, dto.getMember_email());
-			psmt.setString(i++, dto.getMember_card());
-			psmt.setInt(i++, dto.getMember_seq());
+			psmt.setString(i++, photo);
+			psmt.setString(i++, phone);
+			psmt.setString(i++, address);
+			psmt.setString(i++, email);
+			psmt.setString(i++, card);
+			psmt.setInt(i++, seq);
 			
 			System.out.println("2/6 updateMyPage Success");
 			
@@ -141,8 +141,9 @@ public class MyPageDao implements iMyPageDao {
 	public boolean deleteMyPage(int seq) {
 		
 		String sql = " DELETE FROM RC_MEMBER"
-				+ " WHERE SEQ=? AND AUTH=1";
+				+ " WHERE SEQ=? ";
 		
+		System.out.println("deleteMyPage sql:"+sql+"seq:"+seq);
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		
@@ -312,19 +313,50 @@ public class MyPageDao implements iMyPageDao {
 		return count>0?true:false;
 	}
 	@Override
-	public boolean changeDates(int seq) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
+	public boolean changeDates(int seq, String start, String end) {
+		String sql = " UPDATE RC_RENT SET "
+				+ "  RC_START =?, RC_END =? "
+				+ " WHERE SEQ=? ";
 		
-	
-	
-	
-	
-	
-	
-	
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		int i = 1;
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 changeDates Success");
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(i++, start);
+			psmt.setString(i++, end);			
+			psmt.setInt(i++, seq);
+			
+			System.out.println("2/6 changeDates Success");
+			
+			count = psmt.executeUpdate();
+			System.out.println("3/6 changeDates Success");
+			
+		} catch (Exception e) {			
+			System.err.println(e);
+		} finally{
+			DBClose.close(psmt, conn, null);
+			System.out.println("4/6 changeDates Success");
+		}		
+		
+		return count>0?true:false;
+	}
+	@Override
+	public boolean testStr(String str) {
+		System.out.println("testStr:"+str);
+		return true;
+	}
+	@Override
+	public boolean testNum(int num) {
+		System.out.println("testNum:"+num);		
+		return true;
+	}
+		
 	
 		
 	

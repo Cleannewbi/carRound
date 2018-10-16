@@ -1,3 +1,4 @@
+<%@page import="dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -69,7 +70,23 @@ input {
 <link rel="shortcut icon" href="#">
 </head>
 <body>
+<%
+Object ologin = session.getAttribute("login");
+MemberDto dto = null;
+if(ologin == null) {
+%>
+	<script type="text/javascript">
+		alert("다시 로그인 해주세요.");
+		location.href="loginPage.jsp";
+	</script>
+<%
+	return;
+}
+
+dto = (MemberDto)ologin;
+%>
 <a href="loginPage.jsp">LOGIN</a>
+<a href="oMyPage.jsp">myPage</a>
 <div id="searchDiv">
 <section id="contactarea" class="parallax section" style="background-image: url(http://themepush.com/demo/runcharity/assets/img/map.png);">
 <div class="wrapsection">

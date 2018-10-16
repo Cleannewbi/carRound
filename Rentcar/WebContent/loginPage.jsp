@@ -45,7 +45,8 @@ BBS 답변게시판
 <tr>
 	<td colspan="2">
 		<input type="submit" value="로그인">
-		<button type="button" onclick="location.href='regi.jsp'">회원가입</button>
+		<button type="button" onclick="location.href='memRegi.jsp'"> 일반 회원가입</button>
+		<button type="button" onclick="location.href='comRegi.jsp'"> 기업 회원가입</button>
 	</td> 
 </tr>
 </table>

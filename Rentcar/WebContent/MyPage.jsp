@@ -21,7 +21,7 @@
     
     String id = "dog";
     
-    List<MemberDto> mypagelist = myPageDao.getMyPageList(id);
+   //  List<MemberDto> mypagelist = myPageDao.getMyPageList(id);
                     
     
     %>
@@ -34,15 +34,15 @@
 <body>
 <form action="UpdateMyPage.jsp">
 <% 
-for(int i=0; i<mypagelist.size();i++){
+/* for(int i=0; i<mypagelist.size();i++){
 	MemberDto memdto = new MemberDto();
    memdto = mypagelist.get(i);
    seq = memdto.getMember_seq();
    
-   String file = "./images/k5.jpg";
+   String file = "./images/k5.jpg"; */
    
 %>
-
+<%-- 
 <div>
 <img alt="이미지 없음" src="<%=file%>" style="width: 120px; height: 120px;">
 <table border="1">
@@ -56,9 +56,9 @@ for(int i=0; i<mypagelist.size();i++){
 
 </table>
 </div>
-
+ --%>
 <hr>
-<%} %>
+<%//} %>
 
 
 <input type="hidden" name="seq" value="<%=seq%>">

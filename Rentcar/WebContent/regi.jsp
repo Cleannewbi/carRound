@@ -43,7 +43,7 @@ boolean isS = false;
 if(auth.equals("mem")) {
 	  isS = dao.addMem(new MemberDto(0, id, password, imgname, name, phone, add, email, cardnum, 1));
 }else if(auth.equals("com")) {
-	  isS = dao.addMem(new MemberDto(0, id, password, imgname, name, phone, add, email, " ", 3));	
+	  isS = dao.addMem(new MemberDto(0, id, password, imgname, name, phone, add, email, " ", 2));	
 }
 
 if(isS) {
