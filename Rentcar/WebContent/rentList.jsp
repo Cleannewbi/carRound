@@ -40,6 +40,20 @@ System.out.println(rentPlace + startDate + startTime + endDate + endTime);
 	max-height: 900px;
 	min-height: 800px;
 }
+#tdleft1 {
+	float: left;
+	position: absolute;
+	margin: auto;
+	left: 45px;
+	height: 5px;
+}
+#tdleft2 {
+	float: left;
+	position: relative;
+	margin: auto;
+	top: 25px;
+	height: 5px;
+}
 .info {
 	width: 40%;
 	height: 200px;
@@ -71,6 +85,10 @@ li {
 	float: left;
 }
 </style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800' rel='stylesheet' type='text/css'>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
 
@@ -86,7 +104,7 @@ li {
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소형</td></tr>
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;중형</td></tr>
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="SizeC">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대형</td></tr>
-		<tr></tr><tr></tr><tr></tr><tr></tr><hr>
+		<tr></tr><tr></tr><tr></tr><tr></tr>
 		<tr align="center">
 		<td>차량종류</td>
 		</tr>
@@ -101,6 +119,14 @@ li {
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelOil">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가솔린</td></tr>
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelElec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전기</td></tr>
 		<tr align="left"><td><input type="checkbox" class="cb1" name="chkBox" value="fuelDizel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;디젤</td></tr>
+	</table>
+	<table align="center" border="0" name="dateTable" id="dateTable">
+		<col width="200"><col width="200"><col width="200">
+		<tr align="center">
+			<td>대여날짜</td>
+		</tr>
+		<tr align="left" id="tdleft1"><td><input type="text" id="datepicker1" name="rentStartDate" size="8" value="<%=startDate %>"></td>&nbsp;<td><input type="time" id="rentStartTime" name="rentStartTime" size="8" value="<%=startTime %>"></td></tr>
+		<tr align="left" id="tdleft2"><td><input type="text" id="datepicker2" name="rentEndDate" size="8" value="<%=endDate %>"></td>&nbsp;<td><input type="time" id="rentEndTime" name="rentEndTime" value="<%=endTime %>"></td></tr>			 
 	</table>
 	</form>
 	<br>
@@ -238,6 +264,21 @@ for (var i = 0; i < items.length; i++) {
 		}
 	});
 	 
+});
+ 
+$('#datepicker1').datepicker({
+		dateFormat: "yy-mm-dd",
+		dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		numberOfMonths: [1,2],
+		minDate: 0
+});
+$('#datepicker2').datepicker({
+		dateFormat: "yy-mm-dd",
+		dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		numberOfMonths: [1,2],
+		minDate: 0
 });
 
 /* 
