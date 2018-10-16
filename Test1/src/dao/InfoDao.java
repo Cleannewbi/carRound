@@ -18,7 +18,7 @@ public class InfoDao implements InfoDaoImpl {
 	
 	public static InfoDao getInstance() {
 		return infoDao;
-	}
+	}//ddddddddddd
 	
 	@Override
 	public InfoDto getCarInfo(String Car_name, String comName) {

@@ -59,9 +59,14 @@ VALUES(SEQ_RC_MEMBER.NEXTVAL,'tirepro','123','tirepro.jpg','025015527','타이�
 
 INSERT INTO RC_MEMBER
 VALUES(SEQ_RC_MEMBER.NEXTVAL,'giaotoq','123','giaotoq.jpg','025618285','기아오토큐','서울특별시 강남구 언주로104길 15','giaotoq@naver.com','1234123412341234',2);
+
 INSERT INTO RC_MEMBER
 VALUES(SEQ_RC_MEMBER.NEXTVAL,'bluehands','123','bluehands.jpg','025386197','블루핸즈 역삼점','서울특별시 강남구 논현로81길 4','bluehands@naver.com','1234123412341234',2);
 
-블루핸즈 역삼점	서울특별시 강남구 논현로81길 4	025386197
+INSERT INTO RC_INFO
+VALUES (SEQ_RC_INFO, '기아오토큐', 'KiaSportage.jpg', '
+Kia Sportage', '승용차', 'LPG', '중형', '40,000')
 
-블루핸즈 역삼남부점	서울특별시 강남구 봉은사로 234	025558272
+
+
+
