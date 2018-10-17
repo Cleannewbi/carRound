@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.File"%>
 <%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
@@ -12,15 +14,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
- 	<%! int seq;
-    	String id; 
-    	String carName;
-    %>
     <%
     iMyPageDao dao = MyPageDao.getInstance();
     request.setCharacterEncoding("utf-8");
     String file ="";
-    String fileName = request.getParameter("fileName");
+    String fileName = "";
     
     // session
     Object ologin = session.getAttribute("login");
@@ -36,15 +34,19 @@
     }
 
     dto = (MemberDto)ologin;
-   seq = dto.getMember_seq();
-   id = dto.getMember_id();
-   
+    System.out.println("dto:"+dto.toString());
+   int seq = dto.getMember_seq();
+   String id = dto.getMember_id();
+   fileName = dto.getMember_Photo();
    List<RentDto> rentpagelist =  dao.getRentPageList(id.trim());
-      
+      MemberDto dto1 = dao.getMyPageList(id);
    System.out.println("id:"+id + "seq:" + seq);
    int RC_Rent_Seq = dao.getSeq(id);
    System.out.println("RC_Rent_Seq:"+RC_Rent_Seq);
+   System.out.println("fileName: "+fileName); 
     %>
+    
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -58,24 +60,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
 
-<%
-if( dto.getMember_Photo()==null){
-
-if(fileName.isEmpty()){
-	System.out.println(fileName.isEmpty()+"=> true means the user has no images.");
-	fileName = "noImage.png";
-file = "./images/"+fileName.trim(); 
-}else{
-	file = "./images/"+fileName.trim();
- }
-}else if(dto.getMember_Photo()!=null){
-	System.out.println("the id:"+id+" whose dto.getPhoto has an image data which is:"+dto.getMember_Photo());
-	fileName= dto.getMember_Photo();
-	file = "./images/"+fileName.trim();
-}
-
-%>
-
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large"
   onclick="w3_close()">Close &times;</button>
@@ -85,7 +69,7 @@ file = "./images/"+fileName.trim();
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'del_Member')">회원탈퇴</button>
   <%-- <form action="myPage"><input type="hidden" name="M_Command" value="DelMember">
   <input type="hidden" name="seq" value="<%=seq%>"><input type="submit" value="회원탈퇴"></form> --%>
-		<form action="login.jsp"><input type="submit" value="메인화면"></form>
+		<form action="index.jsp"><button type="submit">메인화면</button></form>
 
 	</div>
 
@@ -97,9 +81,7 @@ file = "./images/"+fileName.trim();
     <h1>My Page</h1>
   </div>
 </div>
-
-<img alt="이미지 없음" src="<%=file %>" style="width: 120px; height: 120px;">
-
+<img alt='/images/noImage.png' src="<%= "\\\\192.168.30.31\\Users\\user2\\images\\"+dto.getMember_Photo() %>" style="width: 120px; height: 120px;">
 <div>
 <h1>Dear, <%=id %>'s Page</h1>
 <hr>
@@ -111,12 +93,12 @@ file = "./images/"+fileName.trim();
 <table border="1">
 
 
-<tr><td>ID</td><td><%=dto.getMember_id() %></td></tr>
-<tr><td>NAME</td><td><%=dto.getMember_name() %></td></tr>
-<tr><td>PHONE</td><td><%=dto.getMember_phone() %></td></tr>
-<tr><td>ADDRESS</td><td><%=dto.getMember_address() %></td></tr>
-<tr><td>EMAIL</td><td><%=dto.getMember_email() %></td></tr>
-<tr><td>CARD</td><td><%=dto.getMember_card() %></td></tr> 
+<tr><td>ID</td><td><%=dto1.getMember_id() %></td></tr>
+<tr><td>NAME</td><td><%=dto1.getMember_name() %></td></tr>
+<tr><td>PHONE</td><td><%=dto1.getMember_phone() %></td></tr>
+<tr><td>ADDRESS</td><td><%=dto1.getMember_address() %></td></tr>
+<tr><td>EMAIL</td><td><%=dto1.getMember_email() %></td></tr>
+<tr><td>CARD</td><td><%=dto1.getMember_card() %></td></tr> 
 
 </table>
 </div>
@@ -125,7 +107,7 @@ file = "./images/"+fileName.trim();
 <!-- here 정보 수정 화면  -->
 <div id="info_Change" class="w3-container city w3-animate-opacity" style="display:none">
     
-    <h2>Here's ur info will be updated</h2>
+    <h2>정보수정 화면</h2>
     <form action="updateInfo.jsp" method="post" enctype="multipart/form-data">
     <table>
     		<%if(fileName != null){ %>
@@ -168,10 +150,15 @@ file = "./images/"+fileName.trim();
 <!-- here 예약 확인 화면 -->
 <div id="check_Res" class="w3-container city w3-animate-opacity" style="display:none">
 
- <h2>Here's ur info car reserved</h2>
- <input type="date" value="2018-10-12">
+ <h2>예약확인 화면</h2>
+ <%
+ Date today = new Date();
+ SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+ 	System.out.println(date.format(today));
+ %>
+ 오늘의 날짜:<%=date.format(today) %>
  <div>
-<form action="myPage" name="change_dates">
+
 <table border="1">
 <col width="20"><col width="100"><col width="120"><col width="120"><col width="70"><col width="70"><col width="70"><col width="70">
 <col width="70"><col width="70"><col width="70"><col width="70"><col width="70"><col width="70">
@@ -182,12 +169,25 @@ file = "./images/"+fileName.trim();
 <%
 if(rentpagelist == null || rentpagelist.size() ==0){
 	%>
-	<tr><td colspan="7">예약하신 차량이 없습니다.</tr><%}else{
+	<tr><td colspan="13">예약하신 차량이 없습니다.</tr><%}else{
+				
+		
 		for(int i=0 ; i < rentpagelist.size() ; i++){
 			RentDto rent = rentpagelist.get(i);
+			System.out.println("rent end: "+rent.getRent_end());
+			
+			
+			String end_day = rent.getRent_end().trim();
+			Date d_end = new SimpleDateFormat("yyyy-MM-dd").parse(end_day);
+			System.out.println("d_end: "+d_end+"today:"+today);
+			Date sysdate = new SimpleDateFormat("yyyy-MM-dd").parse(date.format(today));
+			int compare = d_end.compareTo(sysdate); //sys가 크면 양수 ,같으면 0, 작으면 음수
+			
+			if(compare>=0){System.out.println("compare"+compare);
 			
 		%>
 	<tr>
+		<form action="reschedule.jsp">
 		<td><%=i+1 %></td>
 		<td><%=rent.getRent_carname() %></td>
 		<td><%=rent.getRent_start() %></td>
@@ -202,45 +202,54 @@ if(rentpagelist == null || rentpagelist.size() ==0){
 		
 		<td>
 		<input type="hidden" id="start" name="start">
-		<input type="checkbox" id="C_Dates" name="C_Dates">
 		<input type="hidden" id="end" name="end">
 		<input type="hidden" name="seq" value="<%=rent.getRent_seq()%>">
 		<input type="hidden" name="id" value="<%=rent.getCus_id()%>">
 		<input type="hidden" name="carName" value="<%=rent.getRent_carname()%>">
 		<input type="hidden" name="M_Command" value="reschedule">
-		<input type="submit" value="날짜 변경" onclick="return test_checkbox()">
+		<input type="radio" name="chkbox" class="chkbox" value="<%=rent.getRent_seq() %>">
+		<input type="submit" value="날짜 변경">
 		</td>
 		</form>
 		
 		<td>
-		<button id="deletebtn" onclick="deletei(<%=rent.getRent_seq() %>)">예약취소</button>
+		<form action="resv_cancel.jsp">
+		<input type="hidden" name="id" value="<%=rent.getCus_id()%>">
+		<input type="hidden" name="seq" value="<%=rent.getRent_seq()%>">
+		<input type="submit" value="예약 취소">
+		</form>
 		</td>
 		
+		
+	</tr>
+	<%}else if(compare<0){ System.out.println("compare"+compare);%>
+	<tr>
+	
+	<td><%=i+1 %></td>
+		<td><%=rent.getRent_carname() %></td>
+		<td><%=rent.getRent_start() %></td>
+		<td><%=rent.getRent_end() %></td>
+		<td><%=rent.getCus_id() %></td>
+		<td><%=rent.getPrice() %>원</td>
+		<td><%=rent.getRc_name() %></td>
+		<td><%=rent.getRc_phone() %></td>
+		<td><%=rent.getRc_address() %></td>
+		<td><%=rent.getRc_card() %></td>
+		<td><%=rent.getRc_photo() %></td>
+		<td><button>Disable</button></td>
+		<td><button>Disable</button></td>
+	
 	</tr>
 	
+	
 <%}
+}
 } %>
 
 
 </table>
 
  </div>
-<%-- <form action="myPage" name="change_dates">
-<input type="hidden" id="start" name="start">
-<input type="hidden" id="end" name="end">
-<input type="hidden" name="seq" value="<%=RC_Rent_Seq%>">
-<input type="hidden" name="id" value="<%=id%>">
-<input type="hidden" name="carName" value="<%=carName%>">
-<input type="hidden" name="M_Command" value="reschedule">
-<input type="submit" value="날짜 변경">
-</form> --%>
-<%-- <form action="myPage" name="cancel_res">
-<input type="hidden" name="id" value="<%=id%>">
-<input type="hidden" name="carName" value="<%=carName%>">
-<input type="hidden" name="RC_Rent_Seq" value="<%=RC_Rent_Seq%>">
-<input type="hidden" name="M_Command" value="cancelResv">
-<input type="submit" value="예약 취소">
-</form> --%>
 
 </div>
 
@@ -281,24 +290,10 @@ function openLink(evt, animName) {
 </script>
 
 <script type="text/javascript">
-$(function () {
-	function test_checkbox() {
-		var flag = false;
-		var values = document.getElementsByNames("C_Dates");
-		for(var i=0; i<values.length;i++){
-			if(values[i].checked){
-				alert(values[i].value);
-			}
-		}
-		return flag;
-	}
-});
-</script>
-<script type="text/javascript">
 function deletei(seq) {
 	$("#deletebtn").click(function () {
 		alert("click"+seq);
-		location.href = "cancelRes.jsp?seq=";		
+		
 	})
 }
 </script>

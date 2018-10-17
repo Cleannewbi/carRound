@@ -104,24 +104,23 @@ public class MyPageDao implements iMyPageDao {
 	public boolean updateMyPage(String photo, String phone, String address, String email, String card, int seq) {
 		String sql = " UPDATE RC_MEMBER SET "
 				+ "  PHOTO=?, PHONE=?, ADDRESS=?, EMAIL=?, CARD=? "
-				+ " WHERE SEQ=? ";
+				+ " WHERE SEQ="+seq;
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		int count = 0;
-		int i = 1;
 		try {
 			conn = DBConnection.getConnection();
 			System.out.println("1/6 updateMyPage Success");
 			
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setString(i++, photo);
-			psmt.setString(i++, phone);
-			psmt.setString(i++, address);
-			psmt.setString(i++, email);
-			psmt.setString(i++, card);
-			psmt.setInt(i++, seq);
+			psmt.setString(1, photo);
+			psmt.setString(2, phone);
+			psmt.setString(3, address);
+			psmt.setString(4, email);
+			psmt.setString(5, card);
+			
 			
 			System.out.println("2/6 updateMyPage Success");
 			

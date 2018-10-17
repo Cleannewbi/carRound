@@ -92,7 +92,7 @@ dto = (MemberDto)ologin;
     	%>
     		<script type="text/javascript">
     			alert("파일업로드 성공");
-    			location.href="oMyPage.jsp";
+    			location.href="index.jsp";
     		</script>
     	<%
     	} else {
