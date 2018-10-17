@@ -1,25 +1,26 @@
-<%@page import="dao.RentDao"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="dao.RentDao"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@page import="model.MemberDto"%>
+<%@page import="java.util.List"%>
 <%@page import="dao.memberDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
-	//생성
-	memberDao memdao = new memberDao();
-	List<MemberDto> memdtoList = new ArrayList<>();
-	RentDao rentdao = new RentDao();
 
-	//회원출력
-	memdtoList = memdao.getUserList();
-	List<MemberDto> comdtoList = new ArrayList<>();
-	comdtoList = memdao.getComList();
-	
-	//가격, 건수출력
-	HashMap<String,Integer> countMap = rentdao.getOrderCount();
-	HashMap<String,Integer> priceMap = rentdao.getOrderPrice();
+//생성
+memberDao memdao = new memberDao();
+List<MemberDto> memdtoList = new ArrayList<>();
+RentDao rentdao = new RentDao();
+
+//회원출력
+List<MemberDto> comdtoList = new ArrayList<>();
+comdtoList = memdao.getComList();
+
+//가격, 건수출력
+HashMap<String,Integer> countMap = 
+HashMap<String,Integer> priceMap = 
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,10 +40,8 @@ table {
 </style>
 </head>
 <body>
-
-
 <div id="header">
-	<h1>회원관리 페이지</h1>
+	<h1>고객소통 페이지</h1>
 </div>
 
 <div id="nav">
@@ -63,7 +62,8 @@ function manager(number) {
 }
 </script>
 
-<!-- for문 사용하여 member table로 호출, 버튼넣어서 삭제, 업데이트 할수있도록 만들기 -->
+<!-- 고객의 quest를 db에 저장, 불러와서 게시판에 넣고 게시판 누르고 답글쓰기 -> 답글써놓으면 사라지도록 
+q&a는 마이페이지에서도 확인가능해야할것 혹은 그냥 이메일보내는걸로 -->
 
 <div id="section">
 <table>
@@ -88,13 +88,12 @@ function manager(number) {
 
 <script type="text/javascript">
 
-function deleteFunc() {
-	location.href="manageMemAf.jsp?name=checkbox";
-	
-	"NewFile.jsp?name="+$("#name").val() 
 
-}
+
+
 </script>
+
+
 
 <div id="footer">
 <p>carround.company </p>

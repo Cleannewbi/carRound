@@ -181,22 +181,21 @@
 <form action="orderAf.jsp" method="post">
 <input type="hidden" name="infoSeq" value="<%=carInfoDto.getInfo_seq()%>">
 <input type="hidden" name="loginId" value="<%=id%>">
-<div align="center">
+<div style="margin-left: 500px">
 <table>
-<col width="600"><col width="100">
+<col width="400"><col width="100">
 <tr>
 	<td colspan="2" height="70" > <input class="content" name="carName" type="text" value="<%=carInfoDto.getCar_name() %>" style="background-color:transparent; border: none; font-size:28px;"readonly="readonly">
 	</td>
 </tr>
 <tr>
-	<td height="400" ><img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>" height="400"> </td>
+	<td height="300" ><img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>" height="400"> </td>
 	<td id="topData"><%=carInfoDto.getCar_type() %><br><%=carInfoDto.getCar_size() %><br><%=carInfoDto.getCar_fuel()%> </td>
 </tr>
 
 </table>
 </div>
 
-<hr style="color: grey">
 <div style="margin-left: 500px">
 <h2 class="title">운전자정보</h2>
 <table id="userTable" >
@@ -235,7 +234,6 @@
 <font size="3" color="blue">※고객님의 정보가 맞는지 확인하여 주십시오.</font>
 </div>
 <br>
-<hr color="grey">
 <br>
 <div style="margin-left: 500px">
 <h2 class="title">업체명</h2>
@@ -288,13 +286,11 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	    } 
 });    
 </script>
-<hr style="color: grey">
 <div style="margin-left: 500px">
 <h2  class="title">옵션선택</h2>
 <p  class="content">딜리버리 서비스 <input type="checkbox" id="deliveryCheck" onclick="deliFunc(this)"></p>
 <p><font size="3" color="blue">딜리버리 서비스란? <br>위에 기재된 운전자 정보에서 픽업가능한 시스템입니다.</font>
 </div>
-<hr>
 <div style="margin-left: 500px">
 <h2  class="title">결제정보</h2>
 <table>

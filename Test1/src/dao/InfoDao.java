@@ -20,6 +20,7 @@ public class InfoDao implements InfoDaoImpl {
 		return infoDao;
 	}
 	
+	//자동차 정보 가져오기
 	@Override
 	public InfoDto getCarInfo(String Car_name, String comName) {
 

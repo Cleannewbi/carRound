@@ -19,32 +19,23 @@
 <div id="nav">
 <br>
 	<button type="button" class="btn" onclick="manager(1)">회원관리</button><br><br>
-	<button type="button" class="btn"onclick="manager(2)">매출관리</button><br><br>
-	<button type="button" class="btn"onclick="manager(3)">고객과의 소통</button><br><br>
-
+	<button type="button" class="btn"onclick="manager(2)">기업관리</button><br><br>
+	<button type="button" class="btn"onclick="manager(3)">매출관리</button><br><br>
 </div>
-
-<div id="section">
-	<h1><%=name %></h1>
-</div>
-
 <script type="text/javascript">
 function manager(number) {
 	if(number==1){
-		alert("1번입니다.");
 		location.href="manageMem.jsp";
 	}else if(number==2){
-		alert("2번입니다.");
-		location.href="manageSale.jsp";
+		location.href="manageCom.jsp";
 	}else if(number==3){
-		alert("3번입니다.");
-		location.href="manageQnA.jsp";
+		location.href="manageSale.jsp";
 	}
 }
 </script>
 
 <div id="footer">
-<p>carround.company 본사 : 경기도 김포시 풍무동 </p>
+<p>carround.company </p>
 </div>
 
 </body>
