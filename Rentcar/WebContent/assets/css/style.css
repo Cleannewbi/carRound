@@ -636,7 +636,7 @@ label {
 	margin-bottom:0px;
 }
 #contact input#submit {
-	width:auto;
+	width: auto;
 	margin-top:20px;
 	background-color:rgba(0,0,0,0.3);
 	border:0;
@@ -1183,7 +1183,7 @@ img.mfp-img {
 					margin-right:0;
 	}
 	.container {
-					max-width:690px;
+					max-width:10px;
 					padding-left:30px;
 					padding-right:30px;
 	}	
@@ -1236,7 +1236,7 @@ img.mfp-img {
 					margin-right:0;
 	}
 	.container {
-					max-width:690px;
+					max-width:10px;
 					padding-left:30px;
 					padding-right:30px;
 	}	

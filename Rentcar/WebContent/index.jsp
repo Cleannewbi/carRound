@@ -87,6 +87,7 @@ dto = (MemberDto)ologin;
 %>
 <a href="loginPage.jsp">LOGIN</a>
 <a href="oMyPage.jsp">myPage</a>
+<h5><%=dto.getMember_id() %>님 환영합니다.</h5>
 <div id="searchDiv">
 <section id="contactarea" class="parallax section" style="background-image: url(http://themepush.com/demo/runcharity/assets/img/map.png);">
 <div class="wrapsection">
@@ -105,7 +106,7 @@ dto = (MemberDto)ologin;
 						<div class="row">
 							<div class="col-md-4 wow fadeIn animated animated" data-wow-delay="0.1s" data-wow-duration="2s">
 								<label for="name">Name<span class="required">*</span></label>
-								<input type="text" id="rentPlace" name="rentPlace" value="랜트 대여 장소" required/>
+								<input type="text" id="rentPlace" name="rentPlace" value="랜트 대여 장소" size="10" required/>
 							</div>
 							<div class="col-md-4 wow fadeIn animated" data-wow-delay="0.3s" data-wow-duration="2s">
 								<label for="email">Email<span class="required">*</span></label>
@@ -166,14 +167,12 @@ $('#datepicker1').datepicker({
 	dateFormat: "yy-mm-dd",
 	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
 	monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	numberOfMonths: [1,2],
 	minDate: 0
 });
 $('#datepicker2').datepicker({
 	dateFormat: "yy-mm-dd",
 	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
 	monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	numberOfMonths: [1,2],
 	minDate: 0
 });
 
