@@ -1,3 +1,4 @@
+<%@page import="dao.iInfoDao"%>
 <%@page import="dto.MemberDto"%>
 <%@page import="dto.InfoDto"%>
 <%@page import="java.util.List"%>
@@ -6,14 +7,14 @@
     pageEncoding="UTF-8"%>
 <%
 String actionPath = request.getParameter("actionPath");
-
+/* 
 String rentPlace = request.getParameter("rentPlace");
 String startDate = request.getParameter("startDate");
 String startTime = request.getParameter("startTime");
 String endDate = request.getParameter("endDate");
 String endTime = request.getParameter("endTime");
 System.out.println("carList : " + rentPlace + startDate + startTime + endDate + endTime);
-
+ */
 String[] checkedBoxs = request.getParameterValues("arr");
 if(checkedBoxs != null) {
 	for(int i=0 ; i<checkedBoxs.length ; i++) {
@@ -126,18 +127,29 @@ li {
 			%>
 			<li>
 				<div class="info">
-					<div><strong class="infoText"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="RentCarDetail.jsp?seq="<%=idto.getInfo_seq() %>><img class="infoImg" src="./images/k5.jpg"></a>
+					<div><strong class="infoText" id="carName" value="carName"><%=idto.getCar_name() %></strong>&nbsp;</div>
+					<a href="'RentCarDetail.jsp?seq='<%=idto.getInfo_seq() %>"><img class="infoImg" src="./images/k5.jpg"></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 
 						<div class="infoDetail">연료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCar_fuel() %></strong></div> &nbsp; 
 						<div class="infoDetail">차량종류&nbsp;&nbsp;<strong><%=idto.getCar_type() %></strong></div>
-						<div class="infoDetail">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
+						<div class="infoDetail" name="comName">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
-							<input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')">
+							<%-- 
+							<form action="order.jsp" method="post">
+							<input type="hidden" name="carName" value="<%=idto.getCar_name() %>">
+							<input type="hidden" name="comName" value="<%=idto.getCom_name() %>">
+							<input type="hidden" name="startDate" value="<%=startDate %>">
+							<input type="hidden" name="startTime" value="<%=startTime %>">
+							<input type="hidden" name="endDate" value="<%=endDate %>">
+							<input type="hidden" name="endTime" value="<%=endTime %>">
+							<input type="submit" value="이동">
+							 --%>
+							<%-- <input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')"> --%>
+							</form>
 						</div> 
-		<% %>
+		
 				</div>
 			</li>
 	
@@ -164,16 +176,26 @@ li {
 			%>
 			<li>
 				<div class="info">
-					<div><strong class="infoText"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="RentCarDetail.jsp?seq="<%=idto.getInfo_seq() %>><img class="infoImg" src="./images/k5.jpg"></a>
+					<div><strong class="infoText" id="carName" value="<%=idto.getCar_name() %>"><%=idto.getCar_name() %></strong>&nbsp;</div>
+					<a href="RentCarDetail.jsp?seq=<%=idto.getInfo_seq() %>"><img class="infoImg" src="./images/k5.jpg"></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail" name="size">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 
 						<div class="infoDetail" name="fuel">연료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCar_fuel() %></strong></div> &nbsp; 
 						<div class="infoDetail" name="type">차량종류&nbsp;&nbsp;<strong><%=idto.getCar_type() %></strong></div> &nbsp;
-						<div class="infoDetail" name="comp">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
+						<div class="infoDetail" name="comp" id="comName" value="<%=idto.getCom_name() %>">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
-							<input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')">
+							<input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>', '<%=idto.getCar_name() %>', '<%=idto.getCom_name() %>')">
+<%-- 							
+							<form action="order.jsp" method="post">
+							<input type="hidden" name="carName" value="<%=idto.getCar_name() %>">
+							<input type="hidden" name="comName" value="<%=idto.getCom_name() %>">
+							<input type="hidden" name="startDate" value="<%=startDate %>">
+							<input type="hidden" name="startTime" value="<%=startTime %>">
+							<input type="hidden" name="endDate" value="<%=endDate %>">
+							<input type="hidden" name="endTime" value="<%=endTime %>">
+							<input type="submit" value="이동">
+							 --%>
 						</div> 
 				</div>
 			</li>
@@ -187,11 +209,18 @@ li {
 </div>
 </form>
 
-
 <script type="text/javascript">
-
-function RentCarDetail(seq) {
-	location.href = "RentCarDetail.jsp?seq=" + seq;
+function RentCarDetail(seq, carName, comName) {
+/* 	var carName = document.getElementById("carName").value;
+	var comName = document.getElementById("comName").value; */
+	var startDate = "<%=request.getParameter("startDate") %>";
+	var startTime = "<%=request.getParameter("startTime") %>";
+	var endDate = "<%=request.getParameter("endDate") %>";
+	var endTime = "<%=request.getParameter("endTime") %>";
+	alert("seq=" + seq + "&carName=" + carName + "&comName=" + comName + "&startDate=" + startDate + "&startTime=" + startTime + 
+			"&endDate=" + endDate + "&endTime=" + endTime);
+	location.href = "order.jsp?seq=" + seq + "&carName=" + carName + "&comName=" + comName + "&startDate=" + startDate + "&startTime=" + startTime +
+			"&endDate=" + endDate + "&endTime=" + endTime;
 }
 </script>
 
