@@ -71,22 +71,21 @@ input {
 </head>
 <body>
 <%
-/* 
 Object ologin = session.getAttribute("login");
 System.out.println(ologin);
 MemberDto dto = null;
 if(!ologin.equals("") || ologin != null) {
 	dto = (MemberDto)ologin;
 }
-  */
+
 %>
 <a href="loginPage.jsp">LOGIN</a>
 
-<%-- 
+ 
 <%if(!ologin.equals("") || ologin != null) { %>
 <a href="oMyPage.jsp">myPage</a>&nbsp;<h5><%=dto.getMember_id() %>님 환영합니다.</h5>&nbsp;<a href="logout.jsp">logout</a>
 <% } %>
- --%>
+
 
 <div id="searchDiv">
 <section id="contactarea" class="parallax section" style="background-image: url(http://themepush.com/demo/runcharity/assets/img/map.png);">

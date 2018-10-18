@@ -39,11 +39,11 @@
    String id = dto.getMember_id();
    fileName = dto.getMember_Photo();
    List<RentDto> rentpagelist =  dao.getRentPageList(id.trim());
-      MemberDto dto1 = dao.getMyPageList(id);
    System.out.println("id:"+id + "seq:" + seq);
    int RC_Rent_Seq = dao.getSeq(id);
    System.out.println("RC_Rent_Seq:"+RC_Rent_Seq);
-   System.out.println("fileName: "+fileName); 
+   System.out.println("fileName : "+fileName); 
+   System.out.println("이미지경로 : " + "\\\\192.168.30.31\\Users\\user2\\images\\"+dto.getMember_Photo());
     %>
     
 
@@ -55,7 +55,28 @@
 <title>MyPage.jsp</title>
 
 </head>
-<script src="./jq/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<!-- 
+<script type="text/javascript">
+$(function() {
+    $("#imgInp").on('change', function(){
+        readURL(this);
+    });
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+ -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
@@ -81,24 +102,30 @@
     <h1>My Page</h1>
   </div>
 </div>
-<img alt='/images/noImage.png' src="<%= "\\\\192.168.30.31\\Users\\user2\\images\\"+dto.getMember_Photo() %>" style="width: 120px; height: 120px;">
+				
+<img alt="" src="C:\Users\user2\git\carRound\images\"<%=dto.getMember_Photo() %> />
+			
 <div>
 <h1>Dear, <%=id %>'s Page</h1>
 <hr>
 
 
+<!-- 
+<form id="form1" runat="server">
+	<input type="file" id="imgInp" />
+	<img id="blah" src="#" alt="img" />
+</form>
+ -->
+ 
 <br>
-
-
 <table border="1">
 
-
-<tr><td>ID</td><td><%=dto1.getMember_id() %></td></tr>
-<tr><td>NAME</td><td><%=dto1.getMember_name() %></td></tr>
-<tr><td>PHONE</td><td><%=dto1.getMember_phone() %></td></tr>
-<tr><td>ADDRESS</td><td><%=dto1.getMember_address() %></td></tr>
-<tr><td>EMAIL</td><td><%=dto1.getMember_email() %></td></tr>
-<tr><td>CARD</td><td><%=dto1.getMember_card() %></td></tr> 
+<tr><td>ID</td><td><%=dto.getMember_id() %></td></tr>
+<tr><td>NAME</td><td><%=dto.getMember_name() %></td></tr>
+<tr><td>PHONE</td><td><%=dto.getMember_phone() %></td></tr>
+<tr><td>ADDRESS</td><td><%=dto.getMember_address() %></td></tr>
+<tr><td>EMAIL</td><td><%=dto.getMember_email() %></td></tr>
+<tr><td>CARD</td><td><%=dto.getMember_card() %></td></tr> 
 
 </table>
 </div>
