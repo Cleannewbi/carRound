@@ -13,12 +13,13 @@
 <%@page import="dao.iMyPageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+   
 <!DOCTYPE html>
     <%
     iMyPageDao dao = MyPageDao.getInstance();
     request.setCharacterEncoding("utf-8");
-    String file ="";
-    String fileName = "";
+   
     
     // session
     Object ologin = session.getAttribute("login");
@@ -37,13 +38,28 @@
     System.out.println("dto:"+dto.toString());
    int seq = dto.getMember_seq();
    String id = dto.getMember_id();
-   fileName = dto.getMember_Photo();
-   List<RentDto> rentpagelist =  dao.getRentPageList(id.trim());
-   System.out.println("id:"+id + "seq:" + seq);
-   int RC_Rent_Seq = dao.getSeq(id);
-   System.out.println("RC_Rent_Seq:"+RC_Rent_Seq);
-   System.out.println("fileName : "+fileName); 
-   System.out.println("이미지경로 : " + "\\\\192.168.30.31\\Users\\user2\\images\\"+dto.getMember_Photo());
+  
+    List<RentDto> rentpagelist =  dao.getRentPageList(id.trim());
+      MemberDto dto1 = dao.getMyPageList(id);
+    System.out.println("id:"+id + "seq:" + seq);
+    String fileName = "";
+    try{
+    fileName = dto1.getMember_Photo().trim();
+    System.out.println("dto1.contain:"+dto1.getMember_Photo().contains("."));
+    }catch(Exception e){
+    	System.err.println(e);
+    }
+    int RC_Rent_Seq = dao.getSeq(id);
+    System.out.println("dto1.toString(): "+dto1.toString());
+    System.out.println("RC_Rent_Seq:"+RC_Rent_Seq);
+    
+    if(!fileName.isEmpty() && fileName.contains(".")){
+    	//fileName = dto1.getMember_Photo().trim();
+    System.out.println("dto1 photo 이미지 있음:"+dto1.getMember_Photo().trim());
+    } else if(!fileName.contains(".") || fileName.isEmpty()){
+    	System.out.println("dto1 photo 이미지가 아님:"+dto1.getMember_Photo().trim());
+    	fileName = "noImage.png";
+    } 
     %>
     
 
@@ -55,28 +71,7 @@
 <title>MyPage.jsp</title>
 
 </head>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-<!-- 
-<script type="text/javascript">
-$(function() {
-    $("#imgInp").on('change', function(){
-        readURL(this);
-    });
-});
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-            $('#blah').attr('src', e.target.result);
-        }
-
-      reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
- -->
+<script src="./jq/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
@@ -96,51 +91,52 @@ function readURL(input) {
 
 <div id="main">
 
+
+
 <div class="w3-teal">
   <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
   <div class="w3-container">
     <h1>My Page</h1>
   </div>
 </div>
-				
-<img alt="" src="C:\Users\user2\git\carRound\images\"<%=dto.getMember_Photo() %> />
-			
+
+<img alt='./images/noImage.png' src='./images/<%=fileName%>' style="width: 120px; height: 120px;">
+
+<%System.out.println("oMyPage.jsp img:"+dto1.getMember_Photo().trim()); %>
 <div>
 <h1>Dear, <%=id %>'s Page</h1>
 <hr>
 
 
-<!-- 
-<form id="form1" runat="server">
-	<input type="file" id="imgInp" />
-	<img id="blah" src="#" alt="img" />
-</form>
- -->
- 
 <br>
+
+
 <table border="1">
 
-<tr><td>ID</td><td><%=dto.getMember_id() %></td></tr>
-<tr><td>NAME</td><td><%=dto.getMember_name() %></td></tr>
-<tr><td>PHONE</td><td><%=dto.getMember_phone() %></td></tr>
-<tr><td>ADDRESS</td><td><%=dto.getMember_address() %></td></tr>
-<tr><td>EMAIL</td><td><%=dto.getMember_email() %></td></tr>
-<tr><td>CARD</td><td><%=dto.getMember_card() %></td></tr> 
+
+<tr><td>ID</td><td><%=dto1.getMember_id() %></td></tr>
+<tr><td>NAME</td><td><%=dto1.getMember_name() %></td></tr>
+<tr><td>PHONE</td><td><%=dto1.getMember_phone() %></td></tr>
+<tr><td>ADDRESS</td><td><%=dto1.getMember_address() %></td></tr>
+<tr><td>EMAIL</td><td><%=dto1.getMember_email() %></td></tr>
+<tr><td>CARD</td><td><%=dto1.getMember_card() %></td></tr> 
 
 </table>
 </div>
 <hr>
 
+
+
 <!-- here 정보 수정 화면  -->
 <div id="info_Change" class="w3-container city w3-animate-opacity" style="display:none">
     
     <h2>정보수정 화면</h2>
-    <form action="updateInfo.jsp" method="post" enctype="multipart/form-data">
+    <form action="pdsupload.jsp" method="post" enctype="multipart/form-data">
     <table>
     		<%if(fileName != null){ %>
 		<tr>
 			<td>
-				<img alt="" src="image/<%=fileName %>" height="100" width="100">
+				<img alt="" src="d:\\\\tmp\\"+<%=fileName.trim() %> height="100" width="100">
 			</td>
 		</tr>
 		
@@ -167,7 +163,7 @@ function readURL(input) {
 <!-- here del_Member -->
 <div id="del_Member" class="w3-container city w3-animate-opacity" style="display:none">
 <h2>회원탈퇴 화면</h2>
-<form action="myPage">
+<form action="DeleteMyPage.jsp">
 <input type="hidden" name="M_Command" value="DelMember">
 <input type="hidden" name="seq" value="<%=seq%>">
 <input type="submit" value="탈퇴하기">
@@ -204,13 +200,13 @@ if(rentpagelist == null || rentpagelist.size() ==0){
 			System.out.println("rent end: "+rent.getRent_end());
 			
 			
-			String end_day = rent.getRent_end().trim();
-			Date d_end = new SimpleDateFormat("yyyy-MM-dd").parse(end_day);
-			System.out.println("d_end: "+d_end+"today:"+today);
+			String s_day = rent.getRent_start().trim();
+			Date start_day = new SimpleDateFormat("yyyy-MM-dd").parse(s_day);
+			System.out.println("d_end: "+start_day+"today:"+today);
 			Date sysdate = new SimpleDateFormat("yyyy-MM-dd").parse(date.format(today));
-			int compare = d_end.compareTo(sysdate); //sys가 크면 양수 ,같으면 0, 작으면 음수
+			int compare = start_day.compareTo(sysdate); //sys가 크면 양수 ,같으면 0, 작으면 음수
 			
-			if(compare>=0){System.out.println("compare"+compare);
+			if(compare>0){System.out.println("compare"+compare);
 			
 		%>
 	<tr>
@@ -249,7 +245,7 @@ if(rentpagelist == null || rentpagelist.size() ==0){
 		
 		
 	</tr>
-	<%}else if(compare<0){ System.out.println("compare"+compare);%>
+	<%}else if(compare<=0){ System.out.println("compare"+compare);%>
 	<tr>
 	
 	<td><%=i+1 %></td>
@@ -276,6 +272,8 @@ if(rentpagelist == null || rentpagelist.size() ==0){
 
 </table>
 
+
+
  </div>
 
 </div>
@@ -283,7 +281,7 @@ if(rentpagelist == null || rentpagelist.size() ==0){
 </form>
 
 </div>
-
+<img alt="" src="\\\\192.168.30.31\\Users\\user2\\images\\k5.jpg"> 
 
 
 <script>

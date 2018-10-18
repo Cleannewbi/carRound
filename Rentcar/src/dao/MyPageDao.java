@@ -45,6 +45,52 @@ public class MyPageDao implements iMyPageDao {
 			System.out.println("3/6 getMyPageList Success");
 			
 			if (rs.next()) {
+				if(rs.getString(4)==null) {
+				 dto = new MemberDto(rs.getInt(1),
+						 rs.getString(2),rs.getString(3),"이미지없음", rs.getString(5),rs.getString(6),
+						rs.getString(7),	rs.getString(8), rs.getString(9),rs.getInt(10));}
+				else {
+					dto = new MemberDto(rs.getInt(1),
+							 rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5),rs.getString(6),
+							rs.getString(7),	rs.getString(8), rs.getString(9),rs.getInt(10));
+					
+				}
+
+			}System.out.println("DB id:"+id);
+			System.out.println("getMyPageList Loading Success");
+		} catch (Exception e) {
+			System.err.println(e);
+		} finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+		return dto;
+	}
+	
+	@Override
+	public MemberDto getComPageList(String id) {
+		String sql = "SELECT SEQ,ID,PASSWORD,PHOTO,NAME,PHONE,ADDRESS,EMAIL,CARD,AUTH"
+				+ " FROM RC_MEMBER "
+				+ " WHERE ID=? AND AUTH =2";
+		System.out.println(sql);
+		System.out.println(id);
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		MemberDto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			
+			System.out.println("1/6 getMyPageList Success");
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getMyPageList Success");
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getMyPageList Success");
+			
+			if (rs.next()) {
 				 dto = new MemberDto(rs.getInt(1),
 						 rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5),rs.getString(6),
 						rs.getString(7),	rs.getString(8), rs.getString(9),rs.getInt(10));

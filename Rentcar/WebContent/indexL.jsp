@@ -32,6 +32,9 @@
 	background-size: cover;
 	z-index: -100;
 }
+	.align_right {
+	
+	}
 	</style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800' rel='stylesheet' type='text/css'>
@@ -83,7 +86,7 @@ if(!ologin.equals("") || ologin != null) {
 
  
 <%if(!ologin.equals("") || ologin != null) { %>
-<a href="oMyPage.jsp">myPage</a>&nbsp;<h5><%=dto.getMember_id() %>님 환영합니다.</h5>&nbsp;<a href="logout.jsp">logout</a>
+<a id="myPage" onClick="myPage()">myPage</a>&nbsp;<a href="logout.jsp" class="align_right">logout</a>
 <% } %>
 
 
@@ -185,6 +188,14 @@ function searchRentCar() {
 	var endTime = document.getElementById("rentEndTime").value;
 	alert(rentPlace + "" + startDate + "" + startTime + "" + endDate + "" + endTime);
 	location.href="rentList.jsp?rentPlace=" + rentPlace + "&startDate=" + startDate + "&startTime=" + startTime + "&endDate=" + endDate + "&endTime=" + endTime;
+}
+function myPage() {
+	if(<%=dto.getMember_auth() %> == 1 ) {
+		location.href = "oMyPage.jsp?auth=1";
+	}
+	else if(<%=dto.getMember_auth() %> == 2 ) {
+		location.href = "oMyPage.jsp?auth=2";
+	}
 }
 
 </script>

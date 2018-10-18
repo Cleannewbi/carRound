@@ -176,7 +176,7 @@ li {
 if(rentPlace.equals("") && startDate.equals("") && startTime.equals("") && endDate.equals("") && endTime.equals("")) {
 %>
 <jsp:include page="carList.jsp" flush="false">
-	<jsp:param value="index.jsp" name="actionPath"/>
+	<jsp:param value="rentList.jsp" name="actionPath"/>
 </jsp:include>
 </div>
 <%
