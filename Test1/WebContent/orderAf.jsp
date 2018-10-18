@@ -14,12 +14,14 @@
 	String carName = request.getParameter("carName").trim();
 	String startDate = request.getParameter("startYear").trim()+request.getParameter("startMonth").trim()+request.getParameter("startDay").trim();	
 	String endDate = request.getParameter("endYear").trim()+request.getParameter("endMonth").trim()+request.getParameter("endDay").trim();
-	startDate.replace("년", "/");
-	startDate.replace("월", "/");
-	startDate.replace("일", "/");
-	endDate.replace("년", "/");
-	endDate.replace("월", "/");
-	endDate.replace("일", "/");
+	startDate=startDate.replace("년", "-");
+	startDate=startDate.replace("월", "-");
+	startDate=startDate.replace("일", "");
+	endDate=endDate.replace("년", "-");
+	endDate=endDate.replace("월", "-");
+	endDate=endDate.replace("일", "");
+	System.out.println("startDate : "+startDate+" / enddate : "+endDate);
+	
 	String pri = request.getParameter("price");
 	pri=pri.replace(",", "");
 	pri=pri.replace("원", "");

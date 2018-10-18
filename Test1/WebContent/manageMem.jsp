@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="dao.RentDao"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
@@ -20,6 +21,9 @@
 	//가격, 건수출력
 	HashMap<String,Integer> countMap = rentdao.getOrderCount();
 	HashMap<String,Integer> priceMap = rentdao.getOrderPrice();
+	
+	DecimalFormat formatter = new DecimalFormat("###,###,###");
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,7 +46,7 @@ table {
 
 
 <div id="header">
-	<h1>회원관리 페이지</h1>
+	<h1>회원관리</h1>
 </div>
 
 <div id="nav">
@@ -72,15 +76,13 @@ function manager(number) {
 	<td>아이디</td>
 	<td>주문/판매건수</td>
 	<td>주문/판매총액</td>
-	<td><button id="deleteBtn" type="button" onclick="deleteFunc()">삭제</button> </td>
 </tr>
 <%for (int i =0; i<memdtoList.size();i++){ %>
 <tr>
 	<td><%=memdtoList.get(i).getMember_name()%></td>
 	<td><%=memdtoList.get(i).getMember_id()%></td>
-	<td><%=countMap.get(memdtoList.get(i).getMember_id()) %></td>
-	<td><%=priceMap.get(memdtoList.get(i).getMember_id()) %></td>
-	<td><input type="checkbox" name="checkbox"></td>
+	<td><%=countMap.get(memdtoList.get(i).getMember_id()) %>건</td>
+	<td><%=priceMap.get(memdtoList.get(i).getMember_id())%>원</td>
 </tr>
 <%} %>
 </table>
@@ -97,7 +99,7 @@ function deleteFunc() {
 </script>
 
 <div id="footer">
-<p>carround.company </p>
+<p> <a href="index.jsp" style="text-decoration: none; color: white;">carround.company</a> </p>
 </div>
 </body>
 </html>

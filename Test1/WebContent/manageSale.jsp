@@ -33,9 +33,13 @@ function manager(number) {
 <!-- 회사별(차트), 날짜별(그래프), 차종별(차트) 제작 -->
 <div id="section">
 	
+	
+	
+	
+	
 </div>
 <div id="footer">
-<p>carround.company </p>
+<p> <a href="index.jsp" style="text-decoration: none; color: white;">carround.company</a> </p>
 </div>
 </body>
 </html>

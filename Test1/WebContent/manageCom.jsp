@@ -17,9 +17,10 @@ RentDao rentdao = new RentDao();
 List<MemberDto> comdtoList = new ArrayList<>();
 comdtoList = memdao.getComList();
 
+
 //가격, 건수출력
-HashMap<String,Integer> countMap = 
-HashMap<String,Integer> priceMap = 
+HashMap<String,Integer> countMap = rentdao.getComOrderCount();
+HashMap<String,Integer> priceMap = rentdao.getComOrderPrice();
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,7 +42,7 @@ table {
 </head>
 <body>
 <div id="header">
-	<h1>고객소통 페이지</h1>
+	<h1>기업관리</h1>
 </div>
 
 <div id="nav">
@@ -72,15 +73,13 @@ q&a는 마이페이지에서도 확인가능해야할것 혹은 그냥 이메일보내는걸로 -->
 	<td>아이디</td>
 	<td>주문/판매건수</td>
 	<td>주문/판매총액</td>
-	<td><button id="deleteBtn" type="button" onclick="deleteFunc()">삭제</button> </td>
 </tr>
-<%for (int i =0; i<memdtoList.size();i++){ %>
+<%for (int i =0; i<comdtoList.size();i++){ %>
 <tr>
-	<td><%=memdtoList.get(i).getMember_name()%></td>
-	<td><%=memdtoList.get(i).getMember_id()%></td>
-	<td><%=countMap.get(memdtoList.get(i).getMember_id()) %></td>
-	<td><%=priceMap.get(memdtoList.get(i).getMember_id()) %></td>
-	<td><input type="checkbox" name="checkbox"></td>
+	<td><%=comdtoList.get(i).getMember_name()%></td>
+	<td><%=comdtoList.get(i).getMember_id()%></td>
+	<td><%=countMap.get(comdtoList.get(i).getMember_name()) %>건</td>
+	<td><%=priceMap.get(comdtoList.get(i).getMember_name()) %>원</td>
 </tr>
 <%} %>
 </table>
@@ -96,7 +95,7 @@ q&a는 마이페이지에서도 확인가능해야할것 혹은 그냥 이메일보내는걸로 -->
 
 
 <div id="footer">
-<p>carround.company </p>
+<p> <a href="index.jsp" style="text-decoration: none; color: white;">carround.company</a> </p>
 </div>
 </body>
 </html>

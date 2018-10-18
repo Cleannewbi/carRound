@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%
-	String name = "manager님 환영합니다!";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,6 +31,9 @@ function manager(number) {
 }
 </script>
 
+<div id="section">
+<h2>admin님 환영합니다</h2>
+</div>
 <div id="footer">
 <p>carround.company </p>
 </div>

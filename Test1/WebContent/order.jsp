@@ -72,13 +72,12 @@
     padding: 10px;
 }
 .btn{
-	text-align:center;
 	display:inline-block;
 	border-radius:0.35em;
 	text-decoration:none;
 	font-weight:400;
-	width:150px;
-	height:43px;
+	width:200px;
+	height:60px;
 	font-size:15px;
 	color:#FFF;
 	background-color:#8ebdbc;
@@ -134,10 +133,11 @@
 		int endDateMonth = Integer.parseInt(endDate.substring(4,6));
 		int endDateDay = Integer.parseInt(endDate.substring(6,8));
 		
+		System.out.println("●startYear : " +startDateYear+" / Month : "+startDateMonth+" / Day"+startDateDay);
+		System.out.println("●endYear : " +endDateYear+" / Month : "+endDateMonth+" / Day"+endDateDay);
 		//객체생성
 		Calendar StDay = Calendar.getInstance();
 		Calendar Dday = Calendar.getInstance();
-		
 		//날짜적용
 		Dday.set(endDateYear, endDateMonth-1, endDateDay);
 		StDay.set(startDateYear, startDateMonth-1,startDateDay);
@@ -145,11 +145,8 @@
 		// time추출
 		long EndDay = Dday.getTimeInMillis();
 		long StartDay = StDay.getTimeInMillis();
-		
 		//렌트일수 
-		long RentDays = (EndDay-StartDay)/(60*60*24*1000);
-		System.out.println("●rent 날짜 : " +RentDays);
-		
+		long RentDays = (EndDay-StartDay)/(60*60*24*1000);	
  		//최종결제금액
  		int carFee = Integer.parseInt(carInfoDto.getCar_fee().replace(",", ""))*(int)(long)RentDays;
  		//최종결제금액 컴마생성
@@ -298,17 +295,17 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 <tr height="30">
 	<td class="content">시작일</td>
 	<td align="right">
-		<input class="content" name="startYear" size="2" type="text" value="<%=startDateYear%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
-		<input class="content" name="startMonth" size="1" align="right" type="text" value="<%=startDateMonth%>월" style="background-color:transparent; border: none; text-align: right;"readonly="readonly">
-		<input class="content" name="startDay" size="1"  type="text" align="right" value="<%=startDateDay%>일" style="background-color:transparent; border: none; text-align: right;" readonly="readonly">
+		<input class="content" name="startYear" size="2" type="text" value="<%=startDate.substring(0,4)%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
+		<input class="content" name="startMonth" size="1" align="right" type="text" value="<%=startDate.substring(4,6)%>월" style="background-color:transparent; border: none; text-align: right;"readonly="readonly">
+		<input class="content" name="startDay" size="1"  type="text" align="right" value="<%=startDate.substring(6,8)%>일" style="background-color:transparent; border: none; text-align: right;" readonly="readonly">
 	</td>
 </tr>
 <tr height="30">
 	<td class="content">반납일</td>
 	<td align="right">
-		<input class="content" name="endYear" size="2"  type="text" value="<%=endDateYear%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
-		<input class="content" name="endMonth" size="1"  type="text" value="<%=endDateMonth%>월" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
-		<input class="content" name="endDay" size="1"  type="text" value="<%=endDateDay%>일" style="background-color:transparent; border: none;text-align: right;" readonly="readonly"  >
+		<input class="content" name="endYear" size="2"  type="text" value="<%=endDate.substring(0,4)%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
+		<input class="content" name="endMonth" size="1"  type="text" value="<%=endDate.substring(4,6)%>월" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
+		<input class="content" name="endDay" size="1"  type="text" value="<%=endDate.substring(6,8)%>일" style="background-color:transparent; border: none;text-align: right;" readonly="readonly"  >
 	</td>
 </tr>
 <tr height="30">
@@ -334,7 +331,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 <br><br>
 </div>
 <div align="center">
-<input class="btn" type="submit"  value="결제하기" align="middle">
+<input class="btn" type="submit"  value="결제하기">
 </div>
 <script type="text/javascript">
  	function deliFunc( e ) {
@@ -355,5 +352,8 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	} 
 </script>
 </form>
+<br><br><br><br>
+
+
 </body>
 </html>
