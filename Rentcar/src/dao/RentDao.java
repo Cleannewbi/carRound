@@ -28,7 +28,7 @@ public class RentDao implements iRentDao{
 		
 		String sql = " INSERT INTO RC_RENT "
 				+ " VALUES( SEQ_RC_RENT.NEXTVAL, ?, ?, ?, ?, ?, ?, "
-				+ " ?, ?, ?, ?, ?)";
+				+ " ?, ?, ?, ?, ?, ?)";
 		
 		System.out.println("sql : "+sql);
 		
@@ -51,6 +51,7 @@ public class RentDao implements iRentDao{
 			psmt.setString(9, rDto.getRc_address());
 			psmt.setString(10, rDto.getRc_card());
 			psmt.setString(11, rDto.getRc_photo());
+			psmt.setString(12, rDto.getCom_name());
 				System.out.println("2/6 setReservation Success");
 			count=psmt.executeUpdate();
 				System.out.println("3/6 setReservation Success");

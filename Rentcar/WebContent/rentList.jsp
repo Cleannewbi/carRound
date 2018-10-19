@@ -4,7 +4,7 @@
 <%@page import="dao.InfoDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ include file="/infoSaving.jsp" %> 차후에 사용하자 --%>
+<%-- <%@ include file="/infoSaving.jsp" %> --%>
 <%
 String rentPlace = request.getParameter("rentPlace");
 String startDate = request.getParameter("startDate");
@@ -42,9 +42,8 @@ System.out.println(rentPlace + startDate + startTime + endDate + endTime);
 }
 #tdleft1 {
 	float: left;
-	position: absolute;
+	position: relative;
 	margin: auto;
-	left: 45px;
 	height: 5px;
 }
 #tdleft2 {
@@ -53,6 +52,12 @@ System.out.println(rentPlace + startDate + startTime + endDate + endTime);
 	margin: auto;
 	top: 25px;
 	height: 5px;
+}
+#researchDateBtn {
+	position: relative;
+	margin: auto;
+	height: 30px;
+	top: 45px;
 }
 .info {
 	width: 40%;
@@ -126,7 +131,8 @@ li {
 			<td>대여날짜</td>
 		</tr>
 		<tr align="left" id="tdleft1"><td><input type="text" id="datepicker1" name="rentStartDate" size="8" value="<%=startDate %>"></td>&nbsp;<td><input type="time" id="rentStartTime" name="rentStartTime" size="8" value="<%=startTime %>"></td></tr>
-		<tr align="left" id="tdleft2"><td><input type="text" id="datepicker2" name="rentEndDate" size="8" value="<%=endDate %>"></td>&nbsp;<td><input type="time" id="rentEndTime" name="rentEndTime" value="<%=endTime %>"></td></tr>			 
+		<tr align="left" id="tdleft2"><td><input type="text" id="datepicker2" name="rentEndDate" size="8" value="<%=endDate %>"></td>&nbsp;<td><input type="time" id="rentEndTime" name="rentEndTime" value="<%=endTime %>"></td></tr>		
+		<tr><td><input type="button" id="researchDateBtn" value="날짜 재검색" onclick="researchDate()"></td></tr>	 
 	</table>
 	</form>
 	<br>
@@ -188,7 +194,7 @@ if(rentPlace.equals("") && startDate.equals("") && startTime.equals("") && endDa
 	request.setAttribute("endTime", endTime);
 %>
 <jsp:include page="carList.jsp" flush="false">
-	<jsp:param value="index.jsp" name="actionPath"/>
+	<jsp:param value="rentList.jsp" name="actionPath"/>
 </jsp:include>
 </div>
 <%
@@ -280,6 +286,143 @@ $('#datepicker2').datepicker({
 		numberOfMonths: [1,1],
 		minDate: 0
 });
+
+
+function researchDate() {
+	//var rentPlace = "";
+	var startDate = "";
+	var startTime = "";
+	var endDate = "";
+	var endTime = "";
+	
+	endTime = $("#rentEndTime").val();
+	endDate = $("#datepicker2").datepicker("getDate");
+	startTime = $("#rentStartTime").val();
+	startDate = $("#datepicker1").datepicker("getDate");
+	
+	if(startDate == null || startTime == null || endDate == null || endTime == null) {
+		alert(this + "를 설정해주세요.");
+		focus(this);
+	}
+	
+	var day = ("0" + startDate.getDate()).slice(-2);
+	var month = ("0" + (startDate.getMonth() + 1)).slice(-2);
+	var year = startDate.getFullYear();
+	var eday = ("0" + endDate.getDate()).slice(-2);
+	var emonth = ("0" + (endDate.getMonth() + 1)).slice(-2);
+	var eyear = endDate.getFullYear();
+
+	startDate = year + '-' + month + '-' + day;
+	endDate = eyear + '-' + emonth + '-' + eday;
+	alert(startDate);
+	$.ajax({
+		// 통신 시작
+		url: "carList.jsp",
+		type: "get",
+		data: { /* "rentPlace":rentPlace, */
+				"startDate":startDate,
+				"startTime":startTime,
+				"endDate":endDate,
+				"endTime":endTime
+		},
+		traditional: true,
+		success:function(data) {
+			$("#main_area").html(data);
+		}
+	});
+}
+
+
+/* 
+function changePlace() {
+	
+	$.ajax({
+		// 통신 시작
+		url: "carList.jsp",
+		type: "get",
+		data: { "rentPlace":rentPlace },
+		traditional: true,
+		success:function(data) {
+			$("#main_area").html(data);
+		}
+	});
+}
+function changesDate() {
+	var startDate = "";
+	startDate = $("#datepicker1").datepicker("getDate");
+	var day = ("0" + startDate.getDate()).slice(-2);
+
+	var month = ("0" + (startDate.getMonth() + 1)).slice(-2);
+
+	var year = startDate.getFullYear();
+
+	startDate = year + '-' + month + '-' + day;
+	alert(startDate);
+	$.ajax({
+		// 통신 시작
+		url: "carList.jsp?startDate=" + startDate,
+		type: "get",
+		data: { "startDate":startDate },
+		traditional: true,
+		success:function(data) {
+			$("#main_area").html(data);
+		}
+	});
+	
+}
+function changesTime() {
+	var startTime = "";
+	startTime = $("#rentStartTime").val();
+	alert(startTime);
+	$.ajax({
+		// 통신 시작
+		url: "carList.jsp",
+		type: "get",
+		data: { "startTime":startTime },
+		traditional: true,
+		success:function(data) {
+			$("#main_area").html(data);
+		}
+	});
+}
+function changeeDate() {
+	var endDate = "";
+	endDate = $("#datepicker2").datepicker("getDate");
+	var day = ("0" + endDate.getDate()).slice(-2);
+
+	var month = ("0" + (endDate.getMonth() + 1)).slice(-2);
+
+	var year = endDate.getFullYear();
+
+	endDate = year + '-' + month + '-' + day;
+	alert(endDate);
+	$.ajax({
+		// 통신 시작
+		url: "carList.jsp",
+		type: "get",
+		data: { "endDate":endDate },
+		traditional: true,
+		success:function(data) {
+			$("#main_area").html(data);
+		}
+	});
+}
+function changeeTime() {
+	var endTime = "";
+	endTime = $("#rentEndTime").val();
+	alert(endTime);
+	$.ajax({
+		// 통신 시작
+		url: "carList.jsp",
+		type: "get",
+		data: { "endTime":endTime },
+		traditional: true,
+		success:function(data) {
+			$("#main_area").html(data);
+		}
+	});
+}
+ */
 
 /* 
 $(".cb2").click(function () {

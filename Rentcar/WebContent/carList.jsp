@@ -1,3 +1,5 @@
+<%@page import="dao.iMemManager"%>
+<%@page import="dao.MemManager"%>
 <%@page import="dao.iInfoDao"%>
 <%@page import="dto.MemberDto"%>
 <%@page import="dto.InfoDto"%>
@@ -7,14 +9,14 @@
     pageEncoding="UTF-8"%>
 <%
 String actionPath = request.getParameter("actionPath");
-/* 
+ 
 String rentPlace = request.getParameter("rentPlace");
 String startDate = request.getParameter("startDate");
 String startTime = request.getParameter("startTime");
 String endDate = request.getParameter("endDate");
 String endTime = request.getParameter("endTime");
 System.out.println("carList : " + rentPlace + startDate + startTime + endDate + endTime);
- */
+
 String[] checkedBoxs = request.getParameterValues("arr");
 if(checkedBoxs != null) {
 	for(int i=0 ; i<checkedBoxs.length ; i++) {
@@ -56,12 +58,13 @@ if(checkedBoxs != null) {
 	 bottom: 130px;
 }
 .infoImg {
-	 width: auto; height: auto; max-width: 200px; max-height: 200px;
+	 width: auto; height: auto; max-width: 120px; max-height: 120px;
 }
 .fontSetCenter {
 	text-align: center;
 }
 .infoText {
+	position: relative;
 	margin-top: 0px;
 	font-size: 20px;
 	background-color: #ffffff;
@@ -69,7 +72,7 @@ if(checkedBoxs != null) {
 .infoDetail {
 	position: relative;
 	left: 200px;
-	bottom: 130px;
+	bottom: 110px;
 }
 ul {
 	list-style: none;
@@ -124,11 +127,41 @@ li {
 		} else {
 			for(int i=0 ; i < chkResult.size() ; i++) {
 				InfoDto idto = chkResult.get(i);
+				iMemManager mdto = MemManager.getInstance();
+				MemberDto comInfo = mdto.getCom(idto.getCom_name());
+				
+				
+				String comPhotoName = "";
+				String carPhotoName = "";
+				try{
+					comPhotoName = comInfo.getMember_Photo().trim();
+					carPhotoName = idto.getCar_pic().trim();
+				    System.out.println("comdto.contain:"+comInfo.getMember_Photo().contains("."));
+				    System.out.println("carpic.contain:"+idto.getCar_pic().contains("."));
+				} catch(Exception e) {
+				    	System.err.println(e);
+				}
+				if(!comPhotoName.isEmpty() && comPhotoName.contains(".")){
+			    	//fileName = dto1.getMember_Photo().trim();
+			    System.out.println("dto photo 이미지 있음:"+comInfo.getMember_Photo().trim());
+			    } else if(!comPhotoName.contains(".") || comPhotoName.isEmpty()){
+			    	System.out.println("dto photo 이미지가 아님:"+comInfo.getMember_Photo().trim());
+			    	comPhotoName = "noImage.png";
+			    }
+				
+				if(!carPhotoName.isEmpty() && carPhotoName.contains(".")){
+			    	//fileName = dto1.getMember_Photo().trim();
+			    System.out.println("dto photo 이미지 있음:"+idto.getCar_pic().trim());
+			    } else if(!carPhotoName.contains(".") || carPhotoName.isEmpty()){
+			    	System.out.println("dto photo 이미지가 아님:"+idto.getCar_pic().trim());
+			    	carPhotoName = "noImage.png";
+			    }
+				
 			%>
 			<li>
 				<div class="info">
 					<div><strong class="infoText" id="carName" value="carName"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="'RentCarDetail.jsp?seq='<%=idto.getInfo_seq() %>"><img class="infoImg" src="./images/k5.jpg"></a>
+					<a href="'RentCarDetail.jsp?seq='<%=idto.getInfo_seq() %>"><img class="infoImg" src='./images/<%=carPhotoName %>'></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 
@@ -175,11 +208,41 @@ li {
 		} else { 
 			for(int i=0 ; i < chkResult.size() ; i++) {
 				InfoDto idto = chkResult.get(i);
+				
+				iMemManager mdto = MemManager.getInstance();
+				MemberDto comInfo = mdto.getCom(idto.getCom_name());
+				
+				
+				String comPhotoName = "";
+				String carPhotoName = "";
+				try{
+					comPhotoName = comInfo.getMember_Photo().trim();
+					carPhotoName = idto.getCar_pic().trim();
+				    System.out.println("comdto.contain:"+comInfo.getMember_Photo().contains("."));
+				    System.out.println("carpic.contain:"+idto.getCar_pic().contains("."));
+				} catch(Exception e) {
+				    	System.err.println(e);
+				}
+				if(!comPhotoName.isEmpty() && comPhotoName.contains(".")){
+			    	//fileName = dto1.getMember_Photo().trim();
+			    System.out.println("dto photo 이미지 있음:"+comInfo.getMember_Photo().trim());
+			    } else if(!comPhotoName.contains(".") || comPhotoName.isEmpty()){
+			    	//System.out.println("dto photo 이미지가 아님:"+comInfo.getMember_Photo().trim());
+			    	comPhotoName = "noImage.png";
+			    }
+				
+				if(!carPhotoName.isEmpty() && carPhotoName.contains(".")){
+			    	//fileName = dto1.getMember_Photo().trim();
+			    System.out.println("dto photo 이미지 있음:"+idto.getCar_pic().trim());
+			    } else if(!carPhotoName.contains(".") || carPhotoName.isEmpty()){
+			    	//System.out.println("dto photo 이미지가 아님:"+idto.getCar_pic().trim());
+			    	carPhotoName = "noImage.png";
+			    }
 			%>
 			<li>
 				<div class="info">
 					<div><strong class="infoText" id="carName" value="<%=idto.getCar_name() %>"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="RentCarDetail.jsp?seq=<%=idto.getInfo_seq() %>"><img class="infoImg" src="./images/k5.jpg"></a>
+					<a href="RentCarDetail.jsp?seq=<%=idto.getInfo_seq() %>"><img class="infoImg" src='./images/<%=carPhotoName %>'></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail" name="size">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 

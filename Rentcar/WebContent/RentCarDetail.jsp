@@ -19,7 +19,7 @@ int seq = Integer.parseInt(InfoSeq);
 	/*  InfoDto infodto = (InfoDto)request.getAttribute("infolist");		// 차량정보 */
 	iInfoDao iidao = InfoDao.getInstance();
 	InfoDto iidto = iidao.getInfoList(seq);
-	System.out.println(iidto.toString());
+	//System.out.println(iidto.toString());
     
 	iMemManager imdao = MemManager.getInstance();
 	MemberDto comdto = imdao.getCom(iidto.getCom_name());
@@ -92,7 +92,7 @@ int seq = Integer.parseInt(InfoSeq);
  <table>
  	<tr>
  		<th>회사 배너 사진</th>
- 		<%-- <td><%=comdto.getMember_Photo() %></td> --%>
+ 		<td><%=comdto.getMember_Photo() %></td>
  	</tr>
  	
  	<tr>
@@ -120,7 +120,9 @@ int seq = Integer.parseInt(InfoSeq);
  </table>
  
  
- 
+ <jsp:include page="reviewList.jsp?seq=<%=iidto.getInfo_seq() %>" flush="false">
+ 	<jsp:param value="RentCarDetail.jsp" name="actionPath"/>
+ </jsp:include>
  
  
  
