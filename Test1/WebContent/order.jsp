@@ -83,6 +83,7 @@
 	outline: 0;
 	cursor: pointer;
 }
+
 </style>
 </head>
 <body>
@@ -279,11 +280,11 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.setCenter(coords);
 	    } 
-});    
+});
 </script>
 <div style="margin-left: 500px">
 <h2  class="title">옵션선택</h2>
-<p  class="content">딜리버리 서비스 <input type="checkbox" id="deliveryCheck" onclick="deliFunc(this)"></p>
+<p  class="content">딜리버리 서비스 <input type="checkbox" id="switch" onclick="deliFunc(this)"></p>
 <p><font size="3" color="blue">딜리버리 서비스란? <br>위에 기재된 운전자 정보에서 픽업가능한 시스템입니다.</font>
 </div>
 <div style="margin-left: 500px">
@@ -333,7 +334,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 </div>
 <script type="text/javascript">
  	function deliFunc( e ) {
- 		if ($('input:checkbox[id="deliveryCheck"]').is(":checked")){
+ 		if ($('input:checkbox[id="switch"]').is(":checked")){
  			document.getElementById("deliPrice").innerHTML="10,000원";
  			<% deli = 10000;%>
   			var testdeli = "<%=deli %>";

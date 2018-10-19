@@ -32,14 +32,18 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="magager.css">
 <style type="text/css">
-table {
-    width: 100%;
-    border: 1px solid #444444;
+#userTable{
+	font-size: 17px;
+	color:#595959;
+	height: 200px;
     border-collapse: collapse;
-  }
-  th, td {
-    border: 1px solid #444444;
-  }
+    
+}
+td{
+ 	border-bottom: 1px solid #444444;
+    padding: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -69,20 +73,21 @@ function manager(number) {
 
 <!-- for문 사용하여 member table로 호출, 버튼넣어서 삭제, 업데이트 할수있도록 만들기 -->
 
-<div id="section">
-<table>
+<div id="section" align="center">
+<table id="userTable" align="center">
+<col width="450"><col width="300"><col width="250"><col width="250">
 <tr>
-	<td>이름</td>
-	<td>아이디</td>
-	<td>주문/판매건수</td>
-	<td>주문/판매총액</td>
+	<td align="center">이름</td>
+	<td align="center">아이디</td>
+	<td align="center">주문/판매건수</td>
+	<td align="center">주문/판매총액</td>
 </tr>
 <%for (int i =0; i<memdtoList.size();i++){ %>
 <tr>
 	<td><%=memdtoList.get(i).getMember_name()%></td>
 	<td><%=memdtoList.get(i).getMember_id()%></td>
-	<td><%=countMap.get(memdtoList.get(i).getMember_id()) %>건</td>
-	<td><%=priceMap.get(memdtoList.get(i).getMember_id())%>원</td>
+	<td align="right"><%=countMap.get(memdtoList.get(i).getMember_id()) %>건</td>
+	<td align="right"><%=priceMap.get(memdtoList.get(i).getMember_id())%>원</td>
 </tr>
 <%} %>
 </table>

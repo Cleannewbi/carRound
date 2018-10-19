@@ -1,3 +1,4 @@
+<%@page import="java.util.Formatter"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="dao.RentDao"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,7 +18,6 @@ RentDao rentdao = new RentDao();
 List<MemberDto> comdtoList = new ArrayList<>();
 comdtoList = memdao.getComList();
 
-
 //가격, 건수출력
 HashMap<String,Integer> countMap = rentdao.getComOrderCount();
 HashMap<String,Integer> priceMap = rentdao.getComOrderPrice();
@@ -30,14 +30,18 @@ HashMap<String,Integer> priceMap = rentdao.getComOrderPrice();
 <title>Insert title here</title>
 <link rel="stylesheet" href="magager.css">
 <style type="text/css">
-table {
-    width: 100%;
-    border: 1px solid #444444;
+#userTable{
+	font-size: 17px;
+	color:#595959;
+	height: 200px;
     border-collapse: collapse;
-  }
-  th, td {
-    border: 1px solid #444444;
-  }
+    
+}
+td{
+ 	border-bottom: 1px solid #444444;
+    padding: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -63,34 +67,26 @@ function manager(number) {
 }
 </script>
 
-<!-- 고객의 quest를 db에 저장, 불러와서 게시판에 넣고 게시판 누르고 답글쓰기 -> 답글써놓으면 사라지도록 
-q&a는 마이페이지에서도 확인가능해야할것 혹은 그냥 이메일보내는걸로 -->
+<div id="section" align="center">
 
-<div id="section">
-<table>
+<table id="userTable">
+<col width="450"><col width="300"><col width="250"><col width="250">
 <tr>
-	<td>이름</td>
-	<td>아이디</td>
-	<td>주문/판매건수</td>
-	<td>주문/판매총액</td>
+	<td align="center">이름</td>
+	<td align="center">아이디</td>
+	<td align="center">주문/판매건수</td>
+	<td align="center">주문/판매총액</td>
 </tr>
 <%for (int i =0; i<comdtoList.size();i++){ %>
 <tr>
 	<td><%=comdtoList.get(i).getMember_name()%></td>
 	<td><%=comdtoList.get(i).getMember_id()%></td>
-	<td><%=countMap.get(comdtoList.get(i).getMember_name()) %>건</td>
-	<td><%=priceMap.get(comdtoList.get(i).getMember_name()) %>원</td>
+	<td align="right"><%=countMap.get(comdtoList.get(i).getMember_name()) %>건</td>
+	<td align="right"><%= priceMap.get(comdtoList.get(i).getMember_name()) %>원</td>
 </tr>
 <%} %>
 </table>
 </div>
-<script type="text/javascript">
-
-
-
-
-</script>
-
 
 
 <div id="footer">

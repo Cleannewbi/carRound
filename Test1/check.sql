@@ -130,10 +130,7 @@ SELECT SUM(PRICE) FROM RC_RENT WHERE COM_NUM=(SELECT SEQ FROM RC_INFO WHERE com_
 //회사별 가격 
 SELECT SUM(PRICE) FROM RC_RENT WHERE COM_NUM=(SELECT SEQ FROM RC_INFO WHERE COM_NAME='기아오토큐') GROUP BY COM_NUM
 
-
-
-SELECT SEQ FROM RC_INFO
-
+SELECT * FROM RC_INFO
 SELECT SUM(PRICE), COM_NUM FROM RC_RENT GROUP BY COM_NUM(SELECT SEQ FROM RC_INFO)
 
 SELECT * FROM RC_RENT
@@ -148,20 +145,16 @@ list string names 이름들 따로 저장
 //회사별 총액
 SELECT SUM(PRICE) FROM RC_RENT WHERE COM_NUM=17 GROUP BY COM_NUM
 
-seq_priceMap { seq, price } 
-List <String> seqList = seq.seq,se.q......... 
 
+SELECT * FROM RC_RENT GROUP BY COM_NUM
 
-	seq_nameMap.put('',seq_priceMap.get(i))
-
-HASHMAP으로 {seq, name} 을 key,value 로 
-seq를 hashmap의 키로 넣어서 name이랑 price를 엮어
-for (int i=0; dto ; i++){
-	if seq_nameMap.get(i).equals( dtolist.getName) {
-		priceMap . put ( seq_nameMap.get(i) : seq_priceMap.get(i) )
-}	else { priceMap . put ( seq_nameMap.get(i) : 0 )  }
-		SELECT COM_NUM FROM RC_RENT GROUP BY COM_NUM
-{name, price}
 SELECT COM_NUM FROM RC_RENT ORDER BY COM_NUM ASC
 SELECT SEQ, COM_NAME FROM RC_INFO ORDER BY SEQ ASC
-SELECT SUM(PRICE), COM_NUM FROM RC_RENT GROUP BY COM_NUM ORDER BY COM_NUM ASC
+SELECT COM_NAME,COUNT(PRICE) FROM RC_RENT WHERE COM_NAME='기아오토큐' GROUP BY COM_NAME
+
+
+SELECT * FROM RC_RENT
+
+UPDATE RC_RENT SET COM_NAME='서울자동차서비스'
+WHERE COM_NUM=74
+
