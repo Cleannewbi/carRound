@@ -52,7 +52,7 @@ if(checkedBoxs != null) {
 }
 .relativeBtn {
 	position: relative;
-	 left: 500px; 
+	 left: 400px; 
 	 bottom: 130px;
 }
 .infoImg {
@@ -136,6 +136,8 @@ li {
 						<div class="infoDetail">차량종류&nbsp;&nbsp;<strong><%=idto.getCar_type() %></strong></div>
 						<div class="infoDetail" name="comName">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
+							<input type="button" id="selectCar1" value="선택" onclick="RentCarDetail(seq)">
+							<input type="button" id="selectCar2" value="선택" onclick="RentCarOrder('<%=idto.getInfo_seq() %>', '<%=idto.getCar_name() %>', '<%=idto.getCom_name() %>')">
 							<%-- 
 							<form action="order.jsp" method="post">
 							<input type="hidden" name="carName" value="<%=idto.getCar_name() %>">
@@ -185,7 +187,8 @@ li {
 						<div class="infoDetail" name="type">차량종류&nbsp;&nbsp;<strong><%=idto.getCar_type() %></strong></div> &nbsp;
 						<div class="infoDetail" name="comp" id="comName" value="<%=idto.getCom_name() %>">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
-							<input type="button" id="selectCar" value="선택" onclick="RentCarDetail('<%=idto.getInfo_seq() %>', '<%=idto.getCar_name() %>', '<%=idto.getCom_name() %>')">
+							<input type="button" id="selectCar1" value="상세정보" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')">
+							<input type="button" id="selectCar2" value="예약하기" onclick="RentCarOrder('<%=idto.getInfo_seq() %>', '<%=idto.getCar_name() %>', '<%=idto.getCom_name() %>')">
 <%-- 							
 							<form action="order.jsp" method="post">
 							<input type="hidden" name="carName" value="<%=idto.getCar_name() %>">
@@ -210,17 +213,23 @@ li {
 </form>
 
 <script type="text/javascript">
-function RentCarDetail(seq, carName, comName) {
+function RentCarOrder(seq, carName, comName) {
 /* 	var carName = document.getElementById("carName").value;
 	var comName = document.getElementById("comName").value; */
 	var startDate = "<%=request.getParameter("startDate") %>";
 	var startTime = "<%=request.getParameter("startTime") %>";
 	var endDate = "<%=request.getParameter("endDate") %>";
 	var endTime = "<%=request.getParameter("endTime") %>";
+	
 	alert("seq=" + seq + "&carName=" + carName + "&comName=" + comName + "&startDate=" + startDate + "&startTime=" + startTime + 
 			"&endDate=" + endDate + "&endTime=" + endTime);
 	location.href = "order.jsp?seq=" + seq + "&carName=" + carName + "&comName=" + comName + "&startDate=" + startDate + "&startTime=" + startTime +
 			"&endDate=" + endDate + "&endTime=" + endTime;
+	
+	
+}
+function RentCarDetail(seq) {
+	location.href = "RentCarDetail.jsp?seq=" + seq;
 }
 </script>
 

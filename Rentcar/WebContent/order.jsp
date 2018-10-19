@@ -111,6 +111,22 @@
 		card[2]=cards.substring(8,12);
 		card[3]=cards.substring(12,16);
 		
+		//member photo
+		String photoName = "";
+		try{
+			photoName = userDto.getMember_Photo().trim();
+		    System.out.println("dto1.contain:"+userDto.getMember_Photo().contains("."));
+		} catch(Exception e) {
+		    	System.err.println(e);
+		}
+		if(!photoName.isEmpty() && photoName.contains(".")){
+	    	//fileName = dto1.getMember_Photo().trim();
+	    System.out.println("dto1 photo 이미지 있음:"+userDto.getMember_Photo().trim());
+	    } else if(!photoName.contains(".") || photoName.isEmpty()){
+	    	System.out.println("dto1 photo 이미지가 아님:"+userDto.getMember_Photo().trim());
+	    	photoName = "noImage.png";
+	    } 
+		
 		//member 전화번호 
 		String userPhone[] = new String[3];
 		String userPh = userDto.getMember_phone().replace("-", "");
@@ -157,28 +173,35 @@
  		//딜리버리 추가금액
  		int deli = 0;	
 	//4.company Info
-	MemberDto companyDto= memberService.getMember(carInfoDto.getCom_name(),2);
+	MemberDto companyDto= memberService.getMember(carInfoDto.getCom_name(), 2);
 	System.out.println("company dto : "+companyDto);
 	
 		//회사 폰
 		String comPhone[] = new String[3];
-		String comPh = "";
-		comPh = companyDto.getMember_phone().toString();
+		String comPh = companyDto.getMember_phone();
+		comPh=comPh.trim();
+		System.out.println(comPh);
+		
+		if(comPh.equals("") || comPh == null) {
+			
+		}
+		
 		if(comPh.contains("-")) {
 			comPh = companyDto.getMember_phone().replace("-", "");
-		} else {
-			comPh=comPh.trim();
-			if (comPh.length()>10){	//11이면
-				comPhone[0]=comPh.substring(0, 3);
-				comPhone[1]=comPh.substring(3, 7);
-				comPhone[2]=comPh.substring(7, 11);
-						
-			}else if (comPh.length()<10){	//9면
-				comPhone[0]=comPh.substring(0, 2);
-				comPhone[1]=comPh.substring(2, 5);
-				comPhone[2]=comPh.substring(5, 9);
-			}
 		}
+		
+		
+		if (comPh.length()>10){	//11이면
+			comPhone[0]=comPh.substring(0, 3);
+			comPhone[1]=comPh.substring(3, 7);
+			comPhone[2]=comPh.substring(7, 11);
+						
+		}else if (comPh.length()<10){	//9면
+			comPhone[0]=comPh.substring(0, 2);
+			comPhone[1]=comPh.substring(2, 5);
+			comPhone[2]=comPh.substring(5, 9);
+		}
+		
 	
 %>
 
@@ -193,7 +216,7 @@
 	</td>
 </tr>
 <tr>
-	<td height="300" ><img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>" height="400"> </td>
+	<td height="300" ><img alt='./images/noImage.png' src='./images/<%=photoName%>' height="400"> </td>
 	<td id="topData"><%=carInfoDto.getCar_type() %><br><%=carInfoDto.getCar_size() %><br><%=carInfoDto.getCar_fuel()%> </td>
 </tr>
 
