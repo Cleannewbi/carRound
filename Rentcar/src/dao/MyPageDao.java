@@ -391,6 +391,47 @@ public class MyPageDao implements iMyPageDao {
 		
 		return count>0?true:false;
 	}
+	
+	@Override
+	public int checkAuth(String id) throws Exception {
+		String sql =  "SELECT AUTH FROM RC_MEMBER WHERE ID=?";
+		System.out.println("DB checkAuth id:"+id);
+				
+		Connection conn = null;
+		ResultSet rs = null;
+		PreparedStatement psmt = null;
+		
+		int auth=0; 
+		
+		try {
+			conn = DBConnection.getConnection();
+		
+		System.out.println("1/6 checkAuth Success");
+		
+		psmt = conn.prepareStatement(sql);
+		System.out.println("2/6 checkAuth Success");
+		
+		psmt.setString(1, id.trim());
+		
+		rs = psmt.executeQuery();		
+		System.out.println("3/6 checkAuth Success");
+		
+		if(rs.next()) {
+			auth = rs.getInt(1);
+			System.out.println("4/6 checkAuth Success auth:"+auth);				
+		 }
+					
+		
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		finally {
+			DBClose.close(psmt, conn, rs);
+		}
+		
+			
+		return auth;
+	}
 	@Override
 	public boolean testStr(String str) {
 		System.out.println("testStr:"+str);

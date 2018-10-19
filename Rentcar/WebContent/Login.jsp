@@ -16,16 +16,19 @@ System.out.println("id:" + id + " pwd:" + pwd);
 iMemManager dao = MemManager.getInstance();
 MemberDto dto = dao.login(id, pwd);
 
+session.setAttribute("auth_login", id);
+session.setMaxInactiveInterval(30*60);
+
 if(dto != null && !dto.getMember_id().equals("")) {
 	session.setAttribute("login", dto);
 	session.setMaxInactiveInterval(30*60);
 %>
 	<script type="text/javascript">
 	alert("로그인 성공");
-	location.href = "indexL.jsp";
+	location.href = "index.jsp";
 	</script>
 <%	
-} else {
+} else {	
 %>
 	<script type="text/javascript">
 	alert("로그인 실패");

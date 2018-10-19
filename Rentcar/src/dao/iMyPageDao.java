@@ -29,4 +29,8 @@ public interface iMyPageDao {
 	public boolean testStr(String str);
 	public boolean testNum(int num);
 
+	public int checkAuth(String id) throws Exception; //id에따른 return=> 1-일반 회원, 2-렌트카 회사, 3-관리자
+	
+	
+
 }

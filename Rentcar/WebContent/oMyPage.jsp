@@ -83,11 +83,9 @@
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'info_Change')">정보수정</button>
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'check_Res')">예약확인</button>
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'del_Member')">회원탈퇴</button>
-  <%-- <form action="myPage"><input type="hidden" name="M_Command" value="DelMember">
-  <input type="hidden" name="seq" value="<%=seq%>"><input type="submit" value="회원탈퇴"></form> --%>
-		<form action="index.jsp"><button type="submit">메인화면</button></form>
+  <button class="w3-bar-item w3-button tablink" onclick="location.href='index.jsp'">메인화면</button> 
 
-	</div>
+</div>
 
 <div id="main">
 
@@ -107,20 +105,14 @@
 <h1>Dear, <%=id %>'s Page</h1>
 <hr>
 
-
 <br>
-
-
 <table border="1">
-
-
 <tr><td>ID</td><td><%=dto1.getMember_id() %></td></tr>
 <tr><td>NAME</td><td><%=dto1.getMember_name() %></td></tr>
 <tr><td>PHONE</td><td><%=dto1.getMember_phone() %></td></tr>
 <tr><td>ADDRESS</td><td><%=dto1.getMember_address() %></td></tr>
 <tr><td>EMAIL</td><td><%=dto1.getMember_email() %></td></tr>
 <tr><td>CARD</td><td><%=dto1.getMember_card() %></td></tr> 
-
 </table>
 </div>
 <hr>
@@ -154,8 +146,7 @@
 	<tr><td>Your Email</td><td><input type="text" name="email"></td></tr>
 	<tr><td>Your Card Number</td><td><input type="text" name="card"></td></tr>
 	<input type="hidden" name="seq" value="<%=dto.getMember_seq() %>">
-    </table>
-       
+    </table>       
     <input type="submit" value="Convert it!!">
     </form>
 </div>
@@ -281,7 +272,7 @@ if(rentpagelist == null || rentpagelist.size() ==0){
 </form>
 
 </div>
-<img alt="" src="\\\\192.168.30.31\\Users\\user2\\images\\k5.jpg"> 
+
 
 
 <script>

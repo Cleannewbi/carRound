@@ -1,0 +1,41 @@
+@charset "EUC-KR";
+
+#header{
+	background-color: #8ebdbc;
+	color:white;
+	text-align: center;
+	padding: 5px;
+}
+#nav{
+	line-height: 30px;
+	background-color: #eeeeee;
+	width: 200px;
+	float: left;
+	padding: 5px;
+}
+#section{
+	width: 800px;
+	float:left;
+	padding: 10px;
+} 
+#footer{
+	background-color: #8ebdbc;
+	color: white;
+	clear: both;
+	text-align: center;
+	padding: 5px;
+}
+.btn{
+	display:inline-block;
+	border-radius:0.35em;
+	text-decoration:none;
+	font-weight:400;
+	width:150px;
+	height:43px;
+	font-size:15px;
+	color:#FFF;
+	background-color:#8ebdbc;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}

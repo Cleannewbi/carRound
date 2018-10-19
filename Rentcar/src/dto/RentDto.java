@@ -124,6 +124,10 @@ public class RentDto implements Serializable {
 		this.com_num = com_num;
 	}
 	
+	public RentDto() {
+		
+	}
+	
 	public RentDto(String rent_carname, String rent_start, String rent_end, String cus_id, int com_num, int price,
 			String rc_name, String rc_phone, String rc_address, String rc_card, String rc_photo, String com_name) {
 		super();

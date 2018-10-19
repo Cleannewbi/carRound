@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import db.DBClose;
@@ -146,177 +147,205 @@ public class RentDao implements iRentDao{
 		return priceMap;
 	}
 	
-	//회사별 주문건수
-	@Override
-	public HashMap<String, Integer> getComOrderCount() {
-		//1.준비 comList
-			iMemManager memdao = MemManager.getInstance();
-			List<MemberDto> comdtoList = new ArrayList<>();
-			comdtoList = memdao.getComList();
-					
-			// Return용 해시맵
+	//회사별 주문건수★★★★★★★★★★★★★★★★★바뀜
+		@Override
+		public HashMap<String, Integer> getComOrderCount() {
+			//Return용 해시맵
 			HashMap<String, Integer> countMap = new HashMap<>();
 			
-			//sql 의 seq / sql2의 name 
-			List<Integer> com_numList = new ArrayList<>();
-			List<String> com_nameList = new ArrayList<>();
+		//1.company dto소환
+			iMemManager memdao= MemManager.getInstance();
+			List<MemberDto> comdto = memdao.getComList();
+			
+		//1. SQL - RC_INFO 의 COM_NAME SELECT
+			for(int i=0; i<comdto.size();i++) {
+				String sql = "SELECT COM_NAME,COUNT(PRICE) FROM RC_RENT WHERE COM_NAME=? GROUP BY COM_NAME";
 				
-		//2. SQL -  RC_RENT 의 COM_NUM SELECT
-			String sql = "SELECT COM_NUM FROM RC_RENT";
-			
-			Connection conn=null;
-			PreparedStatement psmt = null;
-			ResultSet rs = null;
-	
-			try {
-				conn=DBConnection.getConnection();
-					System.out.println("1/6 getComOrderCount Success");
-				psmt=conn.prepareStatement(sql);
-				rs=psmt.executeQuery();
-					System.out.println("2/6 getComOrderCount Success");
-					
-				while(rs.next()) {
-					com_numList.add(rs.getInt(1));
-				}
-	
-			} catch (Exception e) {
-					System.out.println("getComOrderCount 1st Failed!!!!");
-				e.printStackTrace();
-			}finally {
-				DBClose.close(psmt, conn, rs);
-			}
-
-		//3. SQL2 - RC_INFO 의 COM_NAME SELECT
-			for (int i=0; i<com_numList.size();i++) {
-				String sql2 = "SELECT COM_NAME FROM RC_INFO WHERE SEQ=?";
-	
-				try {
-					conn=DBConnection.getConnection();
-						System.out.println("3/6 getComOrderCount Success");
-					psmt=conn.prepareStatement(sql2);
-					psmt.setInt(1, com_numList.get(i));
-					rs=psmt.executeQuery();
-						System.out.println("4/6 getComOrderCount Success");			
-					if(rs.next()) {
-						com_nameList.add(rs.getString(1));
+				Connection conn=null;
+				PreparedStatement psmt = null;
+				ResultSet rs = null;
+				
+					try {
+						conn=DBConnection.getConnection();
+							System.out.println("1/6 getComOrderPrice Success");
+						psmt=conn.prepareStatement(sql);
+						psmt.setString(1, comdto.get(i).getMember_name());
+						rs=psmt.executeQuery();
+							System.out.println("2/6 getComOrderPrice Success");			
+						if(rs.next()) {
+							countMap.put(comdto.get(i).getMember_name(), rs.getInt(2));						
+						}else {
+							countMap.put(comdto.get(i).getMember_name(),0);		
+						}
+					} catch (Exception e) {
+							System.out.println("getComOrderPrice 1st Failed!!!!");
+						e.printStackTrace();
+					}finally {
+						DBClose.close(psmt, conn, rs);
 					}
-				} catch (Exception e) {
-						System.out.println("getComOrderCount 2nd Failed!!!!");
-					e.printStackTrace();
-				}finally {
-					DBClose.close(psmt, conn, rs);
-				}
-				System.out.println(i+"번째 com_numList : "+com_nameList.get(i));
-			}
-
-		//4. 뽑아온 COM_NAME과 비교할 dto(기업) 이름
-			List<String> comdtonameList =new ArrayList<>();
-			for(int i=0; i<comdtoList.size() ; i++) {
-				comdtonameList.add(comdtoList.get(i).getMember_name());
 			}
 			
-		//5. 비교작업
-			int count=0;
-			for(int i = 0; i<comdtonameList.size(); i++){
-				   for(int j = 0; j<com_nameList.size(); j++){
-				   if(comdtonameList.get(i).equals(com_nameList.get(j))) {
-				     count++;
-				     System.out.println(i+"번째 dtoList : "+comdtonameList.get(i)+" / "+j+"번째 comList : "+com_nameList.get(j));
-				   }
-				  }
-				   countMap.put(comdtonameList.get(i), count);
-				   count=0;
-				}		
+			//확인출력
+			 Iterator<String> mapIter = countMap.keySet().iterator();
+		        while(mapIter.hasNext()) {
+		            String key = mapIter.next();
+		            int value = countMap.get( key );
+		            System.out.println("map == "+key+" : "+value);
+		        }
 		return countMap;
-	}
-	
-	//회사별 주문금액
-	@Override
-	public HashMap<String, Integer> getComOrderPrice() {
-		//1.준비 comList
-			iMemManager memdao = MemManager.getInstance();
-			List<MemberDto> comdtoList = new ArrayList<>();
-			comdtoList = memdao.getComList();
-					
-			//Return용 해시맵
-			HashMap<String, Integer> priceMap = new HashMap<>();
-			
-			//sql 의 seq / sql2의 name 
-			List<Integer> com_numList = new ArrayList<>();
-			List<String> com_nameList = new ArrayList<>();
-				
-		//2. SQL -  RC_RENT 의 COM_NUM SELECT
-			String sql = "SELECT SEQ FROM RC_RENT";
-			
-			Connection conn=null;
-			PreparedStatement psmt = null;
-			ResultSet rs = null;
-	
-			try {
-				conn=DBConnection.getConnection();
-					System.out.println("1/6 getComOrderCount Success");
-				psmt=conn.prepareStatement(sql);
-				rs=psmt.executeQuery();
-					System.out.println("2/6 getComOrderCount Success");
-					
-				while(rs.next()) {
-					com_numList.add(rs.getInt(1));
-				}
-	
-			} catch (Exception e) {
-					System.out.println("getComOrderCount 1st Failed!!!!");
-				e.printStackTrace();
-			}finally {
-				DBClose.close(psmt, conn, rs);
-			}
-	
-		//3. SQL2 - RC_INFO 의 COM_NAME SELECT
-			for (int i=0; i<com_numList.size();i++) {
-				String sql2 = "SELECT SUM(PRICE), COM_NUM FROM RC_RENT WHERE COM_NUM=? GROUP BY COM_NUM";
-	
-				try {
-					conn=DBConnection.getConnection();
-						System.out.println("3/6 getComOrderCount Success");
-					psmt=conn.prepareStatement(sql2);
-					psmt.setInt(1, com_numList.get(i));
-					rs=psmt.executeQuery();
-						System.out.println("4/6 getComOrderCount Success");			
-					if(rs.next()) {
-						com_nameList.add(rs.getString(1));
-					}
-				} catch (Exception e) {
-						System.out.println("getComOrderCount 2nd Failed!!!!");
-					e.printStackTrace();
-				}finally {
-					DBClose.close(psmt, conn, rs);
-				}
-				System.out.println(i+"번째 com_numList : "+com_nameList.get(i));
-			}
-	
-		//4. 뽑아온 COM_NAME과 비교할 dto(기업) 이름
-			List<String> comdtonameList =new ArrayList<>();
-			for(int i=0; i<comdtoList.size() ; i++) {
-				comdtonameList.add(comdtoList.get(i).getMember_name());
-			}
-			
-		//5. 비교작업
-			int count=0;
-			for(int i = 0; i<comdtonameList.size(); i++){
-				   for(int j = 0; j<com_nameList.size(); j++){
-				   if(comdtonameList.get(i).equals(com_nameList.get(j))) {
-				     count++;
-				     System.out.println(i+"번째 dtoList : "+comdtonameList.get(i)+" / "+j+"번째 comList : "+com_nameList.get(j));
-				   }
-				  }
-				   priceMap.put(comdtonameList.get(i), count);
-				   count=0;
-				}		
+		}
 		
-		return priceMap;
+		//회사별 주문금액 ★★★★★★★★★★★★★★★★★바뀜
+		@Override
+		public HashMap<String, Integer> getComOrderPrice() {					
+			//Return용 해시맵
+				HashMap<String, Integer> priceMap = new HashMap<>();
+				
+			//1.company dto소환
+				iMemManager memdao= MemManager.getInstance();
+				List<MemberDto> comdto = memdao.getComList();
+				
+			//1. SQL - RC_INFO 의 COM_NAME SELECT
+				for(int i=0; i<comdto.size();i++) {
+					String sql = "SELECT COM_NAME,SUM(PRICE) FROM RC_RENT WHERE COM_NAME=? GROUP BY COM_NAME";
+					
+					Connection conn=null;
+					PreparedStatement psmt = null;
+					ResultSet rs = null;
+					
+						try {
+							conn=DBConnection.getConnection();
+								System.out.println("1/6 getComOrderPrice Success");
+							psmt=conn.prepareStatement(sql);
+							psmt.setString(1, comdto.get(i).getMember_name());
+							rs=psmt.executeQuery();
+								System.out.println("2/6 getComOrderPrice Success");			
+							if(rs.next()) {
+								priceMap.put(comdto.get(i).getMember_name(), rs.getInt(2));						
+							}else {
+								priceMap.put(comdto.get(i).getMember_name(),0);		
+							}
+						} catch (Exception e) {
+								System.out.println("getComOrderPrice 1st Failed!!!!");
+							e.printStackTrace();
+						}finally {
+							DBClose.close(psmt, conn, rs);
+						}
+				}
+				
+				//확인출력
+				 Iterator<String> mapIter = priceMap.keySet().iterator();
+			        while(mapIter.hasNext()) {
+			            String key = mapIter.next();
+			            int value = priceMap.get( key );
+			            System.out.println("map == "+key+" : "+value);
+			        }
+			return priceMap;
+		}
+
+	@Override
+	public List<RentDto> getRentList() {
+
+		
+		String sql = " SELECT * FROM RC_RENT ";
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<RentDto> list = new ArrayList<RentDto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getCalendarList Success");
+			
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getCalendarList Success");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getCalendarList Success");
+			
+			while(rs.next()) {
+				RentDto dto = new RentDto();
+				dto.setRent_seq(rs.getInt(1));
+				dto.setRent_carname(rs.getString(2));
+				dto.setRent_start(rs.getString(3));
+				dto.setRent_end(rs.getString(4));
+				dto.setCus_id(rs.getString(5));
+				dto.setCom_num(rs.getInt(6));
+				dto.setPrice(rs.getInt(7));
+				dto.setRc_name(rs.getString(8));
+				dto.setRc_phone(rs.getString(9));
+				dto.setRc_address(rs.getString(10));
+				dto.setRc_card(rs.getString(11));
+				dto.setRc_photo(rs.getString(12));
+				list.add(dto);				
+			}
+			System.out.println("4/6 getCalendarList Success");
+			
+		} catch (Exception e) {
+			System.out.println("getCalendarList Fail");
+		} finally {			
+			DBClose.close(psmt, conn, rs);			
+		}
+			
+		return list;
+	}
+
+	@Override
+	public List<RentDto> getRentList(String id) {	
+			
+		String sql =	" select * "  
+					+	" from rc_rent " 
+					+   " where com_name in (select com_name  "
+					+   " 					from rc_info "
+					+   "					where com_name in (select name " 
+					+							 " 				from rc_member  "
+					+						"					where id = ? )) ";
+					
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<RentDto> list = new ArrayList<RentDto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getCalendarList Success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("2/6 getCalendarList Success");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/6 getCalendarList Success");
+			
+			while(rs.next()) {
+				RentDto dto = new RentDto();
+				dto.setRent_seq(rs.getInt(1));
+				dto.setRent_carname(rs.getString(2));
+				dto.setRent_start(rs.getString(3));
+				dto.setRent_end(rs.getString(4));
+				dto.setCus_id(rs.getString(5));
+				dto.setCom_num(rs.getInt(6));
+				dto.setPrice(rs.getInt(7));
+				dto.setRc_name(rs.getString(8));
+				dto.setRc_phone(rs.getString(9));
+				dto.setRc_address(rs.getString(10));
+				dto.setRc_card(rs.getString(11));
+				dto.setRc_photo(rs.getString(12));
+				list.add(dto);				
+			}
+			System.out.println("4/6 getCalendarList Success");
+			
+		} catch (Exception e) {
+			System.out.println("getCalendarList Fail");
+		} finally {			
+			DBClose.close(psmt, conn, rs);			
+		}
+			
+		return list;
 	}
 	
-	
-	
-	
-	
+
 }

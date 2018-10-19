@@ -33,6 +33,7 @@
 	String rCard = request.getParameter("rcCard1").trim()+ request.getParameter("rcCard2").trim()+ request.getParameter("rcCard3").trim()+ request.getParameter("rcCard4").trim();
 	String rPhoto = request.getParameter("rcPhoto").trim();
 	int comNum =Integer.parseInt(request.getParameter("infoSeq"));
+	String comName = request.getParameter("comName").trim();
 	System.out.println("login id : "+loginId+" carName : "+carName+" startDate : "+startDate+" enddate : "+endDate+ " price: "+price+" rName: "+rName+" rAddress: "+rAddress
 			+"rCard : "+rCard+"rphoto : "+rPhoto+" comNum : "+comNum);
 %>
@@ -47,7 +48,7 @@
 
 <%
 	iRentDao rentdao = RentDao.getInstance();
-	RentDto dto = new RentDto(carName, startDate, endDate, loginId, comNum, price,rName, rPhone, rAddress, rCard, rPhoto);
+	RentDto dto = new RentDto(carName, startDate, endDate, loginId, comNum, price,rName, rPhone, rAddress, rCard, rPhoto, comName);
 
 	boolean isS = rentdao.setReservation(dto);
 	if(isS){
