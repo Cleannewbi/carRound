@@ -1,4 +1,4 @@
-SELECT * FROM RC_MEMBER;
+SELECT * FROM RC_MEMBER WHERE AUTH=2;
 
 SELECT * FROM RC_MEMBER WHERE NOT ID IN ('admin') ORDER BY NAME ASC;
 
@@ -11,7 +11,7 @@ VALUES (SEQ_RC_MEMBER.NEXTVAL,'testcom', '123', NULL, 'TEST COMPANY','0109999999
 INSERT INTO RC_MEMBER
 VALUES (SEQ_RC_MEMBER.NEXTVAL,'admin','admin',NULL, '관리자','010-5555-5555','서울시','admin@admin.com','1234123412341234',3);
 
-DELETE FROM RC_MEMBER WHERE ID='cat';
+DELETE FROM RC_MEMBER WHERE SEQ='80';
 
 SELECT * FROM RC_MEMBER;
 
@@ -35,13 +35,13 @@ VALUES(SEQ_RC_MEMBER.NEXTVAL,'dh','123','1234123412341234','대헌','01012341234
 
 DELETE FROM RC_MEMBER WHERE SEQ=77;
 
-SELECT * FROM RC_MEMBER;
+SELECT * FROM RC_MEMBER where AUTH=2;
 
-UPDATE RC_MEMBER SET NAME='블루핸즈 역삼점'
-WHERE SEQ=75;
+UPDATE RC_MEMBER SET NAME='HOLYJEJUS CORP'
+WHERE ID='HOLYJEJUS CORP';
 
 UPDATE RC_MEMBER SET PHONE='025386197'
-WHERE SEQ=75;
+WHERE SEQ=23;
 
 서울자동차서비스 seulService.jpg
 금남자동차공업사 gumnam.jpg
@@ -77,9 +77,12 @@ VALUES(SEQ_RC_MEMBER.NEXTVAL,'giaotoq','123','giaotoq.jpg','025618285','기아�
 
 INSERT INTO RC_MEMBER
 VALUES(SEQ_RC_MEMBER.NEXTVAL,'bluehands','123','bluehands.jpg','025386197','블루핸즈 역삼점','서울특별시 강남구 논현로81길 4','bluehands@naver.com','1234123412341234',2);
-TEST COMPANY
 
-SELECT * FROM RC_INFO 
+
+SELECT * FROM RC_INFO
+
+SELECT * FROM RC_MEMBER 
+
 
 INSERT INTO RC_INFO
 VALUES (SEQ_RC_INFO.NEXTVAL, '서울자동차서비스', 'KiaSportage.jpg', 'Kia Sportage', 'SUV', '디젤', '중형', '40000');
@@ -143,9 +146,22 @@ SELECT COM_NAME FROM RC_INFO WHERE SEQ=?
 list string names 이름들 따로 저장
 
 //회사별 총액
-SELECT SUM(PRICE), COM_NUM FROM RC_RENT GROUP BY COM_NUM
-SELECT SEQ FROM RC_INFO
+SELECT SUM(PRICE) FROM RC_RENT WHERE COM_NUM=17 GROUP BY COM_NUM
+
+seq_priceMap { seq, price } 
+List <String> seqList = seq.seq,se.q......... 
 
 
+	seq_nameMap.put('',seq_priceMap.get(i))
 
-
+HASHMAP으로 {seq, name} 을 key,value 로 
+seq를 hashmap의 키로 넣어서 name이랑 price를 엮어
+for (int i=0; dto ; i++){
+	if seq_nameMap.get(i).equals( dtolist.getName) {
+		priceMap . put ( seq_nameMap.get(i) : seq_priceMap.get(i) )
+}	else { priceMap . put ( seq_nameMap.get(i) : 0 )  }
+		SELECT COM_NUM FROM RC_RENT GROUP BY COM_NUM
+{name, price}
+SELECT COM_NUM FROM RC_RENT ORDER BY COM_NUM ASC
+SELECT SEQ, COM_NAME FROM RC_INFO ORDER BY SEQ ASC
+SELECT SUM(PRICE), COM_NUM FROM RC_RENT GROUP BY COM_NUM ORDER BY COM_NUM ASC

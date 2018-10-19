@@ -131,13 +131,13 @@ public class memberDao implements memberDaoImpl{
 				System.out.println("2/6 getMember Success");
 			rs=psmt.executeQuery();
 				System.out.println("3/6 getMember Success");
-
 			while(rs.next()) {	
 			 MemberDto dto =new MemberDto(rs.getString(1), 
 					 									  rs.getString(2),
 					 									  rs.getString(3),
 					 									  rs.getString(4));
 			dtoList.add(dto);
+
 			}
 			System.out.println("4/6 getMember Success");
 		} catch (Exception e) {
@@ -145,6 +145,9 @@ public class memberDao implements memberDaoImpl{
 			e.printStackTrace();
 		}finally {
 			DBClose.close(psmt, conn, rs);
+		}
+		for(int i=0; i<dtoList.size(); i++) {
+			System.out.println("companyList name : "+dtoList.get(i).getMember_name());
 		}
 		return dtoList;
 	}

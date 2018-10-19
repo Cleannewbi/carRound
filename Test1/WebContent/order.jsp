@@ -12,14 +12,12 @@
 <%
 	//1.정보넘겨받기 
 	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
 	String carName =  request.getParameter("carName");
 	String comName = request.getParameter("comName");
-
 	String startDate = request.getParameter("startDate");
 	String endDate = request.getParameter("endDate");
 
-	System.out.println("index에서 가져온 id : "+id+" pw : "+pw+"carName : "+carName+" startDate : "+startDate+" endDate : "+endDate);
+	System.out.println("index에서 가져온 id : "+id+"carName : "+carName+" startDate : "+startDate+" endDate : "+endDate);
 	/*
 	//login 값 받기
 	Object ologin = session.getAttribute("login");

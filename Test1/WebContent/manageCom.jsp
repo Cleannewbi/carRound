@@ -84,7 +84,6 @@ q&a는 마이페이지에서도 확인가능해야할것 혹은 그냥 이메일보내는걸로 -->
 <%} %>
 </table>
 </div>
-
 <script type="text/javascript">
 
 
