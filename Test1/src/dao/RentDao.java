@@ -246,23 +246,89 @@ public class RentDao implements RentDaoImpl{
 	@Override
 	public HashMap<String, Integer> getComSaleMonthly(){
 		
-		//월별 회사 실적 
-		SELECT SUM(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' ORDER BY COM_NAME
-
-		//이번달 회사 실적 
-		SELECT SUM(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' ORDER BY COM_NAME
+		//1.company dto소환
+		memberDao memdao= memberDao.getInstance();
+		List<MemberDto> comdto = memdao.getComList();
+		
+		//2.리턴할 해시맵
+		HashMap<String, Integer> comSaleMap = new HashMap<>();
+				
+		for(int i=0; i<comdto.size();i++) {
+			String sql="SELECT SUM(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' AND COM_NAME=? ORDER BY COM_NAME";
+			
+			System.out.println("SQL : "+sql);
+			Connection conn=null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+			
+				try {
+					conn=DBConnection.getConnection();
+						System.out.println("1/6 getComSaleMonthly Success");
+					psmt=conn.prepareStatement(sql);
+					if() {
+						psmt.setString(1, );
+					}else if () {
+						psmt.setString(1, );
+					}
+					System.out.println("2/6 getComSaleMonthly Success");			
+	
+					rs=psmt.executeQuery();
+						System.out.println("3/6 getComSaleMonthly Success");			
+					if(rs.next()) {
+						comSaleMap.put(comdto.get(i).getMember_name(), rs.getInt(2));						
+					}else {
+						comSaleMap.put(comdto.get(i).getMember_name(),0);		
+					}
+				} catch (Exception e) {
+						System.out.println("getComSaleMonthly Failed!!!!");
+					e.printStackTrace();
+				}finally {
+					DBClose.close(psmt, conn, rs);
+				}
+		}
+		
+		
 	}
 	
 	//월별 차종 판매량
 	@Override
 	public HashMap<String, Integer> getCarSaleMonthly(){
 
-		SELECT COUNT(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' ORDER BY CAR_NAME
+		//1.company dto소환
+		memberDao memdao= memberDao.getInstance();
+		List<MemberDto> comdto = memdao.getComList();
+		//리턴할 해시맵		
+		HashMap<String, Integer> carSaleMap = new HashMap<>();
+		
+		for(int i=0; i<comdto.size();i++) {
+			String sql = "SELECT COUNT(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' AND COM_NAME=? ORDER BY CAR_NAME"
+			System.out.println("SQL : "+sql);
+			
+			Connection conn=null;
+			PreparedStatement psmt = null;
+			ResultSet rs = null;
+		
+			try {
+				conn=DBConnection.getConnection();
+					System.out.println("1/6 getCarSaleMonthly Success");
+				psmt=conn.prepareStatement(sql);
+					psmt.setString(1, );
+					psmt.setString(2,(comdto.get(i).getMember_name());
+					System.out.println("2/6 getCarSaleMonthly Success");
+				rs=psmt.executeQuery();
+					System.out.println("3/6 getCarSaleMonthly Success");			
+				if(rs.next()) {
+					carSaleMap.put(comdto.get(i).getMember_name(), rs.getInt(2));						
+				}else {
+					carSaleMap.put(comdto.get(i).getMember_name(),0);		
+				}
+			} catch (Exception e) {
+					System.out.println("getCarSaleMonthly Failed!!!!");
+				e.printStackTrace();
+			}finally {
+				DBClose.close(psmt, conn, rs);
+			}
+		
 	}
-	
 
-
-	
-	
-	
 }
