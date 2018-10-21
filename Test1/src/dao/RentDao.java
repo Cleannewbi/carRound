@@ -146,7 +146,7 @@ public class RentDao implements RentDaoImpl{
 		return priceMap;
 	}
 	
-	//회사별 주문건수★★★★★★★★★★★★★★★★★바뀜
+	//회사별 주문건수
 	@Override
 	public HashMap<String, Integer> getComOrderCount() {
 		//Return용 해시맵
@@ -194,7 +194,7 @@ public class RentDao implements RentDaoImpl{
 	return countMap;
 	}
 	
-	//회사별 주문금액 ★★★★★★★★★★★★★★★★★바뀜
+	//회사별 주문금액
 	@Override
 	public HashMap<String, Integer> getComOrderPrice() {					
 		//Return용 해시맵
@@ -241,6 +241,8 @@ public class RentDao implements RentDaoImpl{
 		        }
 		return priceMap;
 	}
+	
+	
 	
 	
 }
