@@ -242,6 +242,26 @@ public class RentDao implements RentDaoImpl{
 		return priceMap;
 	}
 	
+	// 회사 실적 
+	@Override
+	public HashMap<String, Integer> getComSaleMonthly(){
+		
+		//월별 회사 실적 
+		SELECT SUM(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' ORDER BY COM_NAME
+
+		//이번달 회사 실적 
+		SELECT SUM(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' ORDER BY COM_NAME
+	}
+	
+	//월별 차종 판매량
+	@Override
+	public HashMap<String, Integer> getCarSaleMonthly(){
+
+		SELECT COUNT(PRICE) FROM RC_RENT WHERE STARTDATE LIKE '2018-?-%' ORDER BY CAR_NAME
+	}
+	
+
+
 	
 	
 	
