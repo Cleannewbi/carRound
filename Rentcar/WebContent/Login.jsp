@@ -25,14 +25,14 @@ if(dto != null && !dto.getMember_id().equals("")) {
 %>
 	<script type="text/javascript">
 	alert("로그인 성공");
-	location.href = "index.jsp";
+	location.href = "test.jsp";
 	</script>
 <%	
 } else {	
 %>
 	<script type="text/javascript">
 	alert("로그인 실패");
-	location.href = "index.jsp";
+	location.href = "test.jsp";
 	</script>
 <%
 }

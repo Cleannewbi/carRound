@@ -13,4 +13,5 @@ public interface iRentDao {
 	public HashMap<String, Integer> getComOrderPrice();
 	public List<RentDto> getRentList();
 	public List<RentDto> getRentList(String id);
+	public List<RentDto> getDayList(String id, String dates);
 }

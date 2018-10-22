@@ -207,11 +207,17 @@ public class InfoDao implements iInfoDao {
 	}
 
 	@Override
-	public List<InfoDto> getInfoSearchableList(String carname, String comname) {
+	public List<InfoDto> getInfoSearchableList(String carname, String comname, String rentAddress, String startDate, String startTime, String endDate, String endTime) {
 		
+		/*
 		String sql = " SELECT SEQ, COM_NAME, CAR_PIC, CAR_NAME, CAR_TYPE, CAR_FUEL, CAR_SIZE, CAR_FEE " + 
 				" FROM RC_INFO " + 
 				" WHERE COM_NAME NOT IN (SELECT COM_NAME FROM RC_RENT WHERE CAR_NAME= ? AND COM_NAME = ?) ";
+		*/
+		String sql = " SELECT SEQ, COM_NAME, CAR_PIC, CAR_NAME, CAR_TYPE, CAR_FUEL, CAR_SIZE, CAR_FEE " + 
+				" FROM RC_INFO " + 
+				" WHERE COM_NAME IN (SELECT NAME " + 
+				" FROM ( SELECT NAME FROM RC_MEMBER WHERE ADDRESS LIKE '%" + rentAddress + "%')) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -221,17 +227,11 @@ public class InfoDao implements iInfoDao {
 
 		try {
 			conn = DBConnection.getConnection();
-
 			System.out.println("1/6 getInfoSearchableList() Success!");
 			
-			// dummy data
-			if(carname.equals("") && comname.equals("")) {
-				carname = "K5";
-				comname = "TEST COMPANY";
-			}
+			System.out.println("rentAddress : " + rentAddress);
+			System.out.println("sql : " + sql);
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, carname);
-			psmt.setString(2, comname);
 			System.out.println("2/6 getInfoSearchableList() Success!");
 			
 			rs = psmt.executeQuery();

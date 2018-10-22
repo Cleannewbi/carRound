@@ -13,7 +13,19 @@
    
 	public String two(String msg){
 		return msg.trim().length() < 2 ? "0"+msg : msg.trim(); 
-	}	
+	}
+	
+	// 날짜를 클릭하면, 그날의 일정이 모두 보이게 하는 callist.jsp로 이동시키는 함수
+	public String callist(int year, int month, int day, String id){
+		String s = "";
+		
+		s += String.format("<a href='%s?year=%d&month=%d&day=%d&id=%s'>", 
+							"callist.jsp", year, month, day, id);
+		s += String.format("%2d", day);
+		s += "</a>";
+
+		return s;
+	}
     
     public String makeTable(int year, int month, int day, List<RentDto> list)
     {
@@ -98,7 +110,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>calendar.jsp</title>
 <style type="text/css">
   
   table{border-spacing:0px;border-style:none;padding:0px;}
@@ -220,7 +232,7 @@ for(int i = 1;i < dayOfWeek; i++){
 int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 for(int i = 1;i <= lastDay; i++){
 	%>
-	<td style="color: #595959; "><%=i %>&nbsp;<%-- <%=showPen(year, month, i) %> --%>	
+	<td style="color: #595959; "><%=callist(year, month, i, id) %>&nbsp;
 		<%=makeTable(year, month, i, list) %>
 	</td>
 	<%

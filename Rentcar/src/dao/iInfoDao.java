@@ -12,6 +12,6 @@ public interface iInfoDao {
 	
 	public InfoDto getInfoList(int seq);
 	
-	public List<InfoDto> getInfoSearchableList(String carname, String comname);
+	public List<InfoDto> getInfoSearchableList(String carname, String comname, String rentAddress, String startDate, String startTime, String endDate, String endTime);
 
 }

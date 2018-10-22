@@ -16,7 +16,7 @@
     
    
 <!DOCTYPE html>
-    <%
+ <%
     iMyPageDao dao = MyPageDao.getInstance();
     request.setCharacterEncoding("utf-8");
    
@@ -25,7 +25,7 @@
     Object ologin = session.getAttribute("login");
     MemberDto dto = null;
     if(ologin == null) {
-    %>
+ %>
     	<script type="text/javascript">
     		alert("다시 로그인 해주세요.");
     		location.href="loginPage.jsp";
@@ -82,7 +82,7 @@
   
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'info_Change')">정보수정</button>
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'check_Res')">예약확인</button>
-  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'del_Member')">회원탈퇴</button>
+ <!--  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'del_Member')">회원탈퇴</button> -->
   <button class="w3-bar-item w3-button tablink" onclick="location.href='index.jsp'">메인화면</button> 
 
 </div>
@@ -149,17 +149,20 @@
     </table>       
     <input type="submit" value="Convert it!!">
     </form>
+    
+    <h2>회원 탈퇴</h2>
+    <button onclick="location.href='DeleteMyPage.jsp?seq=<%=seq%>'">탈퇴하기</button>
 </div>
 
 <!-- here del_Member -->
-<div id="del_Member" class="w3-container city w3-animate-opacity" style="display:none">
+<%-- <div id="del_Member" class="w3-container city w3-animate-opacity" style="display:none">
 <h2>회원탈퇴 화면</h2>
 <form action="DeleteMyPage.jsp">
 <input type="hidden" name="M_Command" value="DelMember">
 <input type="hidden" name="seq" value="<%=seq%>">
 <input type="submit" value="탈퇴하기">
 </form>
-</div>
+</div> --%>
 
 <!-- here 예약 확인 화면 -->
 <div id="check_Res" class="w3-container city w3-animate-opacity" style="display:none">
@@ -177,8 +180,8 @@
 <col width="20"><col width="100"><col width="120"><col width="120"><col width="70"><col width="70"><col width="70"><col width="70">
 <col width="70"><col width="70"><col width="70"><col width="70"><col width="70"><col width="70">
 <tr>
-	<th>번호</th><th>차량 이름</th><th>계약시작일</th><th>계약종료일</th><th>회원아이디</th><th>대여료</th><th>운전자</th><th>RC_PHONE</th>
-	<th>RC_ADDRESS</th><th>RC_CARD</th><th>RC_PHOTO</th><th>예약날짜변경</th><th>예약취소</th>
+	<th>번호</th><th>차량 이름</th><th>계약시작일</th><th>계약종료일</th><th>회원아이디</th><th>대여료</th><th>예약자</th><th>회원전화번호</th>
+	<th>주소</th><th>카드번호</th><th>회원사진</th><th>예약날짜변경</th><th>예약취소</th>
 </tr>
 <%
 if(rentpagelist == null || rentpagelist.size() ==0){

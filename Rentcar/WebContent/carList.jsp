@@ -195,7 +195,7 @@ li {
 	} else {
 		String comname = "";
 		String carname = "";
-		List<InfoDto> chkResult = idao.getInfoSearchableList(carname, comname);
+		List<InfoDto> chkResult = idao.getInfoSearchableList(carname, comname, rentPlace, startDate, startTime, endDate, endTime);
 		
 		// 리스트 안에 값이 없을경우
 		if(chkResult == null || chkResult.size() == 0) {
@@ -242,7 +242,7 @@ li {
 			<li>
 				<div class="info">
 					<div><strong class="infoText" id="carName" value="<%=idto.getCar_name() %>"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="RentCarDetail.jsp?seq=<%=idto.getInfo_seq() %>"><img class="infoImg" src='./images/<%=carPhotoName %>'></a>
+					<a href="RentCarDetail.jsp?seq=<%=idto.getInfo_seq() %>"><img class="infoImg" src='./images/<%=carPhotoName %>' width="200px" height="200px"></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail" name="size">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 

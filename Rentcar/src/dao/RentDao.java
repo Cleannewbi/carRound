@@ -347,5 +347,68 @@ public class RentDao implements iRentDao{
 		return list;
 	}
 	
+	@Override
+	public List<RentDto> getDayList(String id, String dates) {
+		String sql = "SELECT CARNAME, RC_START, RC_END, CUS_ID, PRICE,RC_NAME,RC_PHONE,RC_ADDRESS,RC_CARD,COM_NAME"
+				+ " FROM RC_RENT "
+				+ " WHERE COM_NAME=(SELECT NAME FROM RC_MEMBER WHERE ID=?) AND "
+				+ " TO_DATE(?,'YYYY-MM-DD')"
+				+ " BETWEEN RC_START AND RC_END ";	
+		System.out.println("DB id:"+id+" dates:"+dates);
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		
+		List<RentDto> list = new ArrayList<RentDto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/6 getDayList Success");
+			
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/6 getDayList Success");
+			
+			psmt.setString(1, id);
+			psmt.setString(2, dates);
+			System.out.println("3/6 getDayList Success");
+			
+			
+			rs = psmt.executeQuery();
+			System.out.println("4/6 getDayList Success"+rs);
+			
+			while(rs.next()) {
+			RentDto dto = new RentDto();
+			dto.setRent_carname(rs.getString(1));
+			dto.setRent_start(rs.getString(2));
+			dto.setRent_end(rs.getString(3));
+			dto.setCus_id(rs.getString(4));
+			//dto.setCom_num(rs.getInt(5));
+			dto.setPrice(rs.getInt(5));
+			dto.setRc_name(rs.getString(6));
+			dto.setRc_phone(rs.getString(7));
+			dto.setRc_address(rs.getString(8));
+			dto.setRc_card(rs.getString(9));
+			dto.setCom_name(rs.getString(10));
+			
+			System.out.println("5/6 getDayList Success");
+			
+			list.add(dto);
+			System.out.println("adding to List Success!!");
+			}
+			
+			
+			
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		finally {			
+			DBClose.close(psmt, conn, rs);			
+		}
+			
+		return list;
+	}
+	
 
 }

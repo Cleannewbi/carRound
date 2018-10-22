@@ -61,7 +61,7 @@ ul,ol {
 blockquote {
 	padding-top:0;
 	padding-bottom:0;
-	border-color:#1ABC9C;
+	border-color:#5DBEBB;
 }
 blockquote small {
 	color:inherit;
@@ -122,10 +122,10 @@ img {
 	outline:none;
 }
 .btn-link {
-	color:#1abc9c;
+	color:#5DBEBB;
 }
 .btn-link:hover,.btn-link:focus {
-	color:#16a085;
+	color:#5DBEBB;
 }
 .btn-default,.label-default {
 	border-color:#FFF;
@@ -160,12 +160,12 @@ img {
 .btn-info,.label-info,.alert-info {
 	background-color:#FFF;
 	border-color:#FFF;
-	color:#01B0D1;
+	color:#5DBEBB;
 }
 .btn-info:hover,.btn-info:focus {
 	background-color:#FFF;
 	border-color:#FFF;
-	color:#0299b8;
+	color:#5DBEBB;
 }
 .btn-warning,.label-warning,.alert-warning {
 	background-color:#e67e22;
@@ -208,24 +208,24 @@ img {
 	background-color:#ecf0f1;
 }
 .nav-tabs>li>a:hover,.nav-tabs>li>a:focus {
-	color:#1abc9c;
+	color:#5DBEBB;
 	background:transparent;
 }
 .nav-tabs>li.active>a,.nav-tabs>li.active>a:hover,.nav-tabs>li.active>a:focus {
 	background:transparent;
 	border:none;
-	color:#1abc9c;
+	color:#5DBEBB;
 	border-bottom:1px solid #1abc9c;
 }
 .nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
-	background-color:#1abc9c;
+	background-color:#5DBEBB;
 }
 .nav .caret,.nav a:hover .caret {
-	border-top-color:#1abc9c;
-	border-bottom-color:#1abc9c;
+	border-top-color:#5DBEBB;
+	border-bottom-color:#5DBEBB;
 }
 .dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus {
-	background-color:#1abc9c;
+	background-color:#5DBEBB;
 }
 .navbar-inverse .navbar-collapse,.navbar-inverse .navbar-form {
 	border-color:#bdc3c7;
@@ -257,7 +257,7 @@ img {
 	padding:20px 25px;
 }
 .panel-default>.panel-heading a:hover {
-	color:#01b0d1;
+	color:#5DBEBB;
 }
 .panel-default>.panel-heading+.panel-collapse .panel-body {
 		border-top:1px solid #eee;
@@ -379,8 +379,7 @@ label {
 	width:100%;
 	top:0;
 	position:fixed;
-	background-image:url("assets/img/intro.jpg");
-	
+	background-image:url(http://unsplash.it/1600/600?random=1);
 	background-position:center center;
 	background-repeat:no-repeat;
 	-webkit-background-size: cover;
@@ -420,19 +419,19 @@ label {
 .navbar-inverse .navbar-nav>li>a:hover,.navbar-inverse .navbar-nav>li>a:focus,.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>.active>a:focus {
 	background-color:transparent;
 	background-color:rgba(255,255,255,0);
-	color:#01b0d1;
+	color:#5DBEBB;
 }
 .header-button {
 	margin-left: 15px;
 }
 /*	Hero	==================================================*/
 #hero {
-	margin-top:140px;
+	margin-top:0px;
 	padding:0;
 	color:#FFF;
 }
 #hero .herotext {
-	padding:160px 0px;
+	padding:0px 0px;
 }
 #hero h1 {
 	font-size:50px;
@@ -445,7 +444,7 @@ label {
 }
 /*	Features	==================================================*/
 #features {
-	background-color:#01B0D1;
+	background-color:#5DBEBB;
 	color:#FFF;
 }
 .maintitle h1 {
@@ -517,7 +516,7 @@ label {
 }
 /*	Faq==================================================*/ 
 #faq {
-	background-color:#F9FAFD;
+	background-color:#f9f9ff;
 }
 .faq-block {
 	margin:0px;
@@ -578,7 +577,7 @@ label {
 	font-weight:400;
 }
 .carousel-inner blockquote p {
-	font-size:36px;
+	font-size:25px;
 }
 .carousel-control .glyphicon {
 	left:50%;
@@ -631,12 +630,28 @@ label {
 	background-color:#fff;
 	border:0;
 }
+
+#contact input.search{
+	font-family:inherit;
+	font-size:inherit;
+	line-height:inherit;
+	width:100%;
+	border:0px;
+	color:#fdfcff;
+	background-color:#5DBEBB;
+	border:0;
+}
+
+
 #contact input,#contact select {
 		height:40px;
 	margin-bottom:0px;
+	
+    border-radius: 5px;
+
 }
 #contact input#submit {
-	width: auto;
+	width:auto;
 	margin-top:20px;
 	background-color:rgba(0,0,0,0.3);
 	border:0;
@@ -1129,8 +1144,8 @@ img.mfp-img {
 	
 }
 .wrapsection {  
-    padding-top:140px;
-	padding-bottom:140px;
+    padding-top:200px;
+	padding-bottom:200px;
     position: relative;
   }
 
@@ -1183,7 +1198,7 @@ img.mfp-img {
 					margin-right:0;
 	}
 	.container {
-					max-width:10px;
+					max-width:690px;
 					padding-left:30px;
 					padding-right:30px;
 	}	
@@ -1236,7 +1251,7 @@ img.mfp-img {
 					margin-right:0;
 	}
 	.container {
-					max-width:10px;
+					max-width:690px;
 					padding-left:30px;
 					padding-right:30px;
 	}	

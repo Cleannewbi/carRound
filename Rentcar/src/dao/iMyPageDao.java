@@ -9,7 +9,7 @@ public interface iMyPageDao {
 	
 	public MemberDto getMyPageList(String id); //회원 정보 출력(not list, 1인 개인)
 	
-	public MemberDto getComPageList(String id); // 회사 정보 출력
+	// public MemberDto getComPageList(String id); // 회사 정보 출력
 	
 	public List<RentDto> getRentPageList(String id); //회원이 사용중인 서비스(car list-it shows 빌린날짜,반납날짜 등)
 	

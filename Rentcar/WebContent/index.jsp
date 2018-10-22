@@ -101,21 +101,25 @@ auth = auth_dao.checkAuth(forCheckAuth);
 }
 System.out.println("auth:"+auth);
 %>
-<a href="loginPage.jsp">LOGIN</a>
+
 <%if(auth == 1){ %>
+<a href="loginPage.jsp">LOGOUT</a>
 <a href="oMyPage.jsp">myPage</a>
 <%}else if(auth == 2){ 
 	MemberDto dto2 = new MemberDto();
 	dto2 = auth_dao.getMyPageList(forCheckAuth);
 	session.setAttribute("comPage", dto2);
 %>
+<a href="loginPage.jsp">LOGOUT</a>
 <a href= "comPage.jsp">comPage</a>
 
 <%} else if(auth == 3){
-	session.setAttribute("managerMain", forCheckAuth);	
+	session.setAttribute("adminPage", forCheckAuth);	
 %>
-<a href="managerMain.jsp">adminPage</a>
+<a href="loginPage.jsp">LOGOUT</a>
+<a href="adminPage.jsp">adminPage</a>
 <%}else if(auth == 0){%>
+<a href="loginPage.jsp">LOGIN</a>
 <a href="newAccount.jsp">회원가입</a>
 <%} %>
 <!-- ////////////////////END AUTH CHECK////////////////////////////////// -->

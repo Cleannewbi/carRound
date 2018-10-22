@@ -76,7 +76,7 @@
   <h5 class="w3-bar-item">Company Page</h5>
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade1')">정보수정</button>
   <button class="w3-bar-item w3-button tablink" onclick="location.href='calendar.jsp?id=<%=id%>'">스케쥴러</button>
-  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade3')">회원탈퇴</button>
+  <!-- <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade3')">회원탈퇴</button> -->
   <button class="w3-bar-item w3-button tablink" onclick="location.href='index.jsp'">메인화면</button>  
 </div>
 
@@ -86,7 +86,7 @@
 
 <%System.out.println("oMyPage.jsp img:"+dto1.getMember_Photo().trim()); %>
  
-<h1>Dear, <%=id %>'s Page</h1>
+<h1><%=id %>'s ComPage</h1>
 <hr>
 
 <br>
@@ -104,24 +104,54 @@
 </div>
 
   <div id="Fade1" class="w3-container city w3-animate-opacity" style="display:none">
-    <h2>정보 수정</h2>
-    <p>London is the capital city of .</p>
-    <p>It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-  </div>
+  <h2>정보수정 화면</h2>
+    <form action="pdsupload.jsp" method="post" enctype="multipart/form-data">
+    <table>
+    		<%if(fileName != null){ %>
+		<tr>
+			<td>
+				<img alt="" src="d:\\\\tmp\\"+<%=fileName.trim() %> height="100" width="100">
+			</td>
+		</tr>
+		
+		<%}else{ %>
+		<tr>
+			<td>
+				사진을 등록해주세요
+			</td>
+		</tr>
+		<%} %>
+    <tr><td>Photo</td><td><input type="file" name="fileName"></td></tr>
+	<tr><td>Your Name</td><td><input type="text" name="name" value="<%=dto.getMember_name() %>" readonly="readonly"></td></tr>
+	<tr><td>Your Phone</td><td><input type="text" name="phone"></td></tr>
+	<tr><td>Your Address</td><td><input type="text" name="address"></td></tr>
+	<tr><td>Your Email</td><td><input type="text" name="email"></td></tr>
+	<tr><td>Your Card Number</td><td><input type="text" name="card"></td></tr>
+	<input type="hidden" name="seq" value="<%=dto.getMember_seq() %>">
+    </table>       
+    <input type="submit" value="정보수정">
+    </form>
+    
+	<h2>회원 탈퇴</h2>
+    <button onclick="location.href='DeleteMyPage.jsp?seq=<%=seq%>'">탈퇴하기</button>
+  </div> 
   <div id="Fade2" class="w3-container city w3-animate-opacity" style="display:none">
     <h2>스케쥴러</h2>
-    
-
    
   </div>
-  <div id="Fade3" class="w3-container city w3-animate-opacity" style="display:none">
-    <h2>회원 탈퇴</h2>
-    <p>London is the capital city of England.</p>
-    <p>It is the most populous cit
-  <div id="Fade4" class="w3-container city w3-animate-opacity" style="display:none">
+  
+ <%--  <div id="Fade3" class="w3-container city w3-animate-opacity" style="display:none">
+    <h2>회원탈퇴 화면</h2>
+<form action="DeleteMyPage.jsp">
+<input type="hidden" name="M_Command" value="DelMember">
+<input type="hidden" name="seq" value="<%=seq%>">
+<input type="submit" value="탈퇴하기">
+</form> --%>
+
+ <!-- <div id="Fade4" class="w3-container city w3-animate-opacity" style="display:none">
     <h2>메인 화면</h2>
    
-  </div>  
+  </div>   -->
 
 </div>
 

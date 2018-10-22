@@ -25,7 +25,7 @@ public class MyPageDao implements iMyPageDao {
 	public MemberDto getMyPageList(String id) {
 		String sql = "SELECT SEQ,ID,PASSWORD,PHOTO,NAME,PHONE,ADDRESS,EMAIL,CARD,AUTH"
 				+ " FROM RC_MEMBER "
-				+ " WHERE ID=? AND AUTH =1";
+				+ " WHERE ID=?"; //AND AUTH =1
 		System.out.println(sql);
 		System.out.println(id);
 		Connection conn = null;
@@ -67,6 +67,7 @@ public class MyPageDao implements iMyPageDao {
 		return dto;
 	}
 	
+	/*
 	@Override
 	public MemberDto getComPageList(String id) {
 		String sql = "SELECT SEQ,ID,PASSWORD,PHOTO,NAME,PHONE,ADDRESS,EMAIL,CARD,AUTH"
@@ -105,6 +106,8 @@ public class MyPageDao implements iMyPageDao {
 		
 		return dto;
 	}
+	*/
+	
 	@Override
 	public List<RentDto> getRentPageList(String id) {
 		

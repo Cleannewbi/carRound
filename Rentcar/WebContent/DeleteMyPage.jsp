@@ -22,7 +22,8 @@
 %>
 <script type="text/javascript">
 alert("회원탈퇴 성공!!");
-alert("메엔화면으로 이동");
+alert("로그인화면으로 이동");
+location.href="loginPage.jsp";
 </script>
 <%}else if(isS==false){ %>
 <script type="text/javascript">
