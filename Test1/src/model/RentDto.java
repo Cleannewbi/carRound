@@ -43,6 +43,7 @@ public class RentDto implements Serializable {
 	private String rc_address;
 	private String rc_card;
 	private String rc_photo;
+	private String com_name;
 	
 	public RentDto() {	}
 
@@ -59,7 +60,7 @@ public class RentDto implements Serializable {
 	}
 
 	public RentDto(String rent_carname, String rent_start, String rent_end, String cus_id, int com_num, int price,
-			String rc_name, String rc_phone, String rc_address, String rc_card, String rc_photo) {
+			String rc_name, String rc_phone, String rc_address, String rc_card, String rc_photo, String com_name) {
 		super();
 		Rent_carname = rent_carname;
 		Rent_start = rent_start;
@@ -72,6 +73,7 @@ public class RentDto implements Serializable {
 		this.rc_address = rc_address;
 		this.rc_card = rc_card;
 		this.rc_photo = rc_photo;
+		this.com_name=com_name;
 	}
 
 	public int getRent_seq() {
@@ -169,13 +171,23 @@ public class RentDto implements Serializable {
 	public void setRc_photo(String rc_photo) {
 		this.rc_photo = rc_photo;
 	}
+	
+	
+
+	public String getCom_name() {
+		return com_name;
+	}
+
+	public void setCom_name(String com_name) {
+		this.com_name = com_name;
+	}
 
 	@Override
 	public String toString() {
 		return "RentDto [Rent_seq=" + Rent_seq + ", Rent_carname=" + Rent_carname + ", Rent_start=" + Rent_start
 				+ ", Rent_end=" + Rent_end + ", cus_id=" + cus_id + ", com_num=" + com_num + ", price=" + price
 				+ ", rc_name=" + rc_name + ", rc_phone=" + rc_phone + ", rc_address=" + rc_address + ", rc_card="
-				+ rc_card + ", rc_photo=" + rc_photo + "]";
+				+ rc_card + ", rc_photo=" + rc_photo +", com_name="+com_name+"]";
 	}
 
 	

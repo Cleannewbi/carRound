@@ -7,11 +7,9 @@
 <% request.setCharacterEncoding("KSC5601");%>
 <%
 
-	// loginId 는 session에서 가져와야함 Object ologin = session.getAttribute("login");
 	String loginId = request.getParameter("loginId").trim();
-	//session에서 가져오면 hidden loginId order.jsp에서 삭제해야됨
-	
 	String carName = request.getParameter("carName").trim();
+	String comName = request.getParameter("comName").trim();
 	String startDate = request.getParameter("startYear").trim()+request.getParameter("startMonth").trim()+request.getParameter("startDay").trim();	
 	String endDate = request.getParameter("endYear").trim()+request.getParameter("endMonth").trim()+request.getParameter("endDay").trim();
 	startDate=startDate.replace("년", "-");
@@ -47,7 +45,7 @@
 
 <%
 	RentDaoImpl rentdao = RentDao.getInstance();
-	RentDto dto = new RentDto(carName, startDate, endDate, loginId, comNum, price,rName, rPhone, rAddress, rCard, rPhoto);
+	RentDto dto = new RentDto(carName, startDate, endDate, loginId, comNum, price,rName, rPhone, rAddress, rCard, rPhoto,comName);
 
 	boolean isS = rentdao.setReservation(dto);
 	if(isS){

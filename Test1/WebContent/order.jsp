@@ -1,3 +1,8 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="model.ReviewDto"%>
+<%@page import="model.RentDto"%>
+<%@page import="dao.RentDao"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="model.MemberDto"%>
@@ -18,28 +23,7 @@
 	String endDate = request.getParameter("endDate");
 
 	System.out.println("index에서 가져온 id : "+id+"carName : "+carName+" startDate : "+startDate+" endDate : "+endDate);
-	/*
-	//login 값 받기
-	Object ologin = session.getAttribute("login");
-	//start day , end day, 차 이름 = rentInfo 라는 이름의 session으로 받아오기
-	Object rent = session.getAttribute("rentInfo");
-	MemberDto mem = null;
-	RentDto rentdto = null;
-	if (ologin ==null){//값이 제대로 안넘어왔거나 로그인한지 한참되었거나
-	
-		<script type="text/javascript">
-			alert("session이 비어있습니다.");
-			location.href="inex.jsp";
-		</script>
 
-			return; 
-		}
-		mem=(MemberDto)ologin;	//로그인시 받은 사용자의 dto
-		rentdto = (RentDto)rentInfo;		
-		String startDate = rentdto.getStr;
-		String endDate = getRent_start;
-		String carName =getRent_end
-		*/
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -56,7 +40,7 @@
 	font-size: 17px;
 	color:#595959;
 }
-#userTable{
+.underBorderTable{
 	font-size: 17px;
 	color:#595959;
 	height: 200px;
@@ -68,6 +52,16 @@
 .userTd{
  	border-bottom: 1px solid #444444;
     padding: 10px;
+}
+#reviewTable{
+	border: 2px solid gray;
+    border-left: none;
+    border-right: none;
+}
+.reviewTd{
+	padding: 10px;
+	font-size: 17px;
+	color:#595959;
 }
 .btn{
 	display:inline-block;
@@ -171,30 +165,60 @@
 			comPhone[1]=comPh.substring(2, 5);
 			comPhone[2]=comPh.substring(5, 9);
 		}
-	
+				
+		//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★후기용 정보
+		RentDao rendao = new RentDao();
+		List<ReviewDto> reviewList = new ArrayList<>();
+		reviewList =rendao.getReview(carInfoDto.getCar_name(), companyDto.getMember_name());
+		for(int i=0; i<reviewList.size() ; i++) {
+			System.out.println("order 페이지에서의 review : "+reviewList.get(i));
+			System.out.println("order 페이지에서의 id : "+reviewList.get(i).getReview_cus_id() );
+		}
+		
+		int reviewCount = rendao.getreviewCount(carInfoDto.getCar_name(), companyDto.getMember_name());
 %>
 
 <form action="orderAf.jsp" method="post">
 <input type="hidden" name="infoSeq" value="<%=carInfoDto.getInfo_seq()%>">
 <input type="hidden" name="loginId" value="<%=id%>">
-<div style="margin-left: 500px">
-<table>
-<col width="400"><col width="100">
-<tr>
-	<td colspan="2" height="70" > <input class="content" name="carName" type="text" value="<%=carInfoDto.getCar_name() %>" style="background-color:transparent; border: none; font-size:28px;"readonly="readonly">
-	</td>
-</tr>
-<tr>
-	<td height="300" ><img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>" height="400"> </td>
-	<td id="topData"><%=carInfoDto.getCar_type() %><br><%=carInfoDto.getCar_size() %><br><%=carInfoDto.getCar_fuel()%> </td>
-</tr>
 
+
+<!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★
+com_name 히든으로 추가함
+-->
+
+
+<div style="margin-left: 500px">
+<img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>" height="400">
+<input type="hidden" name="carName"  value="<%=carInfoDto.getCar_name()%>">
+<input type="hidden" name="carName"  value="<%=companyDto.getMember_name() %>">
+<h2 class="title">차량정보</h2>
+<table class="underBorderTable" >
+<col width="150"><col width="300">
+<tr>
+	<td class="userTd"><b>차 이름</b></td>
+	<td class="userTd" ><%=carInfoDto.getCar_name()%></td>
+</tr>
+<tr>
+	<td class="userTd"><b>차량등급</b></td>
+	<td class="userTd"> <%=carInfoDto.getCar_size() %></td>
+</tr>
+<tr>
+	<td class="userTd"><b>차량종류</b></td>
+	<td class="userTd"> <%=carInfoDto.getCar_type() %></td>
+</tr>
+<tr>
+	<td class="userTd"><b>연료</b></td>
+	<td  class="userTd"> <%=carInfoDto.getCar_fuel()%> </td>
+</tr>
 </table>
 </div>
+<br><br>
+<!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
 
 <div style="margin-left: 500px">
 <h2 class="title">운전자정보</h2>
-<table id="userTable" >
+<table class="underBorderTable" >
 <col width="150"><col width="300">
 <tr>
 	<td class="userTd"><b>이름</b> </td>
@@ -282,11 +306,36 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	    } 
 });
 </script>
+<!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★ 후기-->
+<div style="margin-left: 500px">
+<h2 class="title">후기<font size="4">(<%=reviewCount%>)</font></h2>
+<table id="reviewTable">
+<col width="100"><col width="400">
+<%for(int i=0; i<reviewList.size();i++){
+	if(reviewList.size()==0){%>
+	<tr>
+		<td class="reviewTd" colspan="2">작성된 게시글이 없습니다.</td>
+	</tr>
+<%} else{
+%>
+<tr>
+	<td><b><%=reviewList.get(i).getReview_cus_id() %></b></td>
+	<td class="reviewTd"> <%=reviewList.get(i).getReview_content()%></td>
+</tr>
+<%}
+}%>
+</table>
+</div>
+<br><br>
+
+<!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
+
 <div style="margin-left: 500px">
 <h2  class="title">옵션선택</h2>
-<p  class="content">딜리버리 서비스 <input type="checkbox" id="switch" onclick="deliFunc(this)"></p>
+<p  class="content">딜리버리 서비스 <input type="checkbox" id="deliveryCheck" onclick="deliFunc(this)"></p>
 <p><font size="3" color="blue">딜리버리 서비스란? <br>위에 기재된 운전자 정보에서 픽업가능한 시스템입니다.</font>
 </div>
+
 <div style="margin-left: 500px">
 <h2  class="title">결제정보</h2>
 <table>
@@ -334,7 +383,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 </div>
 <script type="text/javascript">
  	function deliFunc( e ) {
- 		if ($('input:checkbox[id="switch"]').is(":checked")){
+ 		if ($('input:checkbox[id="deliveryCheck"]').is(":checked")){
  			document.getElementById("deliPrice").innerHTML="10,000원";
  			<% deli = 10000;%>
   			var testdeli = "<%=deli %>";
