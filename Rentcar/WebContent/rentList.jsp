@@ -262,11 +262,15 @@ for (var i = 0; i < items.length; i++) {
 	$.ajax({
 		// 통신 시작
 		url: "carList.jsp",
-		type: "get",
+		type: "POST",
 		data: { "arr":arr },
 		traditional: true,
 		success:function(data) {
 			$("#main_area").html(data);
+		},
+		error: function(xhr, option, error){
+			alert(xhr.status); //오류코드
+			alert(error); //오류내용
 		}
 	});
 	 
@@ -289,7 +293,7 @@ $('#datepicker2').datepicker({
 
 
 function researchDate() {
-	//var rentPlace = "";
+	var rentPlace = "<%=request.getParameter("rentPlace") %>";
 	var startDate = "";
 	var startTime = "";
 	var endDate = "";
@@ -319,7 +323,7 @@ function researchDate() {
 		// 통신 시작
 		url: "carList.jsp",
 		type: "get",
-		data: { /* "rentPlace":rentPlace, */
+		data: {  "rentPlace":rentPlace,
 				"startDate":startDate,
 				"startTime":startTime,
 				"endDate":endDate,

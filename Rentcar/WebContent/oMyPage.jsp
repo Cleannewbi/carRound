@@ -83,7 +83,7 @@
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'info_Change')">정보수정</button>
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'check_Res')">예약확인</button>
  <!--  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'del_Member')">회원탈퇴</button> -->
-  <button class="w3-bar-item w3-button tablink" onclick="location.href='index.jsp'">메인화면</button> 
+  <button class="w3-bar-item w3-button tablink" onclick="location.href='test.jsp'">메인화면</button> 
 
 </div>
 

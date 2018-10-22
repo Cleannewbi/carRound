@@ -125,10 +125,11 @@ li {
 			<% 		
 		// 리스트 안에 값이 있을경우
 		} else {
+			/* 
 			for(int i=0 ; i < chkResult.size() ; i++) {
 				InfoDto idto = chkResult.get(i);
 				iMemManager mdto = MemManager.getInstance();
-				MemberDto comInfo = mdto.getCom(idto.getCom_name());
+				MemberDto comInfo = mdto.getMember(idto.getCom_name(), 2);
 				
 				
 				String comPhotoName = "";
@@ -156,6 +157,40 @@ li {
 			    	System.out.println("dto photo 이미지가 아님:"+idto.getCar_pic().trim());
 			    	carPhotoName = "noImage.png";
 			    }
+				 */
+				 for(int i=0 ; i < chkResult.size() ; i++) {
+						InfoDto idto = chkResult.get(i);
+						
+						iMemManager mdto = MemManager.getInstance();
+						System.out.println(idto.getCom_name());
+						MemberDto comInfo = mdto.getCom(idto.getCom_name());
+						
+						
+						String comPhotoName = "";
+						String carPhotoName = "";
+						try{
+							comPhotoName = comInfo.getMember_Photo().trim();
+							carPhotoName = idto.getCar_pic().trim();
+						    System.out.println("comdto.contain:"+comInfo.getMember_Photo().contains("."));
+						    System.out.println("carpic.contain:"+idto.getCar_pic().contains("."));
+						} catch(Exception e) {
+						    	System.err.println(e);
+						}
+						if(!comPhotoName.isEmpty() && comPhotoName.contains(".")){
+					    	//fileName = dto1.getMember_Photo().trim();
+					    System.out.println("dto photo 이미지 있음:"+comInfo.getMember_Photo().trim());
+					    } else if(!comPhotoName.contains(".") || comPhotoName.isEmpty()){
+					    	//System.out.println("dto photo 이미지가 아님:"+comInfo.getMember_Photo().trim());
+					    	comPhotoName = "noImage.png";
+					    }
+						
+						if(!carPhotoName.isEmpty() && carPhotoName.contains(".")){
+					    	//fileName = dto1.getMember_Photo().trim();
+					    System.out.println("dto photo 이미지 있음:"+idto.getCar_pic().trim());
+					    } else if(!carPhotoName.contains(".") || carPhotoName.isEmpty()){
+					    	//System.out.println("dto photo 이미지가 아님:"+idto.getCar_pic().trim());
+					    	carPhotoName = "noImage.png";
+					    }
 				
 			%>
 			<li>
@@ -210,6 +245,7 @@ li {
 				InfoDto idto = chkResult.get(i);
 				
 				iMemManager mdto = MemManager.getInstance();
+				System.out.println(idto.getCom_name());
 				MemberDto comInfo = mdto.getCom(idto.getCom_name());
 				
 				

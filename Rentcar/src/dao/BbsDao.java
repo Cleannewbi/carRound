@@ -129,6 +129,7 @@ private static BbsDao bbsdao = new BbsDao();
 		return dto;
 	}
 
+	/*
 	@Override
 	public MemberDto getCom(String comname) {			// 회사 정보
 		
@@ -174,7 +175,8 @@ private static BbsDao bbsdao = new BbsDao();
 		
 		return dto;
 	}
-
+*/
+	
 	@Override
 	public List<ReviewDto> getBbsList(int com_num) {		// 리뷰
 		

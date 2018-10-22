@@ -132,22 +132,20 @@ public class MemManager implements iMemManager {
 			rs = psmt.executeQuery();
 			System.out.println("3/6 getCom Success");
 		
-			while(rs.next()) {
-				int i = 1;
-			
-			dto = new MemberDto(rs.getInt(i++), rs.getString(i++), rs.getString(i++),
-					rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
-					rs.getString(i++),rs.getString(i++),rs.getInt(i++) );
+			if(rs.next()) {
+			dto = new MemberDto(rs.getInt(1), rs.getString(2), rs.getString(3),
+					rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+					rs.getString(8),rs.getString(9),rs.getInt(10) );
 
 			}
 			System.out.println("4/6 getCom Success");
 		
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+			
+		} finally {
 			DBClose.close(psmt, conn, rs);			
-			System.out.println("6/6 S getCom");
+			System.out.println("5/6 S getCom");
 		}
 		
 		return dto;

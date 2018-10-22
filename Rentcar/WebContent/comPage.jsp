@@ -77,7 +77,7 @@
   <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade1')">정보수정</button>
   <button class="w3-bar-item w3-button tablink" onclick="location.href='calendar.jsp?id=<%=id%>'">스케쥴러</button>
   <!-- <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade3')">회원탈퇴</button> -->
-  <button class="w3-bar-item w3-button tablink" onclick="location.href='index.jsp'">메인화면</button>  
+  <button class="w3-bar-item w3-button tablink" onclick="location.href='test.jsp'">메인화면</button>  
 </div>
 
 <div style="margin-left:130px">

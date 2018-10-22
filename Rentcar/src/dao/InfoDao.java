@@ -72,7 +72,7 @@ public class InfoDao implements iInfoDao {
 	@Override
 	public List<InfoDto> getChecked(String datas[]) {
 		System.out.println("========= Info dao start =========");
-		String sql = " SELECT * FROM RC_INFO WHERE ";
+		String sql = " SELECT SEQ, COM_NAME, CAR_PIC, CAR_NAME, CAR_TYPE, CAR_FUEL, CAR_SIZE, CAR_FEE FROM RC_INFO WHERE ";
 		String keyword[] = null;
 		
 		Connection conn = null;

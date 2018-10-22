@@ -22,7 +22,7 @@
 
 
 	System.out.println("index에서 가져온 id : "+id+" pw : "+pw+"carName : "+carName+" startDate : "+startDate+" endDate : "+endDate); */
-
+    System.out.println("-----------------order.jsp-----------------");
 	String _seq = request.getParameter("seq");
 	int seq = Integer.parseInt(_seq);
 	System.out.println("seq : " + seq);
@@ -103,13 +103,23 @@
 	//3.member Info
 	MemberDto userDto = memberService.getMember(mem.getMember_id(), 1);
 	System.out.println("userDto : "+userDto);
+	
 		//member 결제정보
 		String cards = userDto.getMember_card().trim();		//0000-0000-0000-0000
+		System.out.println("userDto.getMember_card() info: "+cards);
 		String card[] = new String[4];
+		if(userDto.getMember_card().length()==16){
+		//String card[] = new String[4];
 		card[0]=cards.substring(0,4);
 		card[1]=cards.substring(4,8);
 		card[2]=cards.substring(8,12);
-		card[3]=cards.substring(12,16);
+		card[3]=cards.substring(12,16);}
+		else {
+			card[0]="1111";
+			card[1]="2222";
+			card[2]="3333";
+			card[3]="4444";
+		}
 		
 		//member photo
 		String photoName = "";
@@ -143,14 +153,24 @@
 		}
 		
 		//member 대여일 
-		int startDateYear =Integer.parseInt(startDate.substring(0,4));
-		int startDateMonth = Integer.parseInt(startDate.substring(4,6));
-		int startDateDay = Integer.parseInt(startDate.substring(6,8));
+		System.out.println("------------member 대여일------------");
+		System.out.println("startDate:"+startDate+" endDate: "+endDate);
+		int startDateYear=2018;
+		int startDateMonth =10;
+		int startDateDay = 1;
+		int endDateYear = 2018;
+		int endDateMonth = 10;
+		int endDateDay = 30;
+		if(startDate != null && !startDate.equals("") && !startDate.equals(" ") && endDate != null){
+			
+		startDateYear =Integer.parseInt(startDate.substring(0,4));
+		startDateMonth = Integer.parseInt(startDate.substring(4,6));
+		startDateDay = Integer.parseInt(startDate.substring(6,8));
 		
-		int endDateYear = Integer.parseInt(endDate.substring(0,4));
-		int endDateMonth = Integer.parseInt(endDate.substring(4,6));
-		int endDateDay = Integer.parseInt(endDate.substring(6,8));
-		
+		endDateYear = Integer.parseInt(endDate.substring(0,4));
+		endDateMonth = Integer.parseInt(endDate.substring(4,6));
+		endDateDay = Integer.parseInt(endDate.substring(6,8));
+		}
 		System.out.println("●startYear : " +startDateYear+" / Month : "+startDateMonth+" / Day"+startDateDay);
 		System.out.println("●endYear : " +endDateYear+" / Month : "+endDateMonth+" / Day"+endDateDay);
 		//객체생성
@@ -324,19 +344,23 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 <col width="250"><col width="250">
 <tr height="30">
 	<td class="content">시작일</td>
+	<% if(!startDate.equals("") && startDate != null && !startDate.equals(" ")) {%>
 	<td align="right">
 		<input class="content" name="startYear" size="2" type="text" value="<%=startDate.substring(0,4)%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
 		<input class="content" name="startMonth" size="1" align="right" type="text" value="<%=startDate.substring(4,6)%>월" style="background-color:transparent; border: none; text-align: right;"readonly="readonly">
 		<input class="content" name="startDay" size="1"  type="text" align="right" value="<%=startDate.substring(6,8)%>일" style="background-color:transparent; border: none; text-align: right;" readonly="readonly">
 	</td>
+	<%} %>
 </tr>
 <tr height="30">
 	<td class="content">반납일</td>
+	<%if(!endDate.equals("") && endDate != null && !endDate.equals(" ")) {%>
 	<td align="right">
 		<input class="content" name="endYear" size="2"  type="text" value="<%=endDate.substring(0,4)%>년" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
 		<input class="content" name="endMonth" size="1"  type="text" value="<%=endDate.substring(4,6)%>월" style="background-color:transparent; border: none; text-align: right;" readonly="readonly" >
 		<input class="content" name="endDay" size="1"  type="text" value="<%=endDate.substring(6,8)%>일" style="background-color:transparent; border: none;text-align: right;" readonly="readonly"  >
 	</td>
+	<%} %>
 </tr>
 <tr height="30">
 	<td class="content">대여료</td>

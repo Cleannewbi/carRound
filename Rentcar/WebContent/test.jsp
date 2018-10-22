@@ -81,26 +81,6 @@ auth = auth_dao.checkAuth(forCheckAuth);
 }
 System.out.println("auth:"+auth);
 %>
-
-<%if(auth == 1){ %>
-<a href="oMyPage.jsp">myPage</a>
-<%}else if(auth == 2){ 
-	MemberDto dto2 = new MemberDto();
-	dto2 = auth_dao.getMyPageList(forCheckAuth);
-	session.setAttribute("comPage", dto2);
-%>
-<a href="loginPage.jsp">LOGOUT</a>
-<a href= "comPage.jsp">comPage</a>
-
-<%} else if(auth == 3){
-	session.setAttribute("adminPage", forCheckAuth);	
-%>
-<a href="loginPage.jsp">LOGOUT</a>
-<a href="adminPage.jsp">adminPage</a>
-<%}else if(auth == 0){%>
-<a href="loginPage.jsp">LOGIN</a>
-<a href="newAccount.jsp">회원가입</a>
-<%} %>
 <!-- ////////////////////END AUTH CHECK////////////////////////////////// -->
 
 <!-- End Hero Bg
@@ -130,13 +110,14 @@ System.out.println("auth:"+auth);
 				<li class=""><a href="#faq">ABOUT</a></li>
 				<%if(auth == 1){ %>
 				<li class=""><a href="oMyPage.jsp">SERVICE</a></li>
+				<li class=""><a href="loginPage.jsp">LOGOUT</a></li>
 				<%} else if(auth == 2){ 
 					MemberDto dto2 = new MemberDto();
 					dto2 = auth_dao.getMyPageList(forCheckAuth);
 					session.setAttribute("comPage", dto2);
 				%>
 				<li class=""><a href="comPage.jsp">SERVICE</a></li>
-				<li class=""><a href="loginPage.jsp">LOGIN</a></li>
+				<li class=""><a href="loginPage.jsp">LOGOUT</a></li>
 				<%} else if(auth == 3){
 					session.setAttribute("adminPage", forCheckAuth);	
 				%>
@@ -229,30 +210,30 @@ System.out.println("auth:"+auth);
 											data-wow-delay="0.3s" data-wow-duration="2s">
 											<label for="phone">대여시간</label> <select name="job" id="rentStartTime">
 												<option value="">시간선택</option>
-												<option value="오전 00:00">오전 00:00</option>
-												<option value="오전 01:00">오전 01:00</option>
-												<option value="오전 02:00">오전 02:00</option>
-												<option value="오전 03:00">오전 03:00</option>
-												<option value="오전 04:00">오전 04:00</option>
-												<option value="오전 05:00">오전 05:00</option>
-												<option value="오전 06:00">오전 06:00</option>
-												<option value="오전 07:00">오전 07:00</option>
-												<option value="오전 08:00">오전 08:00</option>
-												<option value="오전 09:00">오전 09:00</option>
-												<option value="오전 10:00">오전 10:00</option>
-												<option value="오전 11:00">오전 11:00</option>
-												<option value="오후 12:00">오후 12:00</option>
-												<option value="오후 01:00">오후 01:00</option>
-												<option value="오후 02:00">오후 02:00</option>
-												<option value="오후 03:00">오후 03:00</option>
-												<option value="오후 04:00">오후 04:00</option>
-												<option value="오후 05:00">오후 05:00</option>
-												<option value="오후 06:00">오후 06:00</option>
-												<option value="오후 07:00">오후 07:00</option>
-												<option value="오후 08:00">오후 08:00</option>
-												<option value="오후 09:00">오후 09:00</option>
-												<option value="오후 10:00">오후 10:00</option>
-												<option value="오후 11:00">오후 11:00</option>
+												<option value="00:00">오전 00:00</option>
+												<option value="01:00">오전 01:00</option>
+												<option value="02:00">오전 02:00</option>
+												<option value="03:00">오전 03:00</option>
+												<option value="04:00">오전 04:00</option>
+												<option value="05:00">오전 05:00</option>
+												<option value="06:00">오전 06:00</option>
+												<option value="07:00">오전 07:00</option>
+												<option value="08:00">오전 08:00</option>
+												<option value="09:00">오전 09:00</option>
+												<option value="10:00">오전 10:00</option>
+												<option value="11:00">오전 11:00</option>
+												<option value="12:00">오후 12:00</option>
+												<option value="01:00">오후 01:00</option>
+												<option value="02:00">오후 02:00</option>
+												<option value="03:00">오후 03:00</option>
+												<option value="04:00">오후 04:00</option>
+												<option value="05:00">오후 05:00</option>
+												<option value="06:00">오후 06:00</option>
+												<option value="07:00">오후 07:00</option>
+												<option value="08:00">오후 08:00</option>
+												<option value="09:00">오후 09:00</option>
+												<option value="10:00">오후 10:00</option>
+												<option value="11:00">오후 11:00</option>
 											</select>
 										</div>
 										<div class="col-md-2 wow fadeIn animated"
@@ -265,30 +246,30 @@ System.out.println("auth:"+auth);
 											<label for="phone">반납시간</label>
 											 <select name="job" id="rentEndTime">
 												<option value="">시간선택</option>
-												<option value="오전 00:00">오전 00:00</option>
-												<option value="오전 01:00">오전 01:00</option>
-												<option value="오전 02:00">오전 02:00</option>
-												<option value="오전 03:00">오전 03:00</option>
-												<option value="오전 04:00">오전 04:00</option>
-												<option value="오전 05:00">오전 05:00</option>
-												<option value="오전 06:00">오전 06:00</option>
-												<option value="오전 07:00">오전 07:00</option>
-												<option value="오전 08:00">오전 08:00</option>
-												<option value="오전 09:00">오전 09:00</option>
-												<option value="오전 10:00">오전 10:00</option>
-												<option value="오전 11:00">오전 11:00</option>
-												<option value="오후 12:00">오후 12:00</option>
-												<option value="오후 01:00">오후 01:00</option>
-												<option value="오후 02:00">오후 02:00</option>
-												<option value="오후 03:00">오후 03:00</option>
-												<option value="오후 04:00">오후 04:00</option>
-												<option value="오후 05:00">오후 05:00</option>
-												<option value="오후 06:00">오후 06:00</option>
-												<option value="오후 07:00">오후 07:00</option>
-												<option value="오후 08:00">오후 08:00</option>
-												<option value="오후 09:00">오후 09:00</option>
-												<option value="오후 10:00">오후 10:00</option>
-												<option value="오후 11:00">오후 11:00</option>
+												<option value="00:00">오전 00:00</option>
+												<option value="01:00">오전 01:00</option>
+												<option value="02:00">오전 02:00</option>
+												<option value="03:00">오전 03:00</option>
+												<option value="04:00">오전 04:00</option>
+												<option value="05:00">오전 05:00</option>
+												<option value="06:00">오전 06:00</option>
+												<option value="07:00">오전 07:00</option>
+												<option value="08:00">오전 08:00</option>
+												<option value="09:00">오전 09:00</option>
+												<option value="10:00">오전 10:00</option>
+												<option value="11:00">오전 11:00</option>
+												<option value="12:00">오후 12:00</option>
+												<option value="01:00">오후 01:00</option>
+												<option value="02:00">오후 02:00</option>
+												<option value="03:00">오후 03:00</option>
+												<option value="04:00">오후 04:00</option>
+												<option value="05:00">오후 05:00</option>
+												<option value="06:00">오후 06:00</option>
+												<option value="07:00">오후 07:00</option>
+												<option value="08:00">오후 08:00</option>
+												<option value="09:00">오후 09:00</option>
+												<option value="10:00">오후 10:00</option>
+												<option value="11:00">오후 11:00</option>
 											</select>
 											
 										</div>

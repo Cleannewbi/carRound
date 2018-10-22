@@ -14,7 +14,7 @@ public interface iBbsDao {
 /////////////
 	public InfoDto getInfoList(int seq);		// 차량 정보
 	
-	public MemberDto getCom(String comname);	// 회사 정보
+	//public MemberDto getCom(String comname);	// 회사 정보
 	
 	public List<ReviewDto> getBbsList(int com_num);	// 리뷰
 	
