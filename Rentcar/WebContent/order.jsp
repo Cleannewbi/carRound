@@ -131,7 +131,7 @@
 		}
 		if(!photoName.isEmpty() && photoName.contains(".")){
 	    	//fileName = dto1.getMember_Photo().trim();
-	    System.out.println("dto1 photo 이미지 있음:"+userDto.getMember_Photo().trim());
+	    	System.out.println("dto1 photo 이미지 있음:"+userDto.getMember_Photo().trim());
 	    } else if(!photoName.contains(".") || photoName.isEmpty()){
 	    	System.out.println("dto1 photo 이미지가 아님:"+userDto.getMember_Photo().trim());
 	    	photoName = "noImage.png";

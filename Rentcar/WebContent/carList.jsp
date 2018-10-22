@@ -196,7 +196,7 @@ li {
 			<li>
 				<div class="info">
 					<div><strong class="infoText" id="carName" value="carName"><%=idto.getCar_name() %></strong>&nbsp;</div>
-					<a href="'RentCarDetail.jsp?seq='<%=idto.getInfo_seq() %>"><img class="infoImg" src='./images/<%=carPhotoName %>'></a>
+					<a href="'RentCarDetail.jsp?seq='<%=idto.getInfo_seq() %>"><img class="infoImg" src='./images/<%=carPhotoName %>' width="200px" height="200px"></a>
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 						
 						<div class="infoDetail">차량등급&nbsp;&nbsp;<strong><%=idto.getCar_size() %></strong></div> &nbsp; 
@@ -204,8 +204,8 @@ li {
 						<div class="infoDetail">차량종류&nbsp;&nbsp;<strong><%=idto.getCar_type() %></strong></div>
 						<div class="infoDetail" name="comName">회사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><%=idto.getCom_name() %></strong></div>
 						<div class="relativeBtn">
-							<input type="button" id="selectCar1" value="선택" onclick="RentCarDetail(seq)">
-							<input type="button" id="selectCar2" value="선택" onclick="RentCarOrder('<%=idto.getInfo_seq() %>', '<%=idto.getCar_name() %>', '<%=idto.getCom_name() %>')">
+							<input type="button" id="selectCar1" value="상세정보" onclick="RentCarDetail('<%=idto.getInfo_seq() %>')">
+							<input type="button" id="selectCar2" value="예약하기" onclick="RentCarOrder('<%=idto.getInfo_seq() %>', '<%=idto.getCar_name() %>', '<%=idto.getCom_name() %>')">
 							<%-- 
 							<form action="order.jsp" method="post">
 							<input type="hidden" name="carName" value="<%=idto.getCar_name() %>">

@@ -227,7 +227,8 @@ for(i = 0; i<ln; i++){
 	}
 });
  */
-
+/* 
+// CHECKBOX FINAL
  $(".cb1").click(function () {
 	var items = [];
 	if($('.cb1').is(':checked')) {
@@ -259,6 +260,8 @@ for (var i = 0; i < items.length; i++) {
 	// alert(arr);
 	// location.href = "index.jsp?" + loc;
 	
+	
+	
 	$.ajax({
 		// 통신 시작
 		url: "carList.jsp",
@@ -274,7 +277,8 @@ for (var i = 0; i < items.length; i++) {
 		}
 	});
 	 
-});
+}); 
+*/
  
 $('#datepicker1').datepicker({
 		dateFormat: "yy-mm-dd",
@@ -291,7 +295,8 @@ $('#datepicker2').datepicker({
 		minDate: 0
 });
 
-
+<%--
+researchDate FINAL 
 function researchDate() {
 	var rentPlace = "<%=request.getParameter("rentPlace") %>";
 	var startDate = "";
@@ -335,7 +340,156 @@ function researchDate() {
 		}
 	});
 }
+ --%>
+ 
+	$(".cb1").click(function () {
+		var rentPlace = "<%=request.getParameter("rentPlace") %>";
+		var startDate = "";
+		var startTime = "";
+		var endDate = "";
+		var endTime = "";
+		var items = [];
+			
+		var tmp = "";
+		if($('.cb1').is(':checked')) {
+			$("input:checkbox[name=chkBox]:checked").each(function () {
+				items.push($(this).val());
+				alert(items);
+			});
+		} else {
+			items.pop($(this).val());
+			alert(items);
+		}
+		var loc = "";
+		var tmp = "";
+		var arr = [];
+		
+	for (var i = 0; i < items.length; i++) {
+		for (var j = 1; j < arr.length; j++) {
+			
+			if(items[i] == arr[j]) {
+				i++;
+				break;
+			}	
+		}
+		tmp += items[i] + "&";
+		arr[i] = tmp;
+	}
+	
+	endTime = $("#rentEndTime").val();
+	endDate = $("#datepicker2").datepicker("getDate");
+	startTime = $("#rentStartTime").val();
+	startDate = $("#datepicker1").datepicker("getDate");
+	
+	if(startDate == null || startTime == null || endDate == null || endTime == null) {
+		alert(this + "를 설정해주세요.");
+		focus(this);
+	}
+	
+	var day = ("0" + startDate.getDate()).slice(-2);
+	var month = ("0" + (startDate.getMonth() + 1)).slice(-2);
+	var year = startDate.getFullYear();
+	var eday = ("0" + endDate.getDate()).slice(-2);
+	var emonth = ("0" + (endDate.getMonth() + 1)).slice(-2);
+	var eyear = endDate.getFullYear();
 
+	startDate = year + '-' + month + '-' + day;
+	endDate = eyear + '-' + emonth + '-' + eday;
+	alert(startDate);
+	$.ajax({
+		// 통신 시작
+		url: "carList.jsp",
+		type: "get",
+		data: { "arr":arr,
+				"rentPlace":rentPlace,
+				"startDate":startDate,
+				"startTime":startTime,
+				"endDate":endDate,
+				"endTime":endTime
+		},
+		traditional: true,
+		success:function(data) {
+			$("#main_area").html(data);
+		}
+	});
+	 
+}); 
+ 
+	function researchDate() {
+		var rentPlace = "<%=request.getParameter("rentPlace") %>";
+		var startDate = "";
+		var startTime = "";
+		var endDate = "";
+		var endTime = "";
+		var items = [];
+		
+		if($('.cb1').is(':checked')) {
+			$("input:checkbox[name=chkBox]:checked").each(function () {
+				items.push($(this).val());
+				alert(items);
+			});
+		} else {
+			items.pop($(this).val());
+			alert(items);
+		}
+			
+		var loc = "";
+		var tmp = "";		
+		var arr = [];
+		
+		for (var i = 0; i < items.length; i++) {
+			for (var j = 1; j < arr.length; j++) {
+				
+				if(items[i] == arr[j]) {
+					i++;
+					break;
+				}	
+			}
+			tmp += items[i] + "&";
+			arr[i] = tmp;
+		}
+
+		endTime = $("#rentEndTime").val();
+		endDate = $("#datepicker2").datepicker("getDate");
+		startTime = $("#rentStartTime").val();
+		startDate = $("#datepicker1").datepicker("getDate");
+		
+		if(startDate == null || startTime == null || endDate == null || endTime == null) {
+			alert(this + "를 설정해주세요.");
+			focus(this);
+		}
+		
+		var day = ("0" + startDate.getDate()).slice(-2);
+		var month = ("0" + (startDate.getMonth() + 1)).slice(-2);
+		var year = startDate.getFullYear();
+		var eday = ("0" + endDate.getDate()).slice(-2);
+		var emonth = ("0" + (endDate.getMonth() + 1)).slice(-2);
+		var eyear = endDate.getFullYear();
+
+		startDate = year + '-' + month + '-' + day;
+		endDate = eyear + '-' + emonth + '-' + eday;
+		alert(startDate);
+		$.ajax({
+			// 통신 시작
+			url: "carList.jsp",
+			type: "get",
+			data: { "arr":arr,
+					"rentPlace":rentPlace,
+					"startDate":startDate,
+					"startTime":startTime,
+					"endDate":endDate,
+					"endTime":endTime
+			},
+			traditional: true,
+			success:function(data) {
+				$("#main_area").html(data);
+			}
+		});
+		
+	}
+	
+	
+ 
 
 /* 
 function changePlace() {
