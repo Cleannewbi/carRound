@@ -312,7 +312,7 @@ public class RentDao implements RentDaoImpl{
 				conn=DBConnection.getConnection();
 					System.out.println("1/6 getCarSaleMonthly Success");
 				psmt=conn.prepareStatement(sql);
-					psmt.setString(1, );
+					psmt.setString(1,two(i+""));
 					psmt.setString(2,(comdto.get(i).getMember_name());
 					System.out.println("2/6 getCarSaleMonthly Success");
 				rs=psmt.executeQuery();
@@ -330,5 +330,10 @@ public class RentDao implements RentDaoImpl{
 			}
 		
 	}
+		
+		public String two(String msg){
+			return msg.trim().length()< 2? "0"+msg:msg.trim();
+		}
+
 
 }
