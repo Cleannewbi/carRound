@@ -9,4 +9,7 @@ public interface RentDaoImpl {
 	public HashMap<String,Integer> getOrderPrice();
 	public HashMap<String, Integer> getComOrderCount();
 	public HashMap<String, Integer> getComOrderPrice();
+	
+	public HashMap<String, Integer> getComSaleMonthly();
+	public HashMap<String, Integer> getCarSaleMonthly();
 }
