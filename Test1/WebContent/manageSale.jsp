@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="dao.RentDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,7 +35,14 @@ function manager(number) {
 <!-- 회사별(차트), 날짜별(그래프), 차종별(차트) 제작 -->
 <div id="section">
 	
-	
+	<%
+		RentDao dao = new RentDao();
+		HashMap <String, Integer> map = new HashMap<>();
+		map = dao.getCarSaleMonthly();
+		HashMap <String, Integer> map2 = new HashMap<>();
+		map2=dao.getComSaleMonthly("월별");
+		//map2=dao.getComSaleMonthly("이번달");
+	%>
 	
 	
 	

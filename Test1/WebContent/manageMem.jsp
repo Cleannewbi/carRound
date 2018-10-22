@@ -12,7 +12,6 @@
 	memberDao memdao = new memberDao();
 	List<MemberDto> memdtoList = new ArrayList<>();
 	RentDao rentdao = new RentDao();
-
 	//회원출력
 	memdtoList = memdao.getUserList();
 	List<MemberDto> comdtoList = new ArrayList<>();
@@ -53,7 +52,7 @@ td{
 	<h1>회원관리</h1>
 </div>
 
-<div id="nav">
+<div id="nav" style="height: auto;">
 <br>
 	<button type="button" class="btn" onclick="manager(1)">회원관리</button><br><br>
 	<button type="button" class="btn"onclick="manager(2)">기업관리</button><br><br>
