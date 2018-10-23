@@ -16,7 +16,7 @@ HashMap<String,Float> name_PercentMap = new HashMap<>();
 carMonthSet=10;//10월 다른 월로 변동가능 onclick 해서 변경 해주면 ㅇㅇ 
 car_CountMap = rentdao.getCarSaleMonthly(carMonthSet);
 
-//car_name list  (rentdao에서 getCarList 할때 orderby car_name해서 가져와야됨★★★★)
+//car_name list
 List<String> car_nameList = new ArrayList<>();
 car_nameList=rentdao.getCarnameList();
 
@@ -30,8 +30,15 @@ for(int i=0; i<nameCountMap.size();i++){
 HashMap<String,Integer> com_CountMap = new HashMap<>();
 com_CountMap=rentdao.getCarnameList();
 
-//orderby com_name 해서 받은 com_name list  (memberDao에서 getComList 할때 orderby com_name해서 가져와야됨★★★★)
+//orderby com_name 해서 받은 com_name list  
 List<String> com_nameList = new ArrayList<>();
+com_nameList=rentdao.getComnameList();
+
+//map의 key를 앞에 넣고 
+for(int i=0; i<nameCountMap.size();i++){
+	name_PercentMap.put(com_nameList.get(i), "%.2f%%%n", com_CountMap.get("key") / rentCount * 100.0);
+}
+
 
 %>
 
@@ -41,6 +48,8 @@ List<String> com_nameList = new ArrayList<>();
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <link rel="stylesheet" href="magager.css">
+<link rel="stylesheet" type="text/css" href="chart.css">
+
 </head>
 <body>
 <div id="header">
