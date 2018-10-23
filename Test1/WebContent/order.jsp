@@ -182,16 +182,14 @@
 <input type="hidden" name="infoSeq" value="<%=carInfoDto.getInfo_seq()%>">
 <input type="hidden" name="loginId" value="<%=id%>">
 
-
 <!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★
 com_name 히든으로 추가함
 -->
 
-
 <div style="margin-left: 500px">
 <img alt="dd" src="./image/<%=carInfoDto.getCar_pic()%>" height="400">
 <input type="hidden" name="carName"  value="<%=carInfoDto.getCar_name()%>">
-<input type="hidden" name="carName"  value="<%=companyDto.getMember_name() %>">
+<input type="hidden" name="comName"  value="<%=companyDto.getMember_name() %>">
 <h2 class="title">차량정보</h2>
 <table class="underBorderTable" >
 <col width="150"><col width="300">
